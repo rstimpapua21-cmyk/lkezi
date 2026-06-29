@@ -1018,15 +1018,17 @@ let _pendingAddDocFileName = '';
 // ==================== GITHUB SYNC SYSTEM ====================
 let ghConfig = { owner:'rstimpapua21-cmyk', repo:'lkezi', branch:'main', path:'data/lkezi2025_data.json', token:'' };
 let ghSha = '';
-let ghAutoSync = false;
+let ghAutoSync = true;
 let ghAutoSyncTimer = null;
 
 function loadGitHubConfig() {
   try {
     const saved = localStorage.getItem('lkezi2025_gh_config');
     if (saved) ghConfig = JSON.parse(saved);
+    else localStorage.setItem('lkezi2025_gh_config', JSON.stringify(ghConfig)); // Save defaults
     ghSha = localStorage.getItem('lkezi2025_gh_sha') || '';
-    ghAutoSync = localStorage.getItem('lkezi2025_gh_autosync') === '1';
+    ghAutoSync = localStorage.getItem('lkezi2025_gh_autosync') !== '0'; // Default true
+    localStorage.setItem('lkezi2025_gh_autosync', ghAutoSync ? '1' : '0');
   } catch(e) {}
   // Populate settings UI
   if (document.getElementById('ghOwner')) {
@@ -1184,6 +1186,14 @@ async function pushToGitHub() {
   const payload = { appData: dataToPush, standaloneDocs: docsToPush, lastModified: new Date().toISOString() };
   const content = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
   const body = { message: `LKEZI data update - ${new Date().toLocaleString('id-ID')}`, content: content };
+  // If no SHA known, fetch current SHA first
+  if (!ghSha) {
+    try {
+      const getResp = await fetch(ghApiUrl(), { headers: { 'Authorization': `token ${ghConfig.token}`, 'Accept': 'application/vnd.github.v3+json' } });
+      if (getResp.status === 200) { const getData = await getResp.json(); ghSha = getData.sha; }
+      else ghSha = ''; // File doesn't exist yet
+    } catch(e) { ghSha = ''; }
+  }
   if (ghSha) body.sha = ghSha;
 
   try {
@@ -2431,10 +2441,8 @@ if (!localStorage.getItem('lkezi2025_rbac_v2')) {
 }
 if (checkSession()) {
   loadSavedData();
-  // Auto-pull from GitHub on startup if token configured
-  if (ghConfig.token && localStorage.getItem('lkezi2025_gh_autosync') === '1') {
-    pullFromGitHub();
-  }
+  // Push current local data to GitHub on startup (preserves local edits)
+  pushToGitHub();
   renderAll();
 } else {
   // No session — show login overlay (already visible by default)
