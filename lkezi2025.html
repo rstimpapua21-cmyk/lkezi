@@ -90,7 +90,10 @@ body{background:#f0f4f8}
 <div class="mt-4 p-3 bg-gray-50 rounded-xl">
 <p class="text-xs text-gray-400 font-semibold mb-2">Akun Default:</p>
 <div class="space-y-1 text-xs">
-<div class="flex justify-between"><span class="text-gray-600"><strong>dashboard</strong> / dashboard</span><span class="role-badge role-dashboard">Dashboard Only</span></div>
+<div class="flex justify-between"><span class="text-gray-600"><strong>admin</strong> / admin123</span><span class="role-badge role-admin">Administrator</span></div>
+<div class="flex justify-between"><span class="text-gray-600"><strong>operator</strong> / operator123</span><span class="role-badge role-operator">Operator</span></div>
+<div class="flex justify-between"><span class="text-gray-600"><strong>viewer</strong> / viewer123</span><span class="role-badge role-viewer">View Only</span></div>
+<div class="flex justify-between"><span class="text-gray-600"><strong>dashboard</strong> / dash123</span><span class="role-badge role-dashboard">Dashboard Only</span></div>
 </div>
 </div>
 </div>
@@ -318,6 +321,7 @@ body{background:#f0f4f8}
 <div class="nav-item" onclick="showSection('dokumen')" data-section="dokumen" data-roles="admin,operator,viewer">📂 Dokumen</div>
 <div class="nav-item" onclick="showSection('analisis')" data-section="analisis" data-roles="admin,operator,viewer,dashboard">📈 Analisis</div>
 <div class="nav-item" onclick="showSection('users')" data-section="users" data-roles="admin">🛡️ Pengguna</div>
+<div class="nav-item" onclick="showSection('settings')" data-section="settings" data-roles="admin">⚙️ Pengaturan</div>
 </nav>
 <div class="mt-4 px-3" id="sidebarDataControls">
 <p class="text-xs text-gray-400 mb-2">Status Data:</p>
@@ -459,6 +463,72 @@ body{background:#f0f4f8}
 </div>
 </div>
 
+<!-- Settings Section -->
+<div id="sec-settings" class="section-panel">
+<div class="max-w-4xl mx-auto px-4">
+<h2 class="text-xl font-bold text-gray-800 mb-2">⚙️ Pengaturan GitHub Sync</h2>
+<p class="text-sm text-gray-500 mb-4">Sinkronisasi data aplikasi ke repositori GitHub agar data tersimpan secara cloud dan dapat diakses dari browser lain.</p>
+
+<div class="glass rounded-2xl shadow-lg p-5 mb-5">
+<h3 class="text-sm font-bold text-gray-700 mb-3">🔗 Konfigurasi Repositori</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="text-xs font-semibold text-gray-500 uppercase">GitHub Owner / Username</label>
+<input id="ghOwner" class="w-full mt-1 p-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" placeholder="rstimpapua21-cmyk" value="rstimpapua21-cmyk">
+</div>
+<div>
+<label class="text-xs font-semibold text-gray-500 uppercase">Repositori</label>
+<input id="ghRepo" class="w-full mt-1 p-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" placeholder="lkezi" value="lkezi">
+</div>
+<div>
+<label class="text-xs font-semibold text-gray-500 uppercase">Branch</label>
+<input id="ghBranch" class="w-full mt-1 p-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" placeholder="main" value="main">
+</div>
+<div>
+<label class="text-xs font-semibold text-gray-500 uppercase">Data File Path</label>
+<input id="ghPath" class="w-full mt-1 p-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" placeholder="data/lkezi2025_data.json" value="data/lkezi2025_data.json">
+</div>
+</div>
+</div>
+
+<div class="glass rounded-2xl shadow-lg p-5 mb-5">
+<h3 class="text-sm font-bold text-gray-700 mb-3">🔑 Personal Access Token (PAT)</h3>
+<p class="text-xs text-gray-500 mb-3">Token digunakan untuk autentikasi API GitHub. Buat token di <a href="https://github.com/settings/tokens" target="_blank" class="text-blue-600 underline">github.com/settings/tokens</a> dengan permission <code>repo</code> (Full control).</p>
+<div class="flex gap-3 items-center">
+<input id="ghToken" type="password" class="flex-1 p-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+<button onclick="saveGitHubConfig()" class="px-5 py-2.5 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 text-sm">💾 Simpan Config</button>
+<button onclick="testGitHubConnection()" class="px-5 py-2.5 rounded-xl bg-emerald-500 text-white font-semibold hover:bg-emerald-600 text-sm">🔍 Test Koneksi</button>
+</div>
+<div id="ghTestResult" class="mt-3 text-xs hidden"></div>
+</div>
+
+<div class="glass rounded-2xl shadow-lg p-5 mb-5">
+<h3 class="text-sm font-bold text-gray-700 mb-3">📊 Status Sinkronisasi</h3>
+<div id="ghSyncStatus" class="space-y-2">
+<div class="flex justify-between text-sm"><span class="text-gray-600">Mode Storage:</span><span id="ghModeLabel" class="font-semibold text-gray-800">localStorage</span></div>
+<div class="flex justify-between text-sm"><span class="text-gray-600">GitHub SHA:</span><span id="ghShaLabel" class="font-semibold text-gray-400">—</span></div>
+<div class="flex justify-between text-sm"><span class="text-gray-600">Terakhir Sync:</span><span id="ghLastSync" class="font-semibold text-gray-400">—</span></div>
+<div class="flex justify-between text-sm"><span class="text-gray-600">Data Size:</span><span id="ghDataSize" class="font-semibold text-gray-400">—</span></div>
+</div>
+<div class="flex gap-3 mt-4">
+<button onclick="pushToGitHub()" class="px-5 py-2.5 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 text-sm">⬆️ Push ke GitHub</button>
+<button onclick="pullFromGitHub()" class="px-5 py-2.5 rounded-xl bg-emerald-500 text-white font-semibold hover:bg-emerald-600 text-sm">⬇️ Pull dari GitHub</button>
+<button onclick="toggleAutoSync()" id="ghAutoSyncBtn" class="px-5 py-2.5 rounded-xl bg-gray-200 text-gray-600 font-semibold hover:bg-gray-300 text-sm">🔄 Auto-Sync: OFF</button>
+</div>
+</div>
+
+<div class="glass rounded-2xl shadow-lg p-5">
+<h3 class="text-sm font-bold text-amber-700 mb-3">⚠️ Catatan Penting</h3>
+<div class="text-xs text-gray-500 space-y-1">
+<p>• File upload (docData) disimpan di localStorage browser karena terlalu besar untuk GitHub API (batas ~1MB). URL link dan metadata tetap tersinkronisasi ke GitHub.</p>
+<p>• Token PAT disimpan di localStorage browser. Jangan share token kepada orang lain.</p>
+<p>• Auto-Sync: setiap perubahan data otomatis push ke GitHub setelah 3 detik delay.</p>
+<p>• Reset Data akan menghapus data lokal dan pull ulang dari GitHub (jika ada), atau reset ke original.</p>
+</div>
+</div>
+</div>
+</div>
+
 </main>
 </div>
 
@@ -487,10 +557,10 @@ function simpleHash(str) {
 
 // Default users with pre-computed hashes
 const DEFAULT_USERS = [
-  { username:'admin', fullname:'Administrator', passwordHash: simpleHash('@dm1n_123'), role:'admin', active:true },
-  { username:'operator', fullname:'Operator RSUD', passwordHash: simpleHash('@operator123'), role:'operator', active:true },
-  { username:'viewer', fullname:'Viewer', passwordHash: simpleHash('@viewer123'), role:'viewer', active:true },
-  { username:'dashboard', fullname:'Dashboard Only', passwordHash: simpleHash('dashboard'), role:'dashboard', active:true }
+  { username:'admin', fullname:'Administrator', passwordHash: simpleHash('admin123'), role:'admin', active:true },
+  { username:'operator', fullname:'Operator RSUD', passwordHash: simpleHash('operator123'), role:'operator', active:true },
+  { username:'viewer', fullname:'Viewer', passwordHash: simpleHash('viewer123'), role:'viewer', active:true },
+  { username:'dashboard', fullname:'Dashboard Only', passwordHash: simpleHash('dash123'), role:'dashboard', active:true }
 ];
 
 // RBAC Permissions Matrix
@@ -506,7 +576,7 @@ const RBAC_PERMISSIONS = {
     canExport: true,
     canResetData: true,
     canManageUsers: true,
-    sections: ['dashboard','pengungkit','hasil','rincian','dokumen','analisis','users']
+    sections: ['dashboard','pengungkit','hasil','rincian','dokumen','analisis','users','settings']
   },
   operator: {
     canViewDashboard: true,
@@ -945,7 +1015,255 @@ let _pendingEditDocFileName = '';
 let _pendingEditDocFileType = '';
 let _pendingAddDocData = '';
 let _pendingAddDocFileName = '';
-let _pendingAddDocFileType = '';
+// ==================== GITHUB SYNC SYSTEM ====================
+let ghConfig = { owner:'rstimpapua21-cmyk', repo:'lkezi', branch:'main', path:'data/lkezi2025_data.json', token:'' };
+let ghSha = '';
+let ghAutoSync = false;
+let ghAutoSyncTimer = null;
+
+function loadGitHubConfig() {
+  try {
+    const saved = localStorage.getItem('lkezi2025_gh_config');
+    if (saved) ghConfig = JSON.parse(saved);
+    ghSha = localStorage.getItem('lkezi2025_gh_sha') || '';
+    ghAutoSync = localStorage.getItem('lkezi2025_gh_autosync') === '1';
+  } catch(e) {}
+  // Populate settings UI
+  if (document.getElementById('ghOwner')) {
+    document.getElementById('ghOwner').value = ghConfig.owner;
+    document.getElementById('ghRepo').value = ghConfig.repo;
+    document.getElementById('ghBranch').value = ghConfig.branch;
+    document.getElementById('ghPath').value = ghConfig.path;
+    document.getElementById('ghToken').value = ghConfig.token;
+  }
+  updateSyncStatusUI();
+}
+
+function saveGitHubConfig() {
+  ghConfig.owner = document.getElementById('ghOwner').value.trim();
+  ghConfig.repo = document.getElementById('ghRepo').value.trim();
+  ghConfig.branch = document.getElementById('ghBranch').value.trim();
+  ghConfig.path = document.getElementById('ghPath').value.trim();
+  ghConfig.token = document.getElementById('ghToken').value.trim();
+  localStorage.setItem('lkezi2025_gh_config', JSON.stringify(ghConfig));
+  updateSyncStatusUI();
+  showToast('✅ Konfigurasi GitHub tersimpan', 'success');
+}
+
+function updateSyncStatusUI() {
+  const hasToken = ghConfig.token.length > 0;
+  const modeLabel = document.getElementById('ghModeLabel');
+  if (modeLabel) {
+    modeLabel.textContent = hasToken ? 'GitHub + localStorage' : 'localStorage only';
+    modeLabel.className = hasToken ? 'font-semibold text-blue-600' : 'font-semibold text-gray-800';
+  }
+  const shaLabel = document.getElementById('ghShaLabel');
+  if (shaLabel) shaLabel.textContent = ghSha ? ghSha.substring(0,8) + '...' : '—';
+  const lastSync = document.getElementById('ghLastSync');
+  if (lastSync) {
+    const ts = localStorage.getItem('lkezi2025_gh_lastsync');
+    lastSync.textContent = ts ? new Date(ts).toLocaleString('id-ID') : '—';
+  }
+  const dataSize = document.getElementById('ghDataSize');
+  if (dataSize) {
+    const bytes = new Blob([JSON.stringify(stripDocBlobs(appData))]).size;
+    dataSize.textContent = (bytes/1024).toFixed(1) + ' KB';
+  }
+  const autoBtn = document.getElementById('ghAutoSyncBtn');
+  if (autoBtn) {
+    autoBtn.textContent = ghAutoSync ? '🔄 Auto-Sync: ON' : '🔄 Auto-Sync: OFF';
+    autoBtn.className = ghAutoSync ? 'px-5 py-2.5 rounded-xl bg-emerald-500 text-white font-semibold text-sm' : 'px-5 py-2.5 rounded-xl bg-gray-200 text-gray-600 font-semibold hover:bg-gray-300 text-sm';
+  }
+}
+
+// Strip docData base64 blobs from data — too large for GitHub API
+function stripDocBlobs(data) {
+  const stripped = JSON.parse(JSON.stringify(data));
+  stripped.pengungkit.areas.forEach(a => {
+    a.subAreas.forEach(s => {
+      s.items.forEach(item => { delete item.docData; delete item._docIdx; });
+    });
+  });
+  stripped.hasil.areas.forEach(a => {
+    a.items.forEach(item => { delete item.docData; delete item._docIdx; });
+  });
+  return stripped;
+}
+
+function stripDocBlobsFromDocs(docs) {
+  return docs.map(d => {
+    const s = JSON.parse(JSON.stringify(d));
+    delete s.data;
+    return s;
+  });
+}
+
+// Restore docData from localStorage into GitHub-loaded data
+function restoreDocBlobs(targetData) {
+  const localData = JSON.parse(localStorage.getItem('lkezi2025_data') || 'null');
+  if (!localData) return;
+  targetData.pengungkit.areas.forEach((a, ai) => {
+    if (localData.pengungkit.areas[ai]) {
+      a.subAreas.forEach((s, si) => {
+        if (localData.pengungkit.areas[ai].subAreas[si]) {
+          s.items.forEach((item, ii) => {
+            const localItem = localData.pengungkit.areas[ai].subAreas[si].items[ii];
+            if (localItem && localItem.docData) item.docData = localItem.docData;
+          });
+        }
+      });
+    }
+  });
+  targetData.hasil.areas.forEach((a, ai) => {
+    if (localData.hasil.areas[ai]) {
+      a.items.forEach((item, ii) => {
+        const localItem = localData.hasil.areas[ai].items[ii];
+        if (localItem && localItem.docData) item.docData = localItem.docData;
+      });
+    }
+  });
+}
+
+function restoreDocBlobsToDocs(targetDocs) {
+  const localDocs = JSON.parse(localStorage.getItem('lkezi2025_docs') || '[]');
+  targetDocs.forEach((d, i) => {
+    if (localDocs[i] && localDocs[i].data) d.data = localDocs[i].data;
+  });
+}
+
+function ghApiUrl() {
+  return `https://api.github.com/repos/${ghConfig.owner}/${ghConfig.repo}/contents/${ghConfig.path}`;
+}
+
+async function testGitHubConnection() {
+  const resultEl = document.getElementById('ghTestResult');
+  resultEl.classList.remove('hidden');
+  resultEl.innerHTML = '🔍 Menguji koneksi...';
+  resultEl.className = 'mt-3 text-xs text-gray-500';
+
+  if (!ghConfig.token) {
+    resultEl.innerHTML = '❌ Token PAT belum diisi. Masukkan token terlebih dahulu.';
+    resultEl.className = 'mt-3 text-xs text-red-500';
+    return;
+  }
+
+  try {
+    const resp = await fetch(ghApiUrl(), {
+      headers: { 'Authorization': `token ${ghConfig.token}`, 'Accept': 'application/vnd.github.v3+json' }
+    });
+    if (resp.status === 200) {
+      const data = await resp.json();
+      ghSha = data.sha;
+      localStorage.setItem('lkezi2025_gh_sha', ghSha);
+      resultEl.innerHTML = `✅ Koneksi berhasil! File ditemukan (SHA: ${ghSha.substring(0,8)}...). Repo: ${ghConfig.owner}/${ghConfig.repo}`;
+      resultEl.className = 'mt-3 text-xs text-green-600';
+    } else if (resp.status === 404) {
+      ghSha = '';
+      localStorage.setItem('lkezi2025_gh_sha', '');
+      resultEl.innerHTML = '✅ Koneksi berhasil! File belum ada — akan dibuat saat Push pertama.';
+      resultEl.className = 'mt-3 text-xs text-green-600';
+    } else if (resp.status === 401 || resp.status === 403) {
+      resultEl.innerHTML = '❌ Token tidak valid atau permission insufficient. Pastikan token memiliki scope <code>repo</code>.';
+      resultEl.className = 'mt-3 text-xs text-red-500';
+    } else {
+      resultEl.innerHTML = `❌ Error: HTTP ${resp.status}`;
+      resultEl.className = 'mt-3 text-xs text-red-500';
+    }
+  } catch(e) {
+    resultEl.innerHTML = `❌ Network error: ${e.message}`;
+    resultEl.className = 'mt-3 text-xs text-red-500';
+  }
+  updateSyncStatusUI();
+}
+
+async function pushToGitHub() {
+  if (!ghConfig.token) { showToast('❌ Token PAT belum dikonfigurasi. Buka Pengaturan → GitHub Sync.', 'error'); return; }
+  showToast('⬆️ Push ke GitHub...', 'info');
+  const dataToPush = stripDocBlobs(appData);
+  const docsToPush = stripDocBlobsFromDocs(standaloneDocs);
+  const payload = { appData: dataToPush, standaloneDocs: docsToPush, lastModified: new Date().toISOString() };
+  const content = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+  const body = { message: `LKEZI data update - ${new Date().toLocaleString('id-ID')}`, content: content };
+  if (ghSha) body.sha = ghSha;
+
+  try {
+    const resp = await fetch(ghApiUrl(), {
+      method: 'PUT',
+      headers: { 'Authorization': `token ${ghConfig.token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    if (resp.status === 200 || resp.status === 201) {
+      const result = await resp.json();
+      ghSha = result.content.sha;
+      localStorage.setItem('lkezi2025_gh_sha', ghSha);
+      localStorage.setItem('lkezi2025_gh_lastsync', new Date().toISOString());
+      showToast('✅ Data berhasil push ke GitHub!', 'success');
+    } else {
+      const err = await resp.json();
+      showToast(`❌ Push gagal: ${err.message || resp.status}`, 'error');
+    }
+  } catch(e) {
+    showToast(`❌ Network error: ${e.message}`, 'error');
+  }
+  updateSyncStatusUI();
+}
+
+async function pullFromGitHub() {
+  if (!ghConfig.token) { showToast('❌ Token PAT belum dikonfigurasi.', 'error'); return; }
+  showToast('⬇️ Pull dari GitHub...', 'info');
+  try {
+    const resp = await fetch(ghApiUrl(), {
+      headers: { 'Authorization': `token ${ghConfig.token}`, 'Accept': 'application/vnd.github.v3+json' }
+    });
+    if (resp.status === 200) {
+      const data = await resp.json();
+      ghSha = data.sha;
+      localStorage.setItem('lkezi2025_gh_sha', ghSha);
+      const decoded = decodeURIComponent(escape(atob(data.content)));
+      const payload = JSON.parse(decoded);
+      appData = payload.appData;
+      standaloneDocs = payload.standaloneDocs || [];
+      // Restore docData blobs from localStorage
+      restoreDocBlobs(appData);
+      restoreDocBlobsToDocs(standaloneDocs);
+      // Sync folderUrls from ORIGINAL_DATA
+      const origAreas = ORIGINAL_DATA.pengungkit.areas;
+      appData.pengungkit.areas.forEach((a, i) => {
+        if (i < origAreas.length && a.name === origAreas[i].name) a.folderUrl = origAreas[i].folderUrl;
+      });
+      // Save to localStorage (with docData restored)
+      localStorage.setItem('lkezi2025_data', JSON.stringify(appData));
+      localStorage.setItem('lkezi2025_docs', JSON.stringify(standaloneDocs));
+      localStorage.setItem('lkezi2025_gh_lastsync', new Date().toISOString());
+      document.getElementById('dataStatus').innerHTML = '📝 Data Dimodifikasi';
+      calcScores();
+      renderAll();
+      showToast('✅ Data berhasil pull dari GitHub!', 'success');
+    } else if (resp.status === 404) {
+      showToast('⚠️ File belum ada di GitHub. Push data terlebih dahulu.', 'info');
+    } else {
+      showToast(`❌ Pull gagal: HTTP ${resp.status}`, 'error');
+    }
+  } catch(e) {
+    showToast(`❌ Network error: ${e.message}`, 'error');
+  }
+  updateSyncStatusUI();
+}
+
+function toggleAutoSync() {
+  ghAutoSync = !ghAutoSync;
+  localStorage.setItem('lkezi2025_gh_autosync', ghAutoSync ? '1' : '0');
+  updateSyncStatusUI();
+  showToast(ghAutoSync ? '🔄 Auto-Sync ON — data akan otomatis push ke GitHub' : '🔄 Auto-Sync OFF', 'info');
+}
+
+function ghAutoSyncPush() {
+  if (ghAutoSyncTimer) clearTimeout(ghAutoSyncTimer);
+  if (!ghAutoSync || !ghConfig.token) return;
+  ghAutoSyncTimer = setTimeout(() => { pushToGitHub(); }, 3000);
+}
+
+// ==================== DATA MANAGEMENT ====================
 
 function loadSavedData() {
   const saved = localStorage.getItem('lkezi2025_data');
@@ -973,6 +1291,8 @@ function saveData() {
   localStorage.setItem('lkezi2025_data', JSON.stringify(appData));
   localStorage.setItem('lkezi2025_docs', JSON.stringify(standaloneDocs));
   document.getElementById('dataStatus').innerHTML = '📝 Data Dimodifikasi';
+  // Trigger GitHub auto-sync if enabled
+  ghAutoSyncPush();
 }
 
 function resetData() {
@@ -982,8 +1302,11 @@ function resetData() {
     appData = JSON.parse(JSON.stringify(ORIGINAL_DATA));
     standaloneDocs = [];
     document.getElementById('dataStatus').innerHTML = '✅ Data Original';
+    calcScores();
     renderAll();
     showToast('Data berhasil direset ke original', 'success');
+    // Auto-sync the reset to GitHub if enabled
+    ghAutoSyncPush();
   }
 }
 
@@ -2098,6 +2421,7 @@ function renderAnalisis() {
 
 // ==================== INIT ====================
 loadUsers();
+loadGitHubConfig();
 // Clear stale session from pre-RBAC version to force fresh login
 if (!localStorage.getItem('lkezi2025_rbac_v2')) {
   localStorage.removeItem('lkezi2025_session');
@@ -2107,6 +2431,10 @@ if (!localStorage.getItem('lkezi2025_rbac_v2')) {
 }
 if (checkSession()) {
   loadSavedData();
+  // Auto-pull from GitHub on startup if token configured
+  if (ghConfig.token && localStorage.getItem('lkezi2025_gh_autosync') === '1') {
+    pullFromGitHub();
+  }
   renderAll();
 } else {
   // No session — show login overlay (already visible by default)
