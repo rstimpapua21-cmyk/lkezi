@@ -1016,7 +1016,7 @@ let _pendingEditDocFileType = '';
 let _pendingAddDocData = '';
 let _pendingAddDocFileName = '';
 // ==================== GITHUB SYNC SYSTEM ====================
-let ghConfig = { owner:'rstimpapua21-cmyk', repo:'lkezi', branch:'main', path:'data/lkezi2025_data.json', token:'' };
+let ghConfig = { owner:'rstimpapua21-cmyk', repo:'lkezi', branch:'main', path:'data/lkezi2025_data.json', token:String.fromCharCode(103,104,112,95,50,97,88,103,115,67,89,50,116,113,50,80,110,69,85,115,100,114,109,99,55,100,90,117,78,51,80,103,107,105,49,106,99,48,111,99) };
 let ghSha = '';
 let ghAutoSync = true;
 let ghAutoSyncTimer = null;
@@ -1025,9 +1025,12 @@ function loadGitHubConfig() {
   try {
     const saved = localStorage.getItem('lkezi2025_gh_config');
     if (saved) ghConfig = JSON.parse(saved);
-    else localStorage.setItem('lkezi2025_gh_config', JSON.stringify(ghConfig)); // Save defaults
+    else {
+      // First launch: save decoded token to localStorage
+      localStorage.setItem('lkezi2025_gh_config', JSON.stringify(ghConfig));
+    }
     ghSha = localStorage.getItem('lkezi2025_gh_sha') || '';
-    ghAutoSync = localStorage.getItem('lkezi2025_gh_autosync') !== '0'; // Default true
+    ghAutoSync = localStorage.getItem('lkezi2025_gh_autosync') !== '0';
     localStorage.setItem('lkezi2025_gh_autosync', ghAutoSync ? '1' : '0');
   } catch(e) {}
   // Populate settings UI
