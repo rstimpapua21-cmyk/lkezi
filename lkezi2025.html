@@ -1,0 +1,2118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LKEZI 2025 - RSUD Mimika | Evaluasi Zona Integritas</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{font-family:'Inter',system-ui,sans-serif}
+body{background:#f0f4f8}
+.glass{background:rgba(255,255,255,0.85);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.3)}
+.score-ring{position:relative;width:180px;height:180px}
+.score-ring svg{transform:rotate(-90deg)}
+.score-ring .value{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.progress-bar{height:10px;border-radius:5px;background:#e5e7eb;overflow:hidden}
+.progress-bar .fill{height:100%;border-radius:5px;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+.nav-item{cursor:pointer;padding:10px 18px;border-radius:10px;font-weight:500;transition:all .2s}
+.nav-item:hover{background:rgba(59,130,246,0.08)}
+.nav-item.active{background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;box-shadow:0 4px 15px rgba(59,130,246,0.3)}
+.card-hover{transition:all .3s}
+.card-hover:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,0.08)}
+.badge{display:inline-flex;align-items:center;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600}
+.badge-ok{background:#dcfce7;color:#166534}
+.badge-warn{background:#fef9c3;color:#854d0e}
+.badge-fail{background:#fee2e2;color:#991b1b}
+.detail-row{border-bottom:1px solid #f1f5f9}
+.detail-row:last-child{border-bottom:none}
+.expand-btn{transition:transform .3s}
+.expand-btn.open{transform:rotate(90deg)}
+.section-panel{display:none}
+.section-panel.active{display:block}
+.fade-in{animation:fadeIn .4s ease-out}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.chart-container{position:relative;height:300px}
+@media(max-width:768px){.score-ring{width:140px;height:140px}.chart-container{height:250px}}
+.gradient-header{background:linear-gradient(135deg,#1e3a5f 0%,#2563eb 50%,#3b82f6 100%)}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);backdrop-filter:blur(4px);z-index:1000;display:none;align-items:center;justify-content:center}
+.modal-overlay.show{display:flex}
+.modal-box{background:#fff;border-radius:20px;box-shadow:0 25px 80px rgba(0,0,0,0.2);max-width:700px;width:95%;max-height:90vh;overflow-y:auto;padding:0}
+.doc-card{border:1px solid #e5e7eb;border-radius:12px;padding:12px;transition:all .2s;cursor:pointer}
+.doc-card:hover{border-color:#3b82f6;box-shadow:0 4px 15px rgba(59,130,246,0.1)}
+.btn-crud{padding:4px 12px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;border:none}
+.btn-edit{background:#dbeafe;color:#1e40af}.btn-edit:hover{background:#bfdbfe}
+.btn-delete{background:#fee2e2;color:#991b1b}.btn-delete:hover{background:#fecaca}
+.btn-add{background:#dcfce7;color:#166534}.btn-add:hover{background:#bbf7d0}
+.btn-doc{background:#fef3c7;color:#92400e}.btn-doc:hover{background:#fde68a}
+.toast{position:fixed;top:20px;right:20px;z-index:2000;padding:12px 20px;border-radius:12px;font-size:14px;font-weight:600;box-shadow:0 8px 30px rgba(0,0,0,0.15);transform:translateX(120%);transition:transform .4s ease}
+.toast.show{transform:translateX(0)}
+.toast-success{background:#dcfce7;color:#166534}
+.toast-error{background:#fee2e2;color:#991b1b}
+.toast-info{background:#dbeafe;color:#1e40af}
+.login-overlay{position:fixed;inset:0;background:linear-gradient(135deg,#1e3a5f 0%,#2563eb 50%,#3b82f6 100%);z-index:3000;display:flex;align-items:center;justify-content:center}
+.login-box{background:#fff;border-radius:24px;box-shadow:0 25px 80px rgba(0,0,0,0.3);max-width:420px;width:95%;overflow:hidden}
+.login-box .login-header{background:linear-gradient(135deg,#1e3a5f,#2563eb);padding:30px 24px;text-align:center;color:#fff}
+.login-box .login-body{padding:24px}
+.role-badge{display:inline-flex;align-items:center;padding:4px 14px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:0.5px}
+.role-admin{background:#fee2e2;color:#991b1b;border:1px solid #fca5a5}
+.role-operator{background:#dbeafe;color:#1e40af;border:1px solid #93c5fd}
+.role-viewer{background:#dcfce7;color:#166534;border:1px solid #86efac}
+.role-dashboard{background:#fef3c7;color:#92400e;border:1px solid #fde68a}
+.locked-overlay{position:relative;pointer-events:none;opacity:0.45}
+.locked-overlay::after{content:'🔒';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:24px;opacity:0.7}
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- Login Overlay -->
+<div id="loginOverlay" class="login-overlay">
+<div class="login-box">
+<div class="login-header">
+<div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center text-3xl font-bold backdrop-blur mx-auto mb-3">ZI</div>
+<h2 class="text-2xl font-bold">LKEZI 2025</h2>
+<p class="text-blue-200 text-sm mt-1">Evaluasi Zona Integritas — RSUD Mimika</p>
+</div>
+<div class="login-body">
+<div id="loginForm">
+<p class="text-sm text-gray-500 mb-4 text-center">Masuk untuk mengakses aplikasi</p>
+<div class="mb-3">
+<label class="text-xs font-semibold text-gray-500 uppercase">Username</label>
+<input id="loginUser" class="w-full mt-1 p-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" placeholder="Masukkan username" autocomplete="off">
+</div>
+<div class="mb-3">
+<label class="text-xs font-semibold text-gray-500 uppercase">Password</label>
+<input id="loginPass" type="password" class="w-full mt-1 p-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" placeholder="Masukkan password">
+</div>
+<div id="loginError" class="text-xs text-red-500 mb-3 hidden">❌ Username atau password salah</div>
+<button onclick="doLogin()" class="w-full py-3 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition">🔐 Masuk</button>
+<div class="mt-4 p-3 bg-gray-50 rounded-xl">
+<p class="text-xs text-gray-400 font-semibold mb-2">Akun Default:</p>
+<div class="space-y-1 text-xs">
+<div class="flex justify-between"><span class="text-gray-600"><strong>dashboard</strong> / dashboard</span><span class="role-badge role-dashboard">Dashboard Only</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast toast-success"></div>
+
+<!-- Delete Confirmation Modal -->
+<div id="deleteModal" class="modal-overlay">
+<div class="modal-box">
+<div class="p-6">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-12 h-12 bg-red-100 rounded-2xl flex items-center justify-center text-xl">🗑️</div>
+<h3 class="text-lg font-bold text-gray-800">Konfirmasi Hapus</h3>
+</div>
+<p class="text-sm text-gray-600 mb-2" id="deleteMsg">Apakah Anda yakin ingin menghapus item ini?</p>
+<p class="text-xs text-gray-400 mb-6" id="deleteDetail"></p>
+<div class="flex gap-3 justify-end">
+<button onclick="closeDeleteModal()" class="px-5 py-2.5 rounded-xl bg-gray-100 text-gray-600 font-semibold hover:bg-gray-200">Batal</button>
+<button onclick="confirmDelete()" class="px-5 py-2.5 rounded-xl bg-red-500 text-white font-semibold hover:bg-red-600">Hapus</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Edit/Add Modal -->
+<div id="editModal" class="modal-overlay">
+<div class="modal-box">
+<div class="gradient-header text-white p-5 rounded-t-[20px]">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center" id="editIcon">✏️</div>
+<div>
+<h3 class="text-lg font-bold" id="editTitle">Edit Item</h3>
+<p class="text-blue-200 text-xs" id="editSubtitle"></p>
+</div>
+</div>
+</div>
+<div class="p-5 space-y-4">
+<div>
+<label class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Pertanyaan / Deskripsi</label>
+<textarea id="editQuestion" rows="3" class="w-full mt-1 p-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none resize-none"></textarea>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Kriteria Jawaban</label>
+<input id="editKriteria" class="w-full mt-1 p-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" placeholder="A/B/C, Ya/Tidak, %">
+</div>
+<div>
+<label class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Bobot</label>
+<input id="editBobot" type="number" step="0.01" class="w-full mt-1 p-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" placeholder="0.5">
+</div>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<div>
+<label class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Jawaban Unit</label>
+<input id="editJawaban" class="w-full mt-1 p-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" placeholder="A, Ya, 1">
+</div>
+<div>
+<label class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Jawaban TPI</label>
+<input id="editTPI" class="w-full mt-1 p-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" placeholder="A, Ya, 1">
+</div>
+<div>
+<label class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Nilai (0-1)</label>
+<input id="editNilai" type="number" step="0.01" min="0" max="1" class="w-full mt-1 p-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" placeholder="1.0">
+</div>
+</div>
+<div>
+<label class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Catatan / Keterangan</label>
+<textarea id="editCatatan" rows="2" class="w-full mt-1 p-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none resize-none" placeholder="Catatan penjelasan..."></textarea>
+</div>
+<!-- Document/Evidence Section -->
+<div class="bg-amber-50 rounded-xl p-4 border border-amber-200">
+<div class="flex items-center gap-2 mb-3">
+<span class="text-lg">📎</span>
+<label class="text-xs font-semibold text-amber-800 uppercase tracking-wide">Lokasi Dokumen / Bukti Dukung</label>
+</div>
+<div class="space-y-2">
+<div class="flex gap-2">
+<input id="editDocUrl" class="flex-1 p-3 rounded-xl border border-amber-200 text-sm focus:ring-2 focus:ring-amber-400 focus:outline-none bg-white" placeholder="URL link (mis: https://drive.google.com/...)">
+<button onclick="pickDocFile()" class="btn-crud btn-doc px-4 py-2.5 rounded-xl text-sm">📁 Upload File</button>
+</div>
+<input type="file" id="docFilePicker" class="hidden" onchange="onDocFilePicked(this)" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.rar">
+<div id="editDocUploadArea" class="hidden">
+<div class="flex items-center gap-2 bg-green-50 border border-green-200 rounded-xl p-3">
+<span class="text-lg">✅</span>
+<span id="editDocFileName" class="text-sm font-medium text-green-700 flex-1 truncate"></span>
+<button onclick="removeUploadedDoc()" class="text-red-500 hover:text-red-700 text-sm font-bold">✕ Hapus</button>
+</div>
+</div>
+<textarea id="editDocDesc" rows="2" class="w-full p-3 rounded-xl border border-amber-200 text-sm focus:ring-2 focus:ring-amber-400 focus:outline-none bg-white resize-none" placeholder="Deskripsi dokumen (mis: SK Tim ZI 2025, Banner anti gratifikasi...)"></textarea>
+</div>
+<div id="editDocPreview" class="mt-2 hidden">
+<div class="flex items-center gap-2 text-xs">
+<span>📄</span><span id="editDocPreviewText" class="font-medium text-amber-700"></span>
+<a id="editDocPreviewLink" href="#" target="_blank" class="text-blue-600 underline">Buka</a>
+</div>
+</div>
+</div>
+<div class="flex gap-3 justify-end pt-2">
+<button onclick="closeEditModal()" class="px-5 py-2.5 rounded-xl bg-gray-100 text-gray-600 font-semibold hover:bg-gray-200">Batal</button>
+<button onclick="saveEdit()" class="px-5 py-2.5 rounded-xl bg-blue-500 text-white font-semibold hover:bg-blue-600">💾 Simpan</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Document Manager Modal -->
+<div id="docManagerModal" class="modal-overlay">
+<div class="modal-box" style="max-width:900px">
+<div class="gradient-header text-white p-5 rounded-t-[20px]">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">📂</div>
+<div>
+<h3 class="text-lg font-bold">Manajer Dokumen & Bukti Dukung</h3>
+<p class="text-blue-200 text-xs">Kelola semua dokumen bukti dukung LKEZI 2025</p>
+</div>
+</div>
+</div>
+<div class="p-5">
+<div class="flex gap-3 mb-4 flex-wrap">
+<input type="text" id="docSearch" placeholder="🔍 Cari dokumen..." class="flex-1 min-w-[200px] px-4 py-2 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" oninput="filterDocs()">
+<button onclick="addNewDoc()" class="btn-crud btn-add px-4 py-2 rounded-xl">+ Tambah Dokumen Baru</button>
+</div>
+<div id="docList"></div>
+</div>
+<div class="p-4 border-t flex justify-end">
+<button onclick="closeDocManager()" class="px-5 py-2.5 rounded-xl bg-gray-100 text-gray-600 font-semibold hover:bg-gray-200">Tutup</button>
+</div>
+</div>
+</div>
+
+<!-- Add Doc Modal -->
+<div id="addDocModal" class="modal-overlay">
+<div class="modal-box" style="max-width:600px">
+<div class="p-5">
+<h3 class="text-lg font-bold text-gray-800 mb-4">📁 Tambah Dokumen Bukti Dukung</h3>
+<div class="space-y-3">
+<div>
+<label class="text-xs font-semibold text-gray-500">Nama Dokumen</label>
+<input id="addDocName" class="w-full mt-1 p-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" placeholder="SK Tim ZI 2025">
+</div>
+<div>
+<label class="text-xs font-semibold text-gray-500">Upload File Dokumen</label>
+<button onclick="pickAddDocFile()" class="btn-crud btn-doc px-4 py-2.5 rounded-xl text-sm w-full">📁 Pilih & Upload File</button>
+<input type="file" id="addDocFilePicker" class="hidden" onchange="onAddDocFilePicked(this)" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.rar">
+<div id="addDocUploadArea" class="hidden mt-2">
+<div class="flex items-center gap-2 bg-green-50 border border-green-200 rounded-xl p-3">
+<span class="text-lg">✅</span>
+<span id="addDocFileName" class="text-sm font-medium text-green-700 flex-1 truncate"></span>
+<button onclick="removeAddUploadedDoc()" class="text-red-500 hover:text-red-700 text-sm font-bold">✕ Hapus</button>
+</div>
+</div>
+</div>
+<div>
+<label class="text-xs font-semibold text-gray-500">URL Link</label>
+<input id="addDocUrl" class="w-full mt-1 p-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" placeholder="https://drive.google.com/... atau URL lainnya">
+</div>
+<div>
+<label class="text-xs font-semibold text-gray-500">Deskripsi</label>
+<textarea id="addDocDesc" rows="2" class="w-full mt-1 p-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none resize-none" placeholder="Deskripsi singkat..."></textarea>
+</div>
+<div>
+<label class="text-xs font-semibold text-gray-500">Terhubung ke Item</label>
+<select id="addDocLink" class="w-full mt-1 p-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none">
+<option value="">— Tidak terhubung —</option>
+</select>
+</div>
+</div>
+<div class="flex gap-3 justify-end mt-4">
+<button onclick="closeAddDocModal()" class="px-5 py-2.5 rounded-xl bg-gray-100 text-gray-600 font-semibold hover:bg-gray-200">Batal</button>
+<button onclick="saveNewDoc()" class="px-5 py-2.5 rounded-xl bg-emerald-500 text-white font-semibold hover:bg-emerald-600">💾 Simpan</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Header -->
+<header class="gradient-header text-white shadow-xl">
+<div class="max-w-7xl mx-auto px-4 py-5">
+<div class="flex flex-col md:flex-row items-center justify-between gap-3">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center text-2xl font-bold backdrop-blur">ZI</div>
+<div>
+<h1 class="text-xl md:text-2xl font-bold tracking-tight">LKEZI 2025</h1>
+<p class="text-blue-200 text-sm">Lembar Kerja Evaluasi Zona Integritas — RSUD Mimika</p>
+</div>
+</div>
+<div class="flex items-center gap-3 flex-wrap">
+<span class="bg-white/15 backdrop-blur px-4 py-2 rounded-xl text-sm font-semibold">Predikat: <span class="text-yellow-300">WBK</span></span>
+<span class="bg-white/15 backdrop-blur px-4 py-2 rounded-xl text-sm font-semibold">📅 Tahun 2025</span>
+<span class="bg-white/15 backdrop-blur px-4 py-2 rounded-xl text-sm font-semibold" id="headerUserRole">—</span>
+<button onclick="exportData()" id="exportBtn" class="bg-white/15 backdrop-blur px-4 py-2 rounded-xl text-sm font-semibold hover:bg-white/25">📤 Export</button>
+<button onclick="openDocManager()" id="docManagerBtn" class="bg-amber-400/80 backdrop-blur px-4 py-2 rounded-xl text-sm font-semibold hover:bg-amber-400">📂 Dokumen</button>
+<button onclick="doLogout()" class="bg-red-400/60 backdrop-blur px-4 py-2 rounded-xl text-sm font-semibold hover:bg-red-400">🚪 Keluar</button>
+</div>
+</div>
+</div>
+</header>
+
+<div class="max-w-7xl mx-auto px-4 py-6 flex flex-col lg:flex-row gap-6">
+
+<!-- Sidebar -->
+<aside class="lg:w-64 flex-shrink-0">
+<div class="glass rounded-2xl shadow-lg p-4 lg:sticky lg:top-6">
+<!-- User Info -->
+<div class="px-3 py-2 bg-blue-50 rounded-xl mb-3" id="sidebarUserInfo">
+  <div class="flex items-center gap-2">
+    <div class="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center text-sm font-bold" id="sidebarUserAvatar">👤</div>
+    <div class="flex-1">
+      <p class="text-sm font-bold text-gray-700" id="sidebarUserName">—</p>
+      <p class="text-xs" id="sidebarUserRoleBadge">—</p>
+    </div>
+    <button onclick="doLogout()" class="text-xs text-red-500 font-semibold hover:text-red-700 px-2 py-1 rounded-lg hover:bg-red-50" id="logoutBtn" title="Keluar">🚪</button>
+  </div>
+</div>
+<p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-3">Menu Navigasi</p>
+<nav class="flex lg:flex-col gap-1 overflow-x-auto" id="nav">
+<div class="nav-item active" onclick="showSection('dashboard')" data-section="dashboard" data-roles="admin,operator,viewer,dashboard">📊 Dashboard</div>
+<div class="nav-item" onclick="showSection('pengungkit')" data-section="pengungkit" data-roles="admin,operator,viewer">⚙️ A. Pengungkit</div>
+<div class="nav-item" onclick="showSection('hasil')" data-section="hasil" data-roles="admin,operator,viewer">🎯 B. Hasil</div>
+<div class="nav-item" onclick="showSection('rincian')" data-section="rincian" data-roles="admin,operator,viewer">📋 Rincian Jawaban</div>
+<div class="nav-item" onclick="showSection('dokumen')" data-section="dokumen" data-roles="admin,operator,viewer">📂 Dokumen</div>
+<div class="nav-item" onclick="showSection('analisis')" data-section="analisis" data-roles="admin,operator,viewer,dashboard">📈 Analisis</div>
+<div class="nav-item" onclick="showSection('users')" data-section="users" data-roles="admin">🛡️ Pengguna</div>
+</nav>
+<div class="mt-4 px-3" id="sidebarDataControls">
+<p class="text-xs text-gray-400 mb-2">Status Data:</p>
+<div id="dataStatus" class="text-xs text-green-600 font-semibold">✅ Data Original</div>
+<button onclick="resetData()" id="resetBtn" class="w-full mt-2 px-3 py-2 rounded-xl bg-gray-100 text-gray-500 text-xs font-semibold hover:bg-gray-200">🔄 Reset ke Original</button>
+</div>
+</div>
+</aside>
+
+<!-- Main -->
+<main class="flex-1 min-w-0">
+
+<!-- DASHBOARD -->
+<div id="sec-dashboard" class="section-panel active fade-in">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+<div class="glass rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center card-hover md:col-span-1">
+<p class="text-sm text-gray-500 font-semibold mb-3">NILAI EVALUASI ZONA INTEGRITAS</p>
+<div class="score-ring">
+<svg viewBox="0 0 180 180" width="180" height="180">
+<circle cx="90" cy="90" r="78" fill="none" stroke="#e5e7eb" stroke-width="12"/>
+<circle cx="90" cy="90" r="78" fill="none" stroke="url(#scoreGrad)" stroke-width="12" stroke-linecap="round" stroke-dasharray="490" stroke-dashoffset="490" id="scoreArc"/>
+<defs><linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#22c55e"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient></defs>
+</svg>
+<div class="value">
+<span class="text-4xl font-black text-gray-800" id="totalScoreText">0</span>
+<span class="text-sm text-gray-400">dari 100</span>
+</div>
+</div>
+<div class="mt-3"><span class="badge badge-ok" id="totalBadge">✅ LULUS — OK</span></div>
+</div>
+<div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="glass rounded-2xl shadow-lg p-5 card-hover">
+<div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-lg">⚙️</div><div><p class="text-xs text-gray-400 font-semibold">A. PENGUNGKIT</p><p class="text-xs text-gray-400">Bobot 60%</p></div></div>
+<p class="text-3xl font-black text-blue-700" id="pengungkitScore">0</p>
+<div class="progress-bar mt-2"><div class="fill bg-blue-500" id="pengungkitBar" style="width:0%"></div></div>
+<p class="text-xs text-gray-400 mt-1">Persentase: <span id="pengungkitPct">0%</span></p>
+</div>
+<div class="glass rounded-2xl shadow-lg p-5 card-hover">
+<div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-lg">🎯</div><div><p class="text-xs text-gray-400 font-semibold">B. HASIL</p><p class="text-xs text-gray-400">Bobot 40%</p></div></div>
+<p class="text-3xl font-black text-emerald-700" id="hasilScore">0</p>
+<div class="progress-bar mt-2"><div class="fill bg-emerald-500" id="hasilBar" style="width:0%"></div></div>
+<p class="text-xs text-gray-400 mt-1">Persentase: <span id="hasilPct">0%</span></p>
+</div>
+<div class="glass rounded-2xl shadow-lg p-5 card-hover sm:col-span-2">
+<p class="text-xs text-gray-400 font-semibold mb-3">RINGKASAN 6 AREA PERUBAHAN</p>
+<div class="space-y-3" id="areaSummaryBars"></div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6" id="areaCards"></div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="glass rounded-2xl shadow-lg p-5 card-hover"><h3 class="text-sm font-bold text-gray-700 mb-3">Radar — 6 Area Perubahan</h3><div class="chart-container"><canvas id="radarChart"></canvas></div></div>
+<div class="glass rounded-2xl shadow-lg p-5 card-hover"><h3 class="text-sm font-bold text-gray-700 mb-3">Perbandingan Bobot vs Nilai</h3><div class="chart-container"><canvas id="barChart"></canvas></div></div>
+</div>
+</div>
+
+<!-- PENGUNGKIT -->
+<div id="sec-pengungkit" class="section-panel fade-in">
+<h2 class="text-xl font-bold text-gray-800 mb-1">A. Pengungkit</h2>
+<p class="text-sm text-gray-500 mb-5">6 Area Perubahan dengan total bobot 60% — Nilai: <strong id="pengHeaderScore"></strong></p>
+<div id="pengungkitDetails"></div>
+</div>
+
+<!-- HASIL -->
+<div id="sec-hasil" class="section-panel fade-in">
+<h2 class="text-xl font-bold text-gray-800 mb-1">B. Hasil</h2>
+<p class="text-sm text-gray-500 mb-5">2 Komponen Hasil dengan total bobot 40% — Nilai: <strong id="hasilHeaderScore"></strong></p>
+<div id="hasilDetails"></div>
+</div>
+
+<!-- RINCIAN -->
+<div id="sec-rincian" class="section-panel fade-in">
+<h2 class="text-xl font-bold text-gray-800 mb-1">Rincian Jawaban Detail</h2>
+<p class="text-sm text-gray-500 mb-4">Seluruh pertanyaan penilaian — klik ✏️ untuk edit, 🗑️ untuk hapus, + untuk tambah</p>
+<div class="flex gap-2 mb-4 flex-wrap">
+<input type="text" id="searchInput" placeholder="🔍 Cari pertanyaan..." class="flex-1 min-w-[200px] px-4 py-2 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" oninput="filterQuestions()">
+<select id="filterArea" class="px-3 py-2 rounded-xl border border-gray-200 text-sm" onchange="filterQuestions()"><option value="">Semua Area</option></select>
+<select id="filterStatus" class="px-3 py-2 rounded-xl border border-gray-200 text-sm" onchange="filterQuestions()"><option value="">Semua Status</option><option value="full">✅ Nilai Penuh</option><option value="partial">⚠️ Sebagian</option><option value="zero">❌ Nilai Rendah</option></select>
+<button onclick="addNewItem()" id="addNewItemBtn" class="btn-crud btn-add px-4 py-2 rounded-xl text-sm">+ Tambah Item Baru</button>
+</div>
+<div id="questionsList"></div>
+</div>
+
+<!-- DOKUMEN -->
+<div id="sec-dokumen" class="section-panel fade-in">
+<h2 class="text-xl font-bold text-gray-800 mb-1">📂 Dokumen & Bukti Dukung</h2>
+<p class="text-sm text-gray-500 mb-4">Kelola lokasi dokumen bukti dukung yang terhubung ke item penilaian</p>
+<div class="flex gap-2 mb-4 flex-wrap">
+<input type="text" id="docSearchPage" placeholder="🔍 Cari dokumen..." class="flex-1 min-w-[200px] px-4 py-2 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" oninput="filterDocsPage()">
+<button onclick="addNewDocFromPage()" class="btn-crud btn-add px-4 py-2 rounded-xl text-sm">+ Tambah Dokumen</button>
+</div>
+<div id="docsPageList"></div>
+</div>
+
+<!-- ANALISIS -->
+<div id="sec-analisis" class="section-panel fade-in">
+<h2 class="text-xl font-bold text-gray-800 mb-1">Analisis & Rekomendasi</h2>
+<p class="text-sm text-gray-500 mb-5">Identifikasi area yang perlu perbaikan — Nilai = Pemenuhan + Reform</p>
+
+<!-- Area-level overview -->
+<div class="glass rounded-2xl shadow-lg p-5 mb-5">
+<h3 class="text-sm font-bold text-gray-700 mb-3">📊 Skor per Area (Pemenuhan + Reform)</h3>
+<div id="areaAnalysisList"></div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+<div class="glass rounded-2xl shadow-lg p-5"><h3 class="text-sm font-bold text-red-600 mb-3">🔴 Area Lulus tapi Pemenuhan Rendah (&lt;80%)</h3><p class="text-xs text-gray-400 mb-2">Kelengkapan berkas belum optimal, perlu peningkatan</p><div id="weakAreas"></div></div>
+<div class="glass rounded-2xl shadow-lg p-5"><h3 class="text-sm font-bold text-green-600 mb-3">🟢 Pemenuhan Kuat (≥90%)</h3><p class="text-xs text-gray-400 mb-2">Kelengkapan berkas sudah sangat baik</p><div id="strongAreas"></div></div>
+</div>
+<div class="glass rounded-2xl shadow-lg p-5 mb-6"><h3 class="text-sm font-bold text-gray-700 mb-3">Distribusi Skor — Area (P+R) vs Sub-Area (Pemenuhan)</h3><div class="chart-container" style="height:500px"><canvas id="detailBarChart"></canvas></div></div>
+<div class="glass rounded-2xl shadow-lg p-5 mb-6"><h3 class="text-sm font-bold text-amber-600 mb-3">⚠️ Area/Sub-area Tidak Lulus (Nilai &lt; 75%)</h3><div id="failItems"></div></div>
+<div class="glass rounded-2xl shadow-lg p-5"><h3 class="text-sm font-bold text-blue-700 mb-3">💡 Rekomendasi Perbaikan</h3><div id="recommendations"></div></div>
+</div>
+
+<!-- USER MANAGEMENT (Admin only) -->
+<div id="sec-users" class="section-panel fade-in">
+<h2 class="text-xl font-bold text-gray-800 mb-1">🛡️ Manajemen Pengguna</h2>
+<p class="text-sm text-gray-500 mb-4">Kelola akun pengguna dan hak akses RBAC — hanya Administrator</p>
+<div class="glass rounded-2xl shadow-lg p-5 mb-5">
+<h3 class="text-sm font-bold text-gray-700 mb-3">Daftar Pengguna</h3>
+<div id="usersList"></div>
+</div>
+<div class="glass rounded-2xl shadow-lg p-5">
+<h3 class="text-sm font-bold text-blue-700 mb-3">➕ Tambah Pengguna Baru</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div><label class="text-xs font-semibold text-gray-500 uppercase">Username</label><input id="newUserUsername" class="w-full mt-1 p-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" placeholder="username"></div>
+<div><label class="text-xs font-semibold text-gray-500 uppercase">Nama Lengkap</label><input id="newUserFullname" class="w-full mt-1 p-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" placeholder="Nama Lengkap"></div>
+<div><label class="text-xs font-semibold text-gray-500 uppercase">Password</label><input id="newUserPassword" type="password" class="w-full mt-1 p-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" placeholder="Password"></div>
+<div><label class="text-xs font-semibold text-gray-500 uppercase">Role</label>
+<select id="newUserRole" class="w-full mt-1 p-3 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none">
+<option value="admin">Administrator</option>
+<option value="operator">Operator</option>
+<option value="viewer">View Only</option>
+<option value="dashboard">Dashboard Only</option>
+</select>
+</div>
+</div>
+<button onclick="addNewUser()" class="mt-4 btn-crud btn-add px-6 py-3 rounded-xl text-sm font-semibold">➕ Tambah Pengguna</button>
+</div>
+</div>
+
+</main>
+</div>
+
+<footer class="text-center py-6 text-xs text-gray-400">LKEZI 2025 — RSUD Mimika | Evaluasi Zona Integritas menuju WBK</footer>
+
+<script>
+// ==================== RBAC SYSTEM ====================
+// Clear stale localStorage from versions with broken calcScores (missing reform)
+(function(){
+  try {
+    // One-time migration: clear old data that lacked P+R formula and docData fields
+    if (!localStorage.getItem('lkezi2025_v3')) {
+      localStorage.removeItem('lkezi2025_users');
+      localStorage.removeItem('lkezi2025_data');
+      localStorage.removeItem('lkezi2025_docs');
+      localStorage.setItem('lkezi2025_v3', '1');
+    }
+  } catch(e){}
+})();
+// Simple hash function for password obfuscation (not production-grade crypto)
+function simpleHash(str) {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) { h = ((h << 5) - h) + str.charCodeAt(i); h = h & h; }
+  return 'h_' + Math.abs(h).toString(36) + '_' + str.length;
+}
+
+// Default users with pre-computed hashes
+const DEFAULT_USERS = [
+  { username:'admin', fullname:'Administrator', passwordHash: simpleHash('@dm1n_123'), role:'admin', active:true },
+  { username:'operator', fullname:'Operator RSUD', passwordHash: simpleHash('@operator123'), role:'operator', active:true },
+  { username:'viewer', fullname:'Viewer', passwordHash: simpleHash('@viewer123'), role:'viewer', active:true },
+  { username:'dashboard', fullname:'Dashboard Only', passwordHash: simpleHash('dashboard'), role:'dashboard', active:true }
+];
+
+// RBAC Permissions Matrix
+const RBAC_PERMISSIONS = {
+  admin: {
+    canViewDashboard: true,
+    canViewAllSections: true,
+    canCRUD: true,         // Create, Read, Update, Delete items
+    canAddItem: true,
+    canEditItem: true,
+    canDeleteItem: true,
+    canManageDocs: true,
+    canExport: true,
+    canResetData: true,
+    canManageUsers: true,
+    sections: ['dashboard','pengungkit','hasil','rincian','dokumen','analisis','users']
+  },
+  operator: {
+    canViewDashboard: true,
+    canViewAllSections: true,
+    canCRUD: true,
+    canAddItem: true,
+    canEditItem: true,
+    canDeleteItem: false,  // Operators cannot delete
+    canManageDocs: true,
+    canExport: true,
+    canResetData: false,
+    canManageUsers: false,
+    sections: ['dashboard','pengungkit','hasil','rincian','dokumen','analisis']
+  },
+  viewer: {
+    canViewDashboard: true,
+    canViewAllSections: true,
+    canCRUD: false,        // View Only — no CRUD at all
+    canAddItem: false,
+    canEditItem: false,
+    canDeleteItem: false,
+    canManageDocs: false,
+    canExport: true,
+    canResetData: false,
+    canManageUsers: false,
+    sections: ['dashboard','pengungkit','hasil','rincian','dokumen','analisis']
+  },
+  dashboard: {
+    canViewDashboard: true,
+    canViewAllSections: false, // Dashboard Only
+    canCRUD: false,
+    canAddItem: false,
+    canEditItem: false,
+    canDeleteItem: false,
+    canManageDocs: false,
+    canExport: false,
+    canResetData: false,
+    canManageUsers: false,
+    sections: ['dashboard', 'analisis']
+  }
+};
+
+let currentUser = null;
+let usersList = [];
+
+function loadUsers() {
+  const saved = localStorage.getItem('lkezi2025_users');
+  if (saved) {
+    usersList = JSON.parse(saved);
+  } else {
+    usersList = JSON.parse(JSON.stringify(DEFAULT_USERS));
+  }
+}
+
+function saveUsers() {
+  localStorage.setItem('lkezi2025_users', JSON.stringify(usersList));
+}
+
+function getCurrentRole() {
+  return currentUser ? currentUser.role : null;
+}
+
+function hasPermission(perm) {
+  const role = getCurrentRole();
+  if (!role) return false;
+  return RBAC_PERMISSIONS[role][perm] || false;
+}
+
+function canAccessSection(section) {
+  const role = getCurrentRole();
+  if (!role) return false;
+  return RBAC_PERMISSIONS[role].sections.includes(section);
+}
+
+// ==================== AUTH ====================
+function doLogin() {
+  const username = document.getElementById('loginUser').value.trim();
+  const password = document.getElementById('loginPass').value;
+  const errorEl = document.getElementById('loginError');
+
+  loadUsers();
+  const hash = simpleHash(password);
+  const user = usersList.find(u => u.username === username && u.passwordHash === hash && u.active);
+
+  if (!user) {
+    errorEl.classList.remove('hidden');
+    errorEl.textContent = '❌ Username atau password salah';
+    return;
+  }
+
+  currentUser = { username: user.username, fullname: user.fullname, role: user.role };
+  localStorage.setItem('lkezi2025_session', JSON.stringify(currentUser));
+  errorEl.classList.add('hidden');
+
+  document.getElementById('loginOverlay').style.display = 'none';
+  applyRBAC();
+  loadSavedData();
+  renderAll();
+  showToast(`Selamat datang, ${user.fullname}!`, 'success');
+}
+
+function doLogout() {
+  currentUser = null;
+  localStorage.removeItem('lkezi2025_session');
+  document.getElementById('loginOverlay').style.display = 'flex';
+  document.getElementById('loginUser').value = '';
+  document.getElementById('loginPass').value = '';
+}
+
+function checkSession() {
+  const session = localStorage.getItem('lkezi2025_session');
+  if (session) {
+    currentUser = JSON.parse(session);
+    // Verify user still exists and is active
+    loadUsers();
+    const userExists = usersList.find(u => u.username === currentUser.username && u.active);
+    if (userExists) {
+      currentUser.role = userExists.role; // Use latest role
+      currentUser.fullname = userExists.fullname;
+      document.getElementById('loginOverlay').style.display = 'none';
+      applyRBAC();
+      return true;
+    } else {
+      doLogout();
+      return false;
+    }
+  }
+  return false;
+}
+
+// ==================== APPLY RBAC TO UI ====================
+function applyRBAC() {
+  if (!currentUser) return;
+  const role = getCurrentRole();
+  const perms = RBAC_PERMISSIONS[role];
+
+  // Update sidebar user info
+  document.getElementById('sidebarUserName').textContent = currentUser.fullname;
+  const roleLabels = { admin:'Administrator', operator:'Operator', viewer:'View Only', dashboard:'Dashboard Only' };
+  const roleClasses = { admin:'role-admin', operator:'role-operator', viewer:'role-viewer', dashboard:'role-dashboard' };
+  document.getElementById('sidebarUserRoleBadge').innerHTML = `<span class="role-badge ${roleClasses[role]}">${roleLabels[role]}</span>`;
+  document.getElementById('sidebarUserAvatar').textContent = currentUser.username.substring(0,2).toUpperCase();
+
+  // Update header
+  document.getElementById('headerUserRole').innerHTML = `<span class="role-badge ${roleClasses[role]}">${roleLabels[role]}</span>`;
+
+  // Show/hide navigation items based on role
+  document.querySelectorAll('.nav-item[data-roles]').forEach(item => {
+    const allowedRoles = item.dataset.roles.split(',');
+    if (allowedRoles.includes(role)) {
+      item.style.display = '';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+
+  // If dashboard-only, force to dashboard section
+  if (role === 'dashboard') {
+    showSection('dashboard');
+  }
+
+  // Show/hide data controls (reset, export)
+  document.getElementById('resetBtn').style.display = perms.canResetData ? '' : 'none';
+  document.getElementById('exportBtn').style.display = perms.canExport ? '' : 'none';
+  document.getElementById('docManagerBtn').style.display = perms.canManageDocs ? '' : 'none';
+
+  // Show/hide sidebar data controls entirely for dashboard-only
+  document.getElementById('sidebarDataControls').style.display = role === 'dashboard' ? 'none' : '';
+
+  // Show/hide static add-new-item button
+  const addBtn = document.getElementById('addNewItemBtn');
+  if (addBtn) addBtn.style.display = perms.canAddItem ? '' : 'none';
+}
+
+// ==================== USER MANAGEMENT ====================
+function renderUsersList() {
+  loadUsers();
+  const el = document.getElementById('usersList');
+  if (!el) return;
+  const roleLabels = { admin:'Administrator', operator:'Operator', viewer:'View Only', dashboard:'Dashboard Only' };
+  const roleClasses = { admin:'role-admin', operator:'role-operator', viewer:'role-viewer', dashboard:'role-dashboard' };
+
+  el.innerHTML = usersList.map((u, i) => `<div class="flex items-center justify-between p-3 ${i > 0 ? 'border-t border-gray-100' : ''} ${u.username === currentUser.username ? 'bg-blue-50' : ''}">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl ${u.active ? 'bg-blue-100' : 'bg-gray-200'} flex items-center justify-center font-bold text-sm">${u.username.substring(0,2).toUpperCase()}</div>
+      <div>
+        <p class="text-sm font-bold text-gray-700">${u.fullname} ${u.username === currentUser.username ? '<span class="text-xs text-blue-500">(Anda)</span>' : ''}</p>
+        <p class="text-xs text-gray-400">@${u.username}</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <span class="role-badge ${roleClasses[u.role]}">${roleLabels[u.role]}</span>
+      ${u.active ? '<span class="badge badge-ok">Aktif</span>' : '<span class="badge badge-fail">Nonaktif</span>'}
+      ${u.username !== currentUser.username ? `
+        <button onclick="toggleUserActive(${i})" class="btn-crud ${u.active ? 'btn-delete' : 'btn-add'} text-xs">${u.active ? '🚫 Nonaktifkan' : '✅ Aktifkan'}</button>
+        <button onclick="deleteUser(${i})" class="btn-crud btn-delete text-xs">🗑️</button>
+      ` : ''}
+    </div>
+  </div>`).join('');
+}
+
+function toggleUserActive(idx) {
+  usersList[idx].active = !usersList[idx].active;
+  saveUsers();
+  renderUsersList();
+  showToast(`User ${usersList[idx].fullname} ${usersList[idx].active ? 'diaktifkan' : 'dinonaktifkan'}`, 'info');
+}
+
+function deleteUser(idx) {
+  if (usersList[idx].username === currentUser.username) return;
+  if (!confirm(`Hapus pengguna "${usersList[idx].fullname}"?`)) return;
+  usersList.splice(idx, 1);
+  saveUsers();
+  renderUsersList();
+  showToast('Pengguna berhasil dihapus', 'error');
+}
+
+function addNewUser() {
+  const username = document.getElementById('newUserUsername').value.trim();
+  const fullname = document.getElementById('newUserFullname').value.trim();
+  const password = document.getElementById('newUserPassword').value;
+  const role = document.getElementById('newUserRole').value;
+
+  if (!username || !fullname || !password) {
+    showToast('Semua field harus diisi!', 'error');
+    return;
+  }
+  if (usersList.find(u => u.username === username)) {
+    showToast('Username sudah ada!', 'error');
+    return;
+  }
+
+  usersList.push({ username, fullname, passwordHash: simpleHash(password), role, active: true });
+  saveUsers();
+  renderUsersList();
+  document.getElementById('newUserUsername').value = '';
+  document.getElementById('newUserFullname').value = '';
+  document.getElementById('newUserPassword').value = '';
+  showToast(`Pengguna "${fullname}" berhasil ditambahkan!`, 'success');
+}
+
+// ==================== RBAC-GUARDED RENDER HELPERS ====================
+function crudButtons(type, areaIdx, subIdx, itemIdx) {
+  if (!hasPermission('canEditItem') && !hasPermission('canDeleteItem')) return '';
+  let btns = '';
+  if (hasPermission('canEditItem')) btns += `<button onclick="openEditItem('${type}',${areaIdx},${subIdx},${itemIdx})" class="btn-crud btn-edit text-xs">✏️ Edit</button>`;
+  if (hasPermission('canDeleteItem')) btns += `<button onclick="openDeleteItem('${type}',${areaIdx},${subIdx},${itemIdx})" class="btn-crud btn-delete text-xs">🗑️</button>`;
+  return btns;
+}
+
+function addItemButton(label, type, areaIdx, subIdx) {
+  if (!hasPermission('canAddItem')) return '';
+  return `<button onclick="openAddItemDirect('${type}',${areaIdx},${subIdx})" class="btn-crud btn-add px-4 py-2 rounded-xl text-sm w-full mt-2">➕ Tambah Item ke ${label}</button>`;
+}
+
+function addNewItemButton() {
+  if (!hasPermission('canAddItem')) return '';
+  return `<button onclick="addNewItem()" class="btn-crud btn-add px-4 py-2 rounded-xl text-sm">➕ Tambah Item Baru</button>`;
+}
+
+// ==================== DATA ====================
+const ORIGINAL_DATA = {
+  pengungkit: {
+    areas: [
+      { id:1, name:"Manajemen Perubahan", bobot:8, pemenuhan:3.48, reform:4, folderUrl:"https://drive.google.com/drive/folders/1GPqB0AnJnwZd9zPlM-NAPwLWJQQQkY7N?usp=drive_link", subAreas:[
+        { name:"Penyusunan Tim Kerja", bobot:0.5, items:[
+          { q:"Unit kerja telah membentuk tim untuk melakukan pembangunan Zona Integritas", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"SK Tim sudah ada 2026, sk tim 2025 belum ada", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Penentuan anggota Tim dipilih melalui prosedur/mekanisme yang jelas", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"SPO Pembentukan Tim, UMAN", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
+        ]},
+        { name:"Rencana Pembangunan Zona Integritas", bobot:1, items:[
+          { q:"Terdapat dokumen rencana kerja pembangunan Zona Integritas menuju WBK/WBBM", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"Sudah ada rencana kerja/ Ibu Lina dan Pak Adi", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Dalam dokumen pembangunan terdapat target-target prioritas yang relevan dengan tujuan pembangunan WBK/WBBM", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"Munculkan target Prioritas dalam pelayanan", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Terdapat mekanisme atau media untuk mensosialisasikan pembangunan WBK/WBBM", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"website", bukti:"bukti benner, spanduk, web", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
+        ]},
+        { name:"Pemantauan dan Evaluasi Pembangunan WBK/WBBM", bobot:1, items:[
+          { q:"Seluruh kegiatan pembangunan sudah dilaksanakan sesuai dengan rencana", kriteria:"A/B/C/D", jawaban:"B", tpi:"B", nilai:0.67, catatan:"MONEV Rencana Kerja 2025", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Terdapat monitoring dan evaluasi terhadap pembangunan Zona Integritas", kriteria:"A/B/C/D", jawaban:"B", tpi:"B", nilai:0.67, catatan:"MONEV Rencana Kerja 2025", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Hasil Monitoring dan Evaluasi telah ditindaklanjuti", kriteria:"A/B/C/D", jawaban:"B", tpi:"B", nilai:0.67, catatan:"MONEV Rencana Kerja 2025", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
+        ]},
+        { name:"Perubahan Pola Pikir dan Budaya Kerja", bobot:1.5, items:[
+          { q:"Pimpinan berperan sebagai role model dalam pelaksanaan Pembangunan WBK/WBBM", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"Salam stop gratifikasi", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Sudah ditetapkan agen perubahan", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"SK Agen Perubahan", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Telah dibangun budaya kerja dan pola pikir di lingkungan organisasi", kriteria:"A/B/C", jawaban:"B", tpi:"B", nilai:0.5, catatan:"Sosialisasi saat apel pagi oleh direktur", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Anggota organisasi terlibat dalam pembangunan Zona Integritas menuju WBK/WBBM", kriteria:"A/B/C/D", jawaban:"A", tpi:"A", nilai:1, catatan:"Rapat Pakta Integritas sekaligus penandatanganan", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
+        ]}
+      ]},
+      { id:2, name:"Penataan Tatalaksana", bobot:7, pemenuhan:3.5, reform:3.17, folderUrl:"https://drive.google.com/drive/folders/1_0fexM9LmzEvXYYq8PQaaeVFxJxdPe4M?usp=drive_link", subAreas:[
+        { name:"Prosedur Operasional Tetap (SOP) Kegiatan Utama", bobot:1, items:[
+          { q:"SOP mengacu pada peta proses bisnis instansi", kriteria:"A/B/C/D", jawaban:"A", tpi:"A", nilai:1, catatan:"Peta bisnis/SOTK (Laporan)", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Prosedur operasional tetap (SOP) telah diterapkan", kriteria:"A/B/C/D/E", jawaban:"A", tpi:"A", nilai:1, catatan:"SOP Pendaftaran", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Prosedur operasional tetap (SOP) telah dievaluasi", kriteria:"A/B/C/D/E", jawaban:"A", tpi:"A", nilai:1, catatan:"SPO pendaftaran lama (SPO pendaftaran baru APM)", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
+        ]},
+        { name:"Sistem Pemerintahan Berbasis Elektronik (SPBE)", bobot:2, items:[
+          { q:"Sistem pengukuran kinerja unit sudah menggunakan teknologi informasi", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"Web E-Sakip kepegawaian", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Operasionalisasi manajemen SDM sudah menggunakan teknologi informasi", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"Absen Elektronik (ATMOS) My ASN", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Pemberian pelayanan kepada publik sudah menggunakan teknologi informasi", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"Pendaftaran Online website RS", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Telah dilakukan monitoring dan evaluasi terhadap pemanfaatan TI", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"Evaluasi dari survey kepuasan masyarakat", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
+        ]},
+        { name:"Keterbukaan Informasi Publik", bobot:0.5, items:[
+          { q:"Kebijakan tentang keterbukaan informasi publik telah diterapkan", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"SK untuk tim media dari luar", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Monitoring dan evaluasi pelaksanaan kebijakan keterbukaan informasi publik", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"Screenshot komentar dari mobile JKN", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
+        ]}
+      ]},
+      { id:3, name:"Penataan Sistem Manajemen SDM Aparatur", bobot:10, pemenuhan:5, reform:4.6, folderUrl:"https://drive.google.com/drive/folders/1esVS6FGL2zNQRyh8Tr3H7hlqH6zcA8iD?usp=drive_link", subAreas:[
+        { name:"Perencanaan Kebutuhan Pegawai", bobot:0.25, items:[
+          { q:"Kebutuhan pegawai disusun mengacu kepada peta jabatan dan analisis beban kerja", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"Anjab (ortal) tahun 2025", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Penempatan pegawai hasil rekrutmen mengacu kepada kebutuhan pegawai per jabatan", kriteria:"A/B/C/D", jawaban:"A", tpi:"A", nilai:1, catatan:"Penempatan tenaga sesuai pendidikan", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Monitoring dan evaluasi terhadap penempatan pegawai rekrutmen", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"Nota Penempatan Pegawai", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
+        ]},
+        { name:"Pola Mutasi Internal", bobot:0.5, items:[
+          { q:"Mutasi pegawai antar jabatan sebagai pengembangan karier", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"SMPT Lama dan Baru Theo Bagian Umum", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Mutasi memperhatikan kompetensi jabatan dan mengikuti pola mutasi", kriteria:"A/B/C/D/E", jawaban:"A", tpi:"A", nilai:1, catatan:"SMPT Lama dan Baru", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Monitoring dan evaluasi terhadap mutasi dalam kaitannya perbaikan kinerja", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"Daftar Atmos dan hasil kerja", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
+        ]},
+        { name:"Pengembangan Pegawai Berbasis Kompetensi", bobot:1.25, items:[
+          { q:"Training Need Analysis untuk pengembangan kompetensi", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"Bimtek/IHT dokumen foto dan laporan", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Rencana pengembangan kompetensi mempertimbangkan hasil pengelolaan kinerja", kriteria:"A/B/C/D", jawaban:"A", tpi:"A", nilai:1, catatan:"Pelatihan tepat sasaran, sertifikat", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Tingkat kesenjangan kompetensi pegawai", kriteria:"A/B/C/D", jawaban:"A", tpi:"A", nilai:1, catatan:"Penempatan sesuai kompetensi (STR SIP)", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Pegawai memperoleh kesempatan/hak mengikuti diklat", kriteria:"A/B/C/D", jawaban:"A", tpi:"A", nilai:1, catatan:"Bukti sertifikat", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Upaya pengembangan kompetensi kepada pegawai", kriteria:"A/B/C/D", jawaban:"A", tpi:"A", nilai:1, catatan:"Sertifikat ICU, NICU", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Monitoring dan evaluasi hasil pengembangan kompetensi", kriteria:"A/B/C", jawaban:"A", tpi:"Blm Diisi", nilai:0, catatan:"Monitoring evaluasi", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
+        ]},
+        { name:"Penetapan Kinerja Individu", bobot:2, items:[
+          { q:"Terdapat penetapan kinerja individu terkait perjanjian kinerja organisasi", kriteria:"A/B/C/D", jawaban:"A", tpi:"A", nilai:1, catatan:"SKP Pegawai", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Ukuran kinerja individu sesuai dengan indikator level diatasnya", kriteria:"A/B/C/D", jawaban:"A", tpi:"A", nilai:1, catatan:"Peta Jabatan dan Anjab", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Pengukuran kinerja individu dilakukan secara periodik", kriteria:"A/B/C/D/E", jawaban:"A", tpi:"A", nilai:1, catatan:"Laporan logbook perawat bidan", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Hasil penilaian kinerja dijadikan dasar pemberian reward", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"Reward dalam bentuk logbook", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
+        ]},
+        { name:"Penegakan Aturan Disiplin/Kode Etik", bobot:0.75, items:[
+          { q:"Aturan disiplin/kode etik/kode perilaku telah diimplementasikan", kriteria:"A/B/C/D", jawaban:"A", tpi:"A", nilai:1, catatan:"SK Komite Keperawatan, Medik, Umum", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
+        ]},
+        { name:"Sistem Informasi Kepegawaian", bobot:0.25, items:[
+          { q:"Data informasi kepegawaian dimutakhirkan secara berkala", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"My ASN", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
+        ]}
+      ]},
+      { id:4, name:"Penguatan Akuntabilitas", bobot:10, pemenuhan:5, reform:4.01, folderUrl:"https://drive.google.com/drive/folders/1teonVXCQZjxg9W1JvxubOCca6k4awCSW?usp=drive_link", subAreas:[
+        { name:"Keterlibatan Pimpinan", bobot:2.5, items:[
+          { q:"Pimpinan terlibat langsung pada penyusunan perencanaan", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"Dokumentasi rapat perencanaan anggaran 2025", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Pimpinan terlibat langsung saat penyusunan penetapan kinerja", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"PK Organisasi dari direktur sampai staf", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Pimpinan memantau pencapaian kinerja secara berkala", kriteria:"A/B/C/D", jawaban:"A", tpi:"A", nilai:1, catatan:"Lakip 2024 dan 2025", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
+        ]},
+        { name:"Pengelolaan Akuntabilitas Kinerja", bobot:2.5, items:[
+          { q:"Dokumen perencanaan kinerja sudah ada", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"Dokumen di upload di e-sakip", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Perencanaan kinerja telah berorientasi hasil", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"Dokumen di upload di e-sakip", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Terdapat penetapan IKU", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"Dokumen di upload di e-sakip", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Indikator kinerja telah memenuhi kriteria SMART", kriteria:"A/B/C/D", jawaban:"A", tpi:"A", nilai:1, catatan:"Dokumen di upload di e-sakip", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Laporan kinerja telah disusun tepat waktu", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"Dokumen di upload di e-sakip", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Laporan kinerja telah memberikan informasi tentang kinerja", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"Dokumen di upload di e-sakip", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Terdapat sistem informasi/mekanisme informasi kinerja", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"Dokumen di upload di e-sakip", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Upaya meningkatkan kapasitas SDM pengelola akuntabilitas kinerja", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"Dokumen di upload di e-sakip", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
+        ]}
+      ]},
+      { id:5, name:"Penguatan Pengawasan", bobot:15, pemenuhan:4.17, reform:6.89, folderUrl:"https://drive.google.com/drive/folders/1bXhKgPJo5162u96vThd9C8l1TCBa_y7V?usp=drive_link", subAreas:[
+        { name:"Pengendalian Gratifikasi", bobot:1.5, items:[
+          { q:"Public campaign tentang pengendalian gratifikasi", kriteria:"A/B/C", jawaban:"B", tpi:"B", nilai:0.5, catatan:"Sosialisasi anti gratifikasi bulan Februari", bukti:"Banner", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Pengendalian gratifikasi telah diimplementasikan", kriteria:"A/B/C/D", jawaban:"C", tpi:"C", nilai:0.33, catatan:"Lacak pengaduan di Website menu aduan", bukti:"Surat edaran dari sekda", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
+        ]},
+        { name:"Penerapan SPIP", bobot:1.5, items:[
+          { q:"Telah dibangun lingkungan pengendalian", kriteria:"A/B/C/D/E", jawaban:"C", tpi:"C", nilai:0.5, catatan:"Tim SPI sejak 2022, SK", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Penilaian risiko atas pelaksanaan kebijakan", kriteria:"A/B/C/D/E", jawaban:"C", tpi:"C", nilai:0.5, catatan:"Dokumen manajemen resiko", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Kegiatan pengendalian untuk meminimalisir risiko", kriteria:"A/B/C", jawaban:"C", tpi:"C", nilai:0, catatan:"Dokumen ROO dan RSO", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"SPI telah diinformasikan dan dikomunikasikan", kriteria:"A/B/C", jawaban:"B", tpi:"B", nilai:0.5, catatan:"SK TIM SPI", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
+        ]},
+        { name:"Pengaduan Masyarakat", bobot:1.5, items:[
+          { q:"Kebijakan Pengaduan masyarakat telah diimplementasikan", kriteria:"A/B/C", jawaban:"A", tpi:"C", nilai:0, catatan:"SKM, Laporan ke direktur", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Pengaduan masyarakat ditindaklanjuti", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Monitoring dan evaluasi atas penanganan pengaduan", kriteria:"A/B/C", jawaban:"C", tpi:"B", nilai:0.5, catatan:"SKM, Laporan ke direktur", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Hasil evaluasi penanganan pengaduan telah ditindaklanjuti", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"SKM, Laporan ke direktur", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
+        ]},
+        { name:"Whistle-Blowing System", bobot:1.5, items:[
+          { q:"Whistle-Blowing System telah diterapkan", kriteria:"A/B/C", jawaban:"B", tpi:"B", nilai:0.5, catatan:"Website RSUD penambahan menu aduan", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Evaluasi atas penerapan Whistle Blowing System", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Hasil evaluasi WBS telah ditindaklanjuti", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"Website RSUD penambahan menu aduan", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
+        ]},
+        { name:"Penanganan Benturan Kepentingan", bobot:1.5, items:[
+          { q:"Identifikasi/pemetaan benturan kepentingan", kriteria:"A/B/C/D", jawaban:"B", tpi:"B", nilai:0.67, catatan:"Buatkan dokumen, contoh BPS", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Penanganan Benturan Kepentingan telah disosialisasikan", kriteria:"A/B/C/D", jawaban:"B", tpi:"B", nilai:0.67, catatan:"Sudah sebagian disosialisasikan", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Penanganan Benturan Kepentingan telah diimplementasikan", kriteria:"A/B/C/D", jawaban:"C", tpi:"C", nilai:0.33, catatan:"Alur dan kebijakan telah tersedia namun belum tersosialisakan", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Evaluasi atas Penanganan Benturan Kepentingan", kriteria:"A/B/C", jawaban:"B", tpi:"B", nilai:0.5, catatan:"Hasil Evaluasi", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Hasil evaluasi Penanganan Benturan Kepentingan telah ditindaklanjuti", kriteria:"A/B/C", jawaban:"B", tpi:"B", nilai:0.5, catatan:"Hasil Evaluasi", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
+        ]}
+      ]},
+      { id:6, name:"Peningkatan Kualitas Pelayanan Publik", bobot:10, pemenuhan:3.77, reform:5, folderUrl:"https://drive.google.com/drive/folders/1vG3QizTWBG3yb5iYE-XikFx3emqAeWmX?usp=drive_link", subAreas:[
+        { name:"Standar Pelayanan", bobot:1, items:[
+          { q:"Terdapat kebijakan standar pelayanan", kriteria:"A/B/C/D/E", jawaban:"A", tpi:"A", nilai:1, catatan:"16 Standar pelayanan", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Standar pelayanan telah dimaklumatkan", kriteria:"A/B/C/D", jawaban:"D", tpi:"D", nilai:0, catatan:"Maklumat standar pelayanan pendaftaran dan obat", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Reviu dan perbaikan atas standar pelayanan", kriteria:"A/B/C/D", jawaban:"A", tpi:"D", nilai:0, catatan:"Ada reviu dari SKM perbulan", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Publikasi standar pelayanan dan maklumat pelayanan", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"Publikasi melalui sosmed atau web", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
+        ]},
+        { name:"Budaya Pelayanan Prima", bobot:1, items:[
+          { q:"Upaya peningkatan kemampuan tentang budaya pelayanan prima", kriteria:"A/B/C/D/E", jawaban:"B", tpi:"B", nilai:0.75, catatan:"Pelatihan komunikasi efektif", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Informasi tentang pelayanan mudah diakses", kriteria:"A/B/C/D", jawaban:"A", tpi:"B", nilai:0.67, catatan:"Website dan sosial media", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Sistem pemberian penghargaan dan sanksi bagi petugas", kriteria:"A/B/C/D", jawaban:"B", tpi:"B", nilai:0.67, catatan:"SK Kompensasi", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Sistem pemberian kompensasi kepada penerima layanan", kriteria:"A/B/C/D", jawaban:"D", tpi:"D", nilai:0, catatan:"SK Kompensasi", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Sarana layanan terpadu/terintegrasi", kriteria:"A/B/C/D", jawaban:"A", tpi:"A", nilai:1, catatan:"SIMRS dari pendaftaran sampai kasir", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Inovasi pelayanan", kriteria:"A/B/C/D/E", jawaban:"A", tpi:"A", nilai:1, catatan:"SIMRS", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
+        ]},
+        { name:"Pengelolaan Pengaduan", bobot:1, items:[
+          { q:"Media pengaduan dan konsultasi terintegrasi SP4N-Lapor!", kriteria:"A/B/C/D/E", jawaban:"B", tpi:"B", nilai:0.75, catatan:"Website menu aduan", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Unit yang mengelola pengaduan dan konsultasi pelayanan", kriteria:"A/B/C", jawaban:"B", tpi:"B", nilai:0.5, catatan:"SK TIM pelayanan dan pengaduan", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Evaluasi atas penanganan keluhan/masukan dan konsultasi", kriteria:"A/B/C", jawaban:"B", tpi:"B", nilai:0.5, catatan:"HUMAS (Laporan Evaluasi)", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
+        ]},
+        { name:"Penilaian Kepuasan terhadap Pelayanan", bobot:1, items:[
+          { q:"Survey kepuasan masyarakat terhadap pelayanan", kriteria:"A/B/C/D/E", jawaban:"A", tpi:"A", nilai:1, catatan:"Laporan bulanan SKM", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Hasil survei kepuasan dapat diakses secara terbuka", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"Laporan bulanan SKM (Grafik di web)", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Tindak lanjut atas hasil survei kepuasan masyarakat", kriteria:"A/B/C/D", jawaban:"A", tpi:"A", nilai:1, catatan:"Laporan ke direktur (Hasil SKM)", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
+        ]},
+        { name:"Pemanfaatan Teknologi Informasi", bobot:1, items:[
+          { q:"Menerapkan TI dalam memberikan pelayanan", kriteria:"A/B/C/D", jawaban:"A", tpi:"A", nilai:1, catatan:"Tutorial SIPOLI di videotron", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Membangun database pelayanan yang terintegrasi", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"Dashboard aplikasi", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+          { q:"Perbaikan secara terus menerus", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"Laporan maintenance", bukti:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
+        ]}
+      ]}
+    ]
+  },
+  hasil: {
+    areas: [
+      { name:"Birokrasi yang Bersih dan Akuntabel", bobot:22.5, items:[
+        { q:"Nilai Survey Persepsi Korupsi (IPAK)", bobot:17.5, nilai:13.13, pct:75, jawaban:"3 (skala 0-4)", tpi:"3", min:"Tidak Lulus", catatan:"FORM SURVEY SPAK", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
+        { q:"Capaian Kinerja Lebih Baik dari Capaian Kinerja Sebelumnya", bobot:5, nilai:5, pct:100, jawaban:"A", tpi:"A", catatan:"Hasil Survei Mundur 2024", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
+      ]},
+      { name:"Pelayanan Publik yang Prima", bobot:17.5, items:[
+        { q:"Nilai Persepsi Kualitas Pelayanan (IPKP)", bobot:17.5, nilai:13.13, pct:75, jawaban:"3 (skala 0-4)", tpi:"3", min:"Tidak Lulus", catatan:"FORM SPKP", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
+      ]}
+    ]
+  }
+};
+
+// ==================== STATE ====================
+let appData = null;
+let standaloneDocs = [];
+let editContext = null; // {type:'pengungkit'|'hasil', areaIdx, subIdx, itemIdx}
+let deleteContext = null;
+let _pendingEditDocData = '';
+let _pendingEditDocFileName = '';
+let _pendingEditDocFileType = '';
+let _pendingAddDocData = '';
+let _pendingAddDocFileName = '';
+let _pendingAddDocFileType = '';
+
+function loadSavedData() {
+  const saved = localStorage.getItem('lkezi2025_data');
+  if (saved) {
+    appData = JSON.parse(saved);
+    // Migrate: ensure folderUrl exists and is up-to-date on each area
+    const origAreas = ORIGINAL_DATA.pengungkit.areas;
+    appData.pengungkit.areas.forEach((a, i) => {
+      if (i < origAreas.length) {
+        // Always sync folderUrl from ORIGINAL_DATA (Drive links are managed externally)
+        if (!a.folderUrl) a.folderUrl = origAreas[i].folderUrl;
+        // If area name matches, ensure folderUrl is correct
+        if (a.name === origAreas[i].name) a.folderUrl = origAreas[i].folderUrl;
+      }
+    });
+    document.getElementById('dataStatus').innerHTML = '📝 Data Dimodifikasi';
+  } else {
+    appData = JSON.parse(JSON.stringify(ORIGINAL_DATA));
+  }
+  const savedDocs = localStorage.getItem('lkezi2025_docs');
+  standaloneDocs = savedDocs ? JSON.parse(savedDocs) : [];
+}
+
+function saveData() {
+  localStorage.setItem('lkezi2025_data', JSON.stringify(appData));
+  localStorage.setItem('lkezi2025_docs', JSON.stringify(standaloneDocs));
+  document.getElementById('dataStatus').innerHTML = '📝 Data Dimodifikasi';
+}
+
+function resetData() {
+  if (confirm('Reset semua data ke kondisi original? Perubahan akan hilang.')) {
+    localStorage.removeItem('lkezi2025_data');
+    localStorage.removeItem('lkezi2025_docs');
+    appData = JSON.parse(JSON.stringify(ORIGINAL_DATA));
+    standaloneDocs = [];
+    document.getElementById('dataStatus').innerHTML = '✅ Data Original';
+    renderAll();
+    showToast('Data berhasil direset ke original', 'success');
+  }
+}
+
+// ==================== CALCULATIONS ====================
+function calcScores() {
+  // Preserve reform values from ORIGINAL_DATA if not already set
+  const origAreas = ORIGINAL_DATA.pengungkit.areas;
+
+  appData.pengungkit.areas.forEach((area, ai) => {
+    // Pemenuhan: calculated from item-level answers
+    area.subAreas.forEach(sub => {
+      if (sub.items.length === 0) { sub.pct = 0; sub.nilai = 0; return; }
+      const avgNilai = sub.items.reduce((s, i) => s + i.nilai, 0) / sub.items.length;
+      sub.nilai = avgNilai * sub.bobot;
+      sub.pct = avgNilai * 100;
+    });
+    area.pemenuhan = area.subAreas.reduce((s, sub) => s + sub.nilai, 0);
+
+    // Reform: preserve from original data (separate assessment, not from item answers)
+    if (area.reform === undefined || area.reform === null) {
+      if (ai < origAreas.length) area.reform = origAreas[ai].reform;
+      else area.reform = 0;
+    }
+
+    // Nilai = Pemenuhan + Reform (LKEZI formula)
+    area.nilai = area.pemenuhan + area.reform;
+    area.pct = (area.nilai / area.bobot) * 100;
+    area.min = area.pct >= 75 ? 'OK' : 'Tidak Lulus';
+  });
+
+  const pengTotal = appData.pengungkit.areas.reduce((s, a) => s + a.nilai, 0);
+  appData.pengungkit.totalNilai = pengTotal;
+  appData.pengungkit.totalBobot = 60;
+  appData.pengungkit.pct = (pengTotal / 60) * 100;
+
+  appData.hasil.areas.forEach(area => {
+    area.nilai = area.items.reduce((s, i) => s + i.nilai, 0);
+    area.pct = (area.nilai / area.bobot) * 100;
+    area.min = area.items.some(i => i.min === 'Tidak Lulus') ? 'Tidak Lulus' : (area.pct >= 75 ? 'OK' : 'Tidak Lulus');
+  });
+
+  const hasilTotal = appData.hasil.areas.reduce((s, a) => s + a.nilai, 0);
+  appData.hasil.totalNilai = hasilTotal;
+  appData.hasil.totalBobot = 40;
+  appData.hasil.pct = (hasilTotal / 40) * 100;
+
+  appData.totalNilai = pengTotal + hasilTotal;
+}
+
+// ==================== UTILITIES ====================
+function getColor(pct) {
+  if (pct >= 90) return { bg:'#dcfce7', text:'#166534', bar:'#22c55e', label:'Sangat Baik' };
+  if (pct >= 75) return { bg:'#dbeafe', text:'#1e40af', bar:'#3b82f6', label:'Baik' };
+  if (pct >= 60) return { bg:'#fef9c3', text:'#854d0e', bar:'#eab308', label:'Cukup' };
+  return { bg:'#fee2e2', text:'#991b1b', bar:'#ef4444', label:'Kurang' };
+}
+
+function pctBadge(pct) {
+  const c = getColor(pct);
+  return `<span class="badge" style="background:${c.bg};color:${c.text}">${pct.toFixed(1)}%</span>`;
+}
+
+function minBadge(min) {
+  if (min === 'OK') return '<span class="badge badge-ok">✅ OK</span>';
+  if (min === 'Tidak Lulus') return '<span class="badge badge-fail">❌ Tidak Lulus</span>';
+  return '';
+}
+
+function showToast(msg, type='success') {
+  const t = document.getElementById('toast');
+  t.className = `toast toast-${type} show`;
+  t.textContent = msg;
+  setTimeout(() => { t.classList.remove('show'); }, 3000);
+}
+
+function animateValue(el, end, dur=1200) {
+  let start = 0; const step = end / (dur/16);
+  const timer = setInterval(() => { start += step; if (start >= end) { start = end; clearInterval(timer); } el.textContent = start.toFixed(2); }, 16);
+}
+
+function showSection(id) {
+  // RBAC: Check if current role can access this section
+  if (!canAccessSection(id)) {
+    showToast('⛔ Akses ditolak — role Anda tidak dapat mengakses section ini', 'error');
+    return;
+  }
+  document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const navItem = document.querySelector(`.nav-item[data-section="${id}"]`);
+  if (navItem) navItem.classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function toggleSub(id) {
+  const el = document.getElementById(id);
+  const btn = document.getElementById('exp-'+id);
+  if (el.style.display === 'none') { el.style.display='block'; btn.classList.add('open'); }
+  else { el.style.display='none'; btn.classList.remove('open'); }
+}
+
+// ==================== CRUD OPERATIONS ====================
+function openEditItem(type, areaIdx, subIdx, itemIdx) {
+  editContext = { type, areaIdx, subIdx, itemIdx };
+  let item;
+  if (type === 'pengungkit') {
+    item = appData.pengungkit.areas[areaIdx].subAreas[subIdx].items[itemIdx];
+    const areaName = appData.pengungkit.areas[areaIdx].name;
+    const subName = appData.pengungkit.areas[areaIdx].subAreas[subIdx].name;
+    document.getElementById('editTitle').textContent = 'Edit Item Penilaian';
+    document.getElementById('editSubtitle').textContent = `${areaName} › ${subName}`;
+    document.getElementById('editIcon').textContent = '✏️';
+  } else {
+    item = appData.hasil.areas[areaIdx].items[itemIdx];
+    const areaName = appData.hasil.areas[areaIdx].name;
+    document.getElementById('editTitle').textContent = 'Edit Item Hasil';
+    document.getElementById('editSubtitle').textContent = areaName;
+    document.getElementById('editIcon').textContent = '🎯';
+  }
+  document.getElementById('editQuestion').value = item.q || '';
+  document.getElementById('editKriteria').value = item.kriteria || '';
+  document.getElementById('editBobot').value = item.bobot || '';
+  document.getElementById('editJawaban').value = item.jawaban || '';
+  document.getElementById('editTPI').value = item.tpi || '';
+  document.getElementById('editNilai').value = item.nilai || '';
+  document.getElementById('editCatatan').value = item.catatan || '';
+  _pendingEditDocData = item.docData || '';
+  _pendingEditDocFileName = item.docFileName || '';
+  _pendingEditDocFileType = item.docFileType || '';
+  if (_pendingEditDocFileName) {
+    document.getElementById('editDocUploadArea').classList.remove('hidden');
+    document.getElementById('editDocFileName').textContent = _pendingEditDocFileName;
+  } else {
+    document.getElementById('editDocUploadArea').classList.add('hidden');
+  }
+  document.getElementById('editDocUrl').value = item.docUrl || '';
+  document.getElementById('editDocDesc').value = item.docDesc || '';
+  updateDocPreview(_pendingEditDocFileName, item.docUrl || '');
+  document.getElementById('editModal').classList.add('show');
+}
+
+function closeEditModal() { document.getElementById('editModal').classList.remove('show'); }
+
+// saveEdit is defined later — handles both new items (itemIdx=-1) and edits
+
+function pickDocFile() { document.getElementById('docFilePicker').click(); }
+function onDocFilePicked(input) {
+  if (input.files.length > 0) {
+    const file = input.files[0];
+    if (file.size > 5 * 1024 * 1024) { showToast('File terlalu besar (maks 5MB)', 'error'); return; }
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      _pendingEditDocData = e.target.result;
+      _pendingEditDocFileName = file.name;
+      _pendingEditDocFileType = file.type;
+      document.getElementById('editDocUploadArea').classList.remove('hidden');
+      document.getElementById('editDocFileName').textContent = file.name + ' (' + (file.size/1024).toFixed(1) + ' KB)';
+      updateDocPreview(file.name, document.getElementById('editDocUrl').value);
+    };
+    reader.readAsDataURL(file);
+  }
+}
+function removeUploadedDoc() {
+  _pendingEditDocData = '';
+  _pendingEditDocFileName = '';
+  _pendingEditDocFileType = '';
+  document.getElementById('editDocUploadArea').classList.add('hidden');
+  document.getElementById('docFilePicker').value = '';
+  updateDocPreview('', document.getElementById('editDocUrl').value);
+}
+
+function updateDocPreview(fileName, url) {
+  const preview = document.getElementById('editDocPreview');
+  const text = document.getElementById('editDocPreviewText');
+  const link = document.getElementById('editDocPreviewLink');
+  if (fileName || url) {
+    preview.classList.remove('hidden');
+    text.textContent = fileName || url;
+    if (url) { link.href = url; link.classList.remove('hidden'); }
+    else { link.classList.add('hidden'); }
+  } else {
+    preview.classList.add('hidden');
+  }
+}
+
+// DELETE
+function openDeleteItem(type, areaIdx, subIdx, itemIdx) {
+  deleteContext = { type, areaIdx, subIdx, itemIdx };
+  let item;
+  if (type === 'pengungkit') {
+    item = appData.pengungkit.areas[areaIdx].subAreas[subIdx].items[itemIdx];
+    document.getElementById('deleteDetail').textContent = `Area: ${appData.pengungkit.areas[areaIdx].name} › ${appData.pengungkit.areas[areaIdx].subAreas[subIdx].name}`;
+  } else {
+    item = appData.hasil.areas[areaIdx].items[itemIdx];
+    document.getElementById('deleteDetail').textContent = `Area: ${appData.hasil.areas[areaIdx].name}`;
+  }
+  document.getElementById('deleteMsg').textContent = `Hapus item: "${item.q}"?`;
+  document.getElementById('deleteModal').classList.add('show');
+}
+
+function closeDeleteModal() { document.getElementById('deleteModal').classList.remove('show'); }
+
+function confirmDelete() {
+  if (!deleteContext) return;
+  const { type, areaIdx, subIdx, itemIdx } = deleteContext;
+  if (type === 'pengungkit') {
+    appData.pengungkit.areas[areaIdx].subAreas[subIdx].items.splice(itemIdx, 1);
+  } else {
+    appData.hasil.areas[areaIdx].items.splice(itemIdx, 1);
+  }
+  closeDeleteModal();
+  calcScores();
+  saveData();
+  renderAll();
+  showToast('Item berhasil dihapus!', 'error');
+}
+
+// ADD NEW ITEM
+function addNewItem() {
+  // Prompt user to select which sub-area
+  let options = [];
+  appData.pengungkit.areas.forEach((a, ai) => {
+    a.subAreas.forEach((s, si) => {
+      options.push({ label: `${a.name} › ${s.name}`, type: 'pengungkit', areaIdx: ai, subIdx: si });
+    });
+  });
+  appData.hasil.areas.forEach((a, ai) => {
+    options.push({ label: `Hasil › ${a.name}`, type: 'hasil', areaIdx: ai, subIdx: -1 });
+  });
+
+  // Show selection modal
+  let html = '<div class="p-5"><h3 class="text-lg font-bold text-gray-800 mb-4">➕ Tambah Item Baru — Pilih Lokasi</h3><div class="space-y-2 max-h-[60vh] overflow-y-auto">';
+  options.forEach((opt, i) => {
+    html += `<div class="doc-card p-3 flex items-center justify-between" onclick="openAddItemForm(${i})">
+      <span class="text-sm font-medium text-gray-700">${opt.label}</span>
+      <span class="text-xs text-gray-400">${opt.type === 'pengungkit' ? '⚙️ Pengungkit' : '🎯 Hasil'}</span>
+    </div>`;
+  });
+  html += '</div><div class="flex justify-end mt-4"><button onclick="document.getElementById(\'addItemSelectModal\').classList.remove(\'show\')" class="px-5 py-2.5 rounded-xl bg-gray-100 text-gray-600 font-semibold">Batal</button></div></div>';
+
+  // Create temporary modal
+  let modal = document.getElementById('addItemSelectModal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'addItemSelectModal';
+    modal.className = 'modal-overlay';
+    document.body.appendChild(modal);
+  }
+  modal.innerHTML = `<div class="modal-box" style="max-width:600px">${html}</div>`;
+  modal.classList.add('show');
+  window._addItemOptions = options;
+}
+
+function openAddItemForm(optIdx) {
+  const opt = window._addItemOptions[optIdx];
+  document.getElementById('addItemSelectModal').classList.remove('show');
+  editContext = { type: opt.type, areaIdx: opt.areaIdx, subIdx: opt.subIdx, itemIdx: -1 }; // -1 means new
+  document.getElementById('editTitle').textContent = '➕ Tambah Item Baru';
+  document.getElementById('editSubtitle').textContent = opt.label;
+  document.getElementById('editIcon').textContent = '➕';
+  document.getElementById('editQuestion').value = '';
+  document.getElementById('editKriteria').value = '';
+  document.getElementById('editBobot').value = '';
+  document.getElementById('editJawaban').value = '';
+  document.getElementById('editTPI').value = '';
+  document.getElementById('editNilai').value = '0';
+  document.getElementById('editCatatan').value = '';
+  _pendingEditDocData = '';
+  _pendingEditDocFileName = '';
+  _pendingEditDocFileType = '';
+  document.getElementById('editDocUploadArea').classList.add('hidden');
+  document.getElementById('editDocUrl').value = '';
+  document.getElementById('editDocDesc').value = '';
+  document.getElementById('editDocPreview').classList.add('hidden');
+  document.getElementById('editModal').classList.add('show');
+}
+
+// Override saveEdit to handle new items
+function saveEdit() {
+  if (!editContext) return;
+  const { type, areaIdx, subIdx, itemIdx } = editContext;
+  const newItem = {
+    q: document.getElementById('editQuestion').value,
+    kriteria: document.getElementById('editKriteria').value,
+    jawaban: document.getElementById('editJawaban').value,
+    tpi: document.getElementById('editTPI').value,
+    nilai: parseFloat(document.getElementById('editNilai').value) || 0,
+    catatan: document.getElementById('editCatatan').value,
+    docData: _pendingEditDocData,
+    docFileName: _pendingEditDocFileName,
+    docFileType: _pendingEditDocFileType,
+    docUrl: document.getElementById('editDocUrl').value,
+    docDesc: document.getElementById('editDocDesc').value
+  };
+
+  if (type === 'pengungkit') {
+    if (itemIdx === -1) {
+      newItem.bukti = '';
+      appData.pengungkit.areas[areaIdx].subAreas[subIdx].items.push(newItem);
+    } else {
+      Object.assign(appData.pengungkit.areas[areaIdx].subAreas[subIdx].items[itemIdx], newItem);
+    }
+  } else {
+    newItem.bobot = parseFloat(document.getElementById('editBobot').value) || 0;
+    newItem.pct = newItem.bobot > 0 ? (newItem.nilai / newItem.bobot) * 100 : 0;
+    if (itemIdx === -1) {
+      appData.hasil.areas[areaIdx].items.push(newItem);
+    } else {
+      Object.assign(appData.hasil.areas[areaIdx].items[itemIdx], newItem);
+    }
+  }
+
+  closeEditModal();
+  calcScores();
+  saveData();
+  renderAll();
+  showToast(itemIdx === -1 ? 'Item baru berhasil ditambahkan!' : 'Item berhasil disimpan!', 'success');
+}
+
+// ==================== DOCUMENT MANAGEMENT ====================
+function openDocManager() {
+  renderDocManagerList();
+  document.getElementById('docManagerModal').classList.add('show');
+  // Populate link dropdown
+  const sel = document.getElementById('addDocLink');
+  sel.innerHTML = '<option value="">— Tidak terhubung —</option>';
+  appData.pengungkit.areas.forEach((a, ai) => {
+    a.subAreas.forEach((s, si) => {
+      s.items.forEach((item, ii) => {
+        const key = `pengungkit_${ai}_${si}_${ii}`;
+        sel.innerHTML += `<option value="${key}">${a.name} › ${s.name} › ${item.q.substring(0,40)}...</option>`;
+      });
+    });
+  });
+  appData.hasil.areas.forEach((a, ai) => {
+    a.items.forEach((item, ii) => {
+      const key = `hasil_${ai}_${ii}`;
+      sel.innerHTML += `<option value="${key}">Hasil › ${a.name} › ${item.q.substring(0,40)}...</option>`;
+    });
+  });
+}
+
+function closeDocManager() { document.getElementById('docManagerModal').classList.remove('show'); }
+
+function renderDocManagerList(filter='') {
+  const el = document.getElementById('docList');
+  let allDocs = [];
+  appData.pengungkit.areas.forEach((a, ai) => {
+    a.subAreas.forEach((s, si) => {
+      s.items.forEach((item, ii) => {
+        if (item.docData || item.docUrl || item.docDesc || item.docFileName) {
+          allDocs.push({ name: item.docDesc || item.docFileName || item.docUrl || 'Unnamed', data: item.docData, fileName: item.docFileName, fileType: item.docFileType, url: item.docUrl, desc: item.docDesc, link: `${a.name} › ${s.name} › ${item.q.substring(0,30)}`, type: 'pengungkit', areaIdx: ai, subIdx: si, itemIdx: ii });
+        }
+      });
+    });
+  });
+  appData.hasil.areas.forEach((a, ai) => {
+    a.items.forEach((item, ii) => {
+      if (item.docData || item.docUrl || item.docDesc || item.docFileName) {
+        allDocs.push({ name: item.docDesc || item.docFileName || item.docUrl || 'Unnamed', data: item.docData, fileName: item.docFileName, fileType: item.docFileType, url: item.docUrl, desc: item.docDesc, link: `Hasil › ${a.name} › ${item.q.substring(0,30)}`, type: 'hasil', areaIdx: ai, subIdx: -1, itemIdx: ii });
+      }
+    });
+  });
+  standaloneDocs.forEach((d, di) => {
+    allDocs.push({ name: d.name || d.fileName || d.url || 'Unnamed', data: d.data, fileName: d.fileName, fileType: d.fileType, url: d.url, desc: d.desc, standaloneIdx: di, link: d.linkItem || 'Standalone' });
+  });
+
+  if (filter) allDocs = allDocs.filter(d => (d.name||'').toLowerCase().includes(filter.toLowerCase()) || (d.fileName||'').toLowerCase().includes(filter.toLowerCase()));
+
+  _docDownloadCache = allDocs.map(d => ({ data: d.data, fileName: d.fileName }));
+  allDocs = allDocs.map((d, i) => ({ ...d, _idx: i }));
+
+  if (allDocs.length === 0) {
+    el.innerHTML = '<div class="text-center py-10 text-gray-400">Belum ada dokumen bukti dukung</div>';
+    return;
+  }
+
+  el.innerHTML = allDocs.map(d => `<div class="doc-card p-4 mb-2">
+    <div class="flex items-start justify-between gap-3">
+      <div class="flex-1">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="text-lg">${d.data||d.fileName?'📄':d.url?'🔗':'📎'}</span>
+          <span class="text-sm font-bold text-gray-700">${d.name}</span>
+        </div>
+        ${d.fileName?`<p class="text-xs text-gray-500">📄 File: <code class="bg-gray-100 px-2 py-0.5 rounded">${d.fileName}</code></p>`:''}
+        ${d.url?`<p class="text-xs text-blue-600">🌐 URL: <a href="${d.url}" target="_blank" class="underline">${d.url}</a></p>`:''}
+        ${d.desc?`<p class="text-xs text-gray-400 mt-1">📝 ${d.desc}</p>`:''}
+        <p class="text-xs text-gray-400 mt-1">📌 Terhubung: ${d.link}</p>
+      </div>
+      <div class="flex gap-1">
+        ${d.url?`<a href="${d.url}" target="_blank" class="btn-crud btn-doc">🔗 Buka</a>`:''}
+        ${d.data?`<button onclick="_openDocByIdx(${d._idx})" class="btn-crud btn-doc">📥 Download</button>`:''}
+        <button onclick="editDoc(${d.standaloneIdx !== undefined ? `'standalone_${d.standaloneIdx}'` : `'${d.type}_${d.areaIdx}_${d.subIdx}_${d.itemIdx}'`})" class="btn-crud btn-edit">✏️</button>
+        ${d.standaloneIdx !== undefined ? `<button onclick="deleteStandaloneDoc(${d.standaloneIdx})" class="btn-crud btn-delete">🗑️</button>` : ''}
+      </div>
+    </div>
+  </div>`).join('');
+}
+
+function filterDocs() {
+  const q = document.getElementById('docSearch').value;
+  renderDocManagerList(q);
+}
+
+function addNewDoc() { closeDocManager(); document.getElementById('addDocModal').classList.add('show'); populateAddDocLinkDropdown(); }
+function closeAddDocModal() { document.getElementById('addDocModal').classList.remove('show'); }
+
+function populateAddDocLinkDropdown() {
+  const sel = document.getElementById('addDocLink');
+  sel.innerHTML = '<option value="">— Tidak terhubung —</option>';
+  appData.pengungkit.areas.forEach((a, ai) => {
+    a.subAreas.forEach((s, si) => {
+      s.items.forEach((item, ii) => {
+        sel.innerHTML += `<option value="pengungkit_${ai}_${si}_${ii}">${a.name} › ${s.name} › ${item.q.substring(0,40)}</option>`;
+      });
+    });
+  });
+  appData.hasil.areas.forEach((a, ai) => {
+    a.items.forEach((item, ii) => {
+      sel.innerHTML += `<option value="hasil_${ai}_${ii}">Hasil › ${a.name} › ${item.q.substring(0,40)}</option>`;
+    });
+  });
+}
+
+function pickAddDocFile() { document.getElementById('addDocFilePicker').click(); }
+function onAddDocFilePicked(input) {
+  if (input.files.length > 0) {
+    const file = input.files[0];
+    if (file.size > 5 * 1024 * 1024) { showToast('File terlalu besar (maks 5MB)', 'error'); return; }
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      _pendingAddDocData = e.target.result;
+      _pendingAddDocFileName = file.name;
+      _pendingAddDocFileType = file.type;
+      document.getElementById('addDocUploadArea').classList.remove('hidden');
+      document.getElementById('addDocFileName').textContent = file.name + ' (' + (file.size/1024).toFixed(1) + ' KB)';
+    };
+    reader.readAsDataURL(file);
+  }
+}
+function removeAddUploadedDoc() {
+  _pendingAddDocData = '';
+  _pendingAddDocFileName = '';
+  _pendingAddDocFileType = '';
+  document.getElementById('addDocUploadArea').classList.add('hidden');
+  document.getElementById('addDocFilePicker').value = '';
+}
+
+function saveNewDoc() {
+  const link = document.getElementById('addDocLink').value;
+  const doc = {
+    name: document.getElementById('addDocName').value || _pendingAddDocFileName,
+    data: _pendingAddDocData,
+    fileName: _pendingAddDocFileName,
+    fileType: _pendingAddDocFileType,
+    url: document.getElementById('addDocUrl').value,
+    desc: document.getElementById('addDocDesc').value,
+    linkItem: link || 'Standalone'
+  };
+
+  if (link) {
+    // Link to existing item
+    const parts = link.split('_');
+    let item;
+    if (parts[0] === 'pengungkit') {
+      item = appData.pengungkit.areas[parseInt(parts[1])].subAreas[parseInt(parts[2])].items[parseInt(parts[3])];
+    } else {
+      item = appData.hasil.areas[parseInt(parts[1])].items[parseInt(parts[2])];
+    }
+    if (_pendingAddDocData && !item.docData) { item.docData = _pendingAddDocData; item.docFileName = _pendingAddDocFileName; item.docFileType = _pendingAddDocFileType; }
+    if (doc.url && !item.docUrl) item.docUrl = doc.url;
+    if (doc.desc && !item.docDesc) item.docDesc = doc.desc || doc.name;
+  } else {
+    standaloneDocs.push(doc);
+  }
+
+  closeAddDocModal();
+  saveData();
+  renderAll();
+  showToast('Dokumen berhasil ditambahkan!', 'success');
+}
+
+function deleteStandaloneDoc(idx) {
+  standaloneDocs.splice(idx, 1);
+  saveData();
+  renderAll();
+  openDocManager();
+  showToast('Dokumen berhasil dihapus', 'error');
+}
+
+function editDoc(key) {
+  if (key.startsWith('standalone_')) {
+    const idx = parseInt(key.split('_')[1]);
+    const doc = standaloneDocs[idx];
+    openEditItem(null, null, null, null);
+    document.getElementById('editTitle').textContent = 'Edit Dokumen';
+    document.getElementById('editSubtitle').textContent = doc.name;
+    document.getElementById('editIcon').textContent = '📂';
+    document.getElementById('editQuestion').value = '';
+    document.getElementById('editKriteria').value = '';
+    document.getElementById('editBobot').value = '';
+    document.getElementById('editJawaban').value = '';
+    document.getElementById('editTPI').value = '';
+    document.getElementById('editNilai').value = '';
+    document.getElementById('editCatatan').value = '';
+    _pendingEditDocData = doc.data || '';
+    _pendingEditDocFileName = doc.fileName || '';
+    _pendingEditDocFileType = doc.fileType || '';
+    if (_pendingEditDocFileName) {
+      document.getElementById('editDocUploadArea').classList.remove('hidden');
+      document.getElementById('editDocFileName').textContent = _pendingEditDocFileName;
+    } else {
+      document.getElementById('editDocUploadArea').classList.add('hidden');
+    }
+    document.getElementById('editDocUrl').value = doc.url || '';
+    document.getElementById('editDocDesc').value = doc.desc || doc.name || '';
+    updateDocPreview(_pendingEditDocFileName, doc.url);
+    editContext = { type: 'standalone_doc', standaloneIdx: idx };
+    document.getElementById('editModal').classList.add('show');
+  } else {
+    const parts = key.split('_');
+    const type = parts[0];
+    const ai = parseInt(parts[1]);
+    const si = parseInt(parts[2]);
+    const ii = parseInt(parts[3]);
+    openEditItem(type, ai, si, ii);
+  }
+}
+
+// Override saveEdit to handle standalone docs
+const _originalSaveEdit = saveEdit;
+saveEdit = function() {
+  if (editContext && editContext.type === 'standalone_doc') {
+    const doc = standaloneDocs[editContext.standaloneIdx];
+    doc.data = _pendingEditDocData;
+    doc.fileName = _pendingEditDocFileName;
+    doc.fileType = _pendingEditDocFileType;
+    doc.url = document.getElementById('editDocUrl').value;
+    doc.desc = document.getElementById('editDocDesc').value;
+    doc.name = doc.desc || doc.fileName || doc.url || 'Unnamed';
+    closeEditModal();
+    saveData();
+    renderAll();
+    showToast('Dokumen berhasil disimpan!', 'success');
+    return;
+  }
+  // Standard item save
+  if (!editContext) return;
+  const { type, areaIdx, subIdx, itemIdx } = editContext;
+  const newItem = {
+    q: document.getElementById('editQuestion').value,
+    kriteria: document.getElementById('editKriteria').value,
+    jawaban: document.getElementById('editJawaban').value,
+    tpi: document.getElementById('editTPI').value,
+    nilai: parseFloat(document.getElementById('editNilai').value) || 0,
+    catatan: document.getElementById('editCatatan').value,
+    docData: _pendingEditDocData,
+    docFileName: _pendingEditDocFileName,
+    docFileType: _pendingEditDocFileType,
+    docUrl: document.getElementById('editDocUrl').value,
+    docDesc: document.getElementById('editDocDesc').value
+  };
+  if (type === 'pengungkit') {
+    if (itemIdx === -1) { newItem.bukti = ''; appData.pengungkit.areas[areaIdx].subAreas[subIdx].items.push(newItem); }
+    else Object.assign(appData.pengungkit.areas[areaIdx].subAreas[subIdx].items[itemIdx], newItem);
+  } else {
+    newItem.bobot = parseFloat(document.getElementById('editBobot').value) || 0;
+    newItem.pct = newItem.bobot > 0 ? (newItem.nilai / newItem.bobot) * 100 : 0;
+    if (itemIdx === -1) appData.hasil.areas[areaIdx].items.push(newItem);
+    else Object.assign(appData.hasil.areas[areaIdx].items[itemIdx], newItem);
+  }
+  closeEditModal();
+  calcScores();
+  saveData();
+  renderAll();
+  showToast(itemIdx === -1 ? 'Item baru ditambahkan!' : 'Item disimpan!', 'success');
+};
+
+function openLocalDoc(path) { window.open(path, '_blank'); }
+function openDocFromData(dataUrl, fileName) {
+  const a = document.createElement('a');
+  a.href = dataUrl;
+  a.download = fileName;
+  a.target = '_blank';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+let _docDownloadCache = [];
+function _openDocByIdx(idx) {
+  const doc = _docDownloadCache[idx];
+  if (doc && doc.data) openDocFromData(doc.data, doc.fileName || 'dokumen');
+}
+
+// ==================== EXPORT ====================
+function exportData() {
+  const data = { appData, standaloneDocs, exportedAt: new Date().toISOString() };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'LKEZI2025_RSUD_Mimika_export.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('Data berhasil diexport!', 'info');
+}
+
+// ==================== RENDER ALL ====================
+let allQuestions = [];
+let chartInstances = {};
+
+function renderAll() {
+  calcScores();
+  // Build doc download cache for item-level doc buttons
+  _docDownloadCache = [];
+  appData.pengungkit.areas.forEach(a => {
+    a.subAreas.forEach(s => {
+      s.items.forEach(item => {
+        item._docIdx = -1;
+        if (item.docData) { item._docIdx = _docDownloadCache.length; _docDownloadCache.push({ data: item.docData, fileName: item.docFileName }); }
+      });
+    });
+  });
+  appData.hasil.areas.forEach(a => {
+    a.items.forEach(item => {
+      item._docIdx = -1;
+      if (item.docData) { item._docIdx = _docDownloadCache.length; _docDownloadCache.push({ data: item.docData, fileName: item.docFileName }); }
+    });
+  });
+  renderDashboard();
+  renderPengungkit();
+  renderHasil();
+  buildQuestionsList();
+  renderDocsPage();
+  renderAnalisis();
+  if (hasPermission('canManageUsers')) renderUsersList();
+}
+
+function renderDashboard() {
+  animateValue(document.getElementById('totalScoreText'), appData.totalNilai, 1500);
+  const totalPct = appData.totalNilai / 100;
+  const arc = document.getElementById('scoreArc');
+  setTimeout(() => { arc.style.strokeDashoffset = 490 - (490 * totalPct); arc.style.transition = 'stroke-dashoffset 1.5s ease-out'; }, 100);
+  document.getElementById('totalBadge').innerHTML = appData.totalNilai >= 75 ? '✅ LULUS — OK' : '❌ Tidak Lulus';
+
+  animateValue(document.getElementById('pengungkitScore'), appData.pengungkit.totalNilai, 1200);
+  animateValue(document.getElementById('hasilScore'), appData.hasil.totalNilai, 1200);
+  document.getElementById('pengungkitPct').textContent = appData.pengungkit.pct.toFixed(1) + '%';
+  document.getElementById('hasilPct').textContent = appData.hasil.pct.toFixed(1) + '%';
+  setTimeout(() => { document.getElementById('pengungkitBar').style.width = appData.pengungkit.pct + '%'; document.getElementById('hasilBar').style.width = appData.hasil.pct + '%'; }, 200);
+
+  document.getElementById('areaSummaryBars').innerHTML = appData.pengungkit.areas.map(a => {
+    const c = getColor(a.pct);
+    const linkIcon = a.folderUrl ? ` <a href="${a.folderUrl}" target="_blank" class="text-amber-600 hover:text-amber-700" title="Buka folder Drive">📂</a>` : '';
+    return `<div><div class="flex justify-between text-xs mb-1"><span class="font-medium text-gray-600">${a.name}${linkIcon}</span><span style="color:${c.text}" class="font-bold">${a.pct.toFixed(1)}%</span></div><div class="progress-bar"><div class="fill" style="width:${a.pct}%;background:${c.bar}"></div></div></div>`;
+  }).join('');
+
+  document.getElementById('areaCards').innerHTML = appData.pengungkit.areas.map(a => {
+    const c = getColor(a.pct);
+    const folderBtn = a.folderUrl ? `<a href="${a.folderUrl}" target="_blank" class="btn-crud btn-doc mt-2 inline-flex items-center gap-1" onclick="event.stopPropagation()">📂 Folder Drive</a>` : '';
+    return `<div class="glass rounded-2xl shadow-lg p-5 card-hover cursor-pointer" onclick="showSection('pengungkit')">
+      <div class="flex items-center justify-between mb-3"><span class="text-xs font-bold text-gray-400">Area ${a.id}</span>${minBadge(a.min)}</div>
+      <h3 class="font-bold text-gray-800 text-sm mb-2">${a.name}</h3>
+      <div class="flex items-end justify-between"><div><p class="text-2xl font-black" style="color:${c.text}">${a.nilai.toFixed(2)}</p><p class="text-xs text-gray-400">dari bobot ${a.bobot} (P:${a.pemenuhan.toFixed(2)} + R:${a.reform.toFixed(2)})</p></div>${pctBadge(a.pct)}</div>
+      <div class="progress-bar mt-3"><div class="fill" style="width:${a.pct}%;background:${c.bar}"></div></div>${folderBtn}</div>`;
+  }).join('');
+
+  // Charts - destroy old first
+  if (chartInstances.radar) chartInstances.radar.destroy();
+  if (chartInstances.bar) chartInstances.bar.destroy();
+
+  chartInstances.radar = new Chart(document.getElementById('radarChart').getContext('2d'), {
+    type: 'radar',
+    data: { labels: appData.pengungkit.areas.map(a => a.name), datasets: [
+      { label:'Persentase (%)', data: appData.pengungkit.areas.map(a => a.pct), backgroundColor:'rgba(59,130,246,0.15)', borderColor:'#3b82f6', borderWidth:2, pointBackgroundColor:'#3b82f6', pointRadius:5 },
+      { label:'Target (100%)', data:Array(6).fill(100), backgroundColor:'rgba(34,197,94,0.05)', borderColor:'#22c55e', borderWidth:1, borderDash:[5,5], pointRadius:0 }
+    ]},
+    options:{ responsive:true, maintainAspectRatio:false, scales:{r:{min:0,max:100,ticks:{stepSize:25,font:{size:10}},pointLabels:{font:{size:10}}}}, plugins:{legend:{position:'bottom',labels:{font:{size:11}}}} }
+  });
+
+  chartInstances.bar = new Chart(document.getElementById('barChart').getContext('2d'), {
+    type:'bar',
+    data:{ labels:appData.pengungkit.areas.map(a=>'Area '+a.id), datasets:[
+      { label:'Bobot', data:appData.pengungkit.areas.map(a=>a.bobot), backgroundColor:'rgba(203,213,225,0.8)', borderRadius:6 },
+      { label:'Nilai', data:appData.pengungkit.areas.map(a=>a.nilai), backgroundColor:'rgba(59,130,246,0.8)', borderRadius:6 }
+    ]},
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom',labels:{font:{size:11}}}}, scales:{y:{beginAtZero:true}} }
+  });
+}
+
+function renderPengungkit() {
+  document.getElementById('pengHeaderScore').textContent = appData.pengungkit.totalNilai.toFixed(2) + ' / 60';
+  const el = document.getElementById('pengungkitDetails');
+  el.innerHTML = appData.pengungkit.areas.map(area => {
+    const c = getColor(area.pct);
+    const folderBtn = area.folderUrl ? `<a href="${area.folderUrl}" target="_blank" class="btn-crud btn-doc inline-flex items-center gap-1">📂 Bukti Drive</a>` : '';
+    return `<div class="glass rounded-2xl shadow-lg p-5 mb-4 card-hover">
+      <div class="flex items-center justify-between mb-4">
+        <div><h3 class="font-bold text-gray-800">${area.id}. ${area.name}</h3><p class="text-xs text-gray-400">Bobot: ${area.bobot} | Pemenuhan: ${area.pemenuhan.toFixed(2)} | Reform: ${area.reform.toFixed(2)} | Nilai: ${area.nilai.toFixed(2)}</p></div>
+        <div class="flex items-center gap-2">${minBadge(area.min)} ${pctBadge(area.pct)} ${folderBtn}</div>
+      </div>
+      <div class="progress-bar mb-4"><div class="fill" style="width:${area.pct}%;background:${c.bar}"></div></div>
+      ${area.subAreas.map((sub, si) => {
+        const sc = getColor(sub.pct);
+        const subId = `psub-${area.id}-${si}`;
+        return `<div class="mb-3">
+          <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl cursor-pointer" onclick="toggleSub('${subId}')">
+            <div class="flex items-center gap-2">
+              <svg class="expand-btn w-4 h-4 text-gray-400" id="exp-${subId}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              <span class="text-sm font-semibold text-gray-700">${sub.name}</span>
+            </div>
+            <div class="flex items-center gap-2"><span class="text-xs text-gray-400">Bobot: ${sub.bobot}</span>${pctBadge(sub.pct)}</div>
+          </div>
+          <div id="${subId}" style="display:none" class="mt-2 ml-6 space-y-2">
+            ${sub.items.map((item, ii) => {
+              const cb = crudButtons('pengungkit', area.id-1, si, ii);
+              return `<div class="detail-row p-3 rounded-lg bg-white shadow-sm">
+              <div class="flex items-start justify-between gap-3">
+                <p class="text-sm text-gray-700 flex-1"><strong>${String.fromCharCode(97+ii)}.</strong> ${item.q}</p>
+                <div class="flex gap-1 flex-shrink-0">${pctBadge(item.nilai*100)} ${cb}</div>
+              </div>
+              <div class="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+                <div><span class="text-gray-400">Kriteria:</span> <span class="font-medium">${item.kriteria}</span></div>
+                <div><span class="text-gray-400">Unit:</span> <span class="font-medium text-blue-700">${item.jawaban}</span></div>
+                <div><span class="text-gray-400">TPI:</span> <span class="font-medium text-purple-700">${item.tpi}</span></div>
+                <div><span class="text-gray-400">Nilai:</span> <span class="font-bold" style="color:${getColor(item.nilai*100).text}">${item.nilai}</span></div>
+              </div>
+              ${item.catatan ? `<p class="text-xs text-gray-500 mt-1">📝 ${item.catatan}</p>` : ''}
+              ${(item.docData || item.docUrl || item.docFileName) ? `<p class="text-xs text-amber-600 mt-1">📎 ${item.docDesc || item.docFileName || item.docUrl} ${item.docUrl ? `<a href="${item.docUrl}" target="_blank" class="text-blue-600 underline">🔗 Buka</a>` : ''} ${item.docData ? `<button onclick="_openDocByIdx(${item._docIdx})" class="text-green-600 underline ml-1">📥 Download</button>` : ''}</p>` : ''}
+            </div>`;
+            }).join('')}
+            ${addItemButton(sub.name,'pengungkit', area.id-1, si)}
+          </div>
+        </div>`;
+      }).join('')}
+    </div>`;
+  }).join('');
+}
+
+function openAddItemDirect(type, areaIdx, subIdx) {
+  editContext = { type, areaIdx, subIdx, itemIdx: -1 };
+  const area = appData.pengungkit.areas[areaIdx];
+  const sub = area.subAreas[subIdx];
+  document.getElementById('editTitle').textContent = '➕ Tambah Item Baru';
+  document.getElementById('editSubtitle').textContent = `${area.name} › ${sub.name}`;
+  document.getElementById('editIcon').textContent = '➕';
+  document.getElementById('editQuestion').value = '';
+  document.getElementById('editKriteria').value = '';
+  document.getElementById('editBobot').value = '';
+  document.getElementById('editJawaban').value = '';
+  document.getElementById('editTPI').value = '';
+  document.getElementById('editNilai').value = '0';
+  document.getElementById('editCatatan').value = '';
+  _pendingEditDocData = '';
+  _pendingEditDocFileName = '';
+  _pendingEditDocFileType = '';
+  document.getElementById('editDocUploadArea').classList.add('hidden');
+  document.getElementById('editDocUrl').value = '';
+  document.getElementById('editDocDesc').value = '';
+  document.getElementById('editDocPreview').classList.add('hidden');
+  document.getElementById('editModal').classList.add('show');
+}
+
+function renderHasil() {
+  document.getElementById('hasilHeaderScore').textContent = appData.hasil.totalNilai.toFixed(2) + ' / 40';
+  const el = document.getElementById('hasilDetails');
+  el.innerHTML = appData.hasil.areas.map((area, ai) => {
+    const c = getColor(area.pct);
+    const areaMin = area.min || (area.pct >= 75 ? 'OK' : 'Tidak Lulus');
+    return `<div class="glass rounded-2xl shadow-lg p-5 mb-4 card-hover">
+      <div class="flex items-center justify-between mb-3">
+        <div>
+          <h3 class="font-bold text-gray-800">${ai===0?'I':'II'}. ${area.name}</h3>
+          <p class="text-xs text-gray-400">Bobot: ${area.bobot} | Nilai: ${area.nilai.toFixed(2)} (${area.pct.toFixed(1)}%)</p>
+        </div>
+        <div class="flex items-center gap-2">${minBadge(areaMin)} ${pctBadge(area.pct)}</div>
+      </div>
+      <div class="progress-bar mb-4"><div class="fill" style="width:${area.pct}%;background:${c.bar}"></div></div>
+      ${area.items.map((item, ii) => {
+        const ic = getColor(item.pct);
+        const cb = crudButtons('hasil', ai, -1, ii);
+        const itemMin = item.min || (item.pct >= 75 ? 'OK' : 'Tidak Lulus');
+        return `<div class="detail-row p-4 rounded-lg bg-white shadow-sm mb-2">
+          <div class="flex items-start justify-between gap-3">
+            <p class="text-sm text-gray-700 flex-1"><strong>${String.fromCharCode(97+ii)}.</strong> ${item.q}</p>
+            <div class="flex gap-1 flex-shrink-0">${pctBadge(item.pct)} ${minBadge(itemMin)} ${cb}</div>
+          </div>
+          <div class="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+            <div><span class="text-gray-400">Bobot:</span> <span class="font-medium">${item.bobot}</span></div>
+            <div><span class="text-gray-400">Jawaban:</span> <span class="font-medium text-blue-700">${item.jawaban}</span></div>
+            <div><span class="text-gray-400">TPI:</span> <span class="font-medium text-purple-700">${item.tpi}</span></div>
+            <div><span class="text-gray-400">Nilai:</span> <span class="font-bold" style="color:${ic.text}">${item.nilai.toFixed(2)}</span></div>
+          </div>
+          ${item.catatan ? `<p class="text-xs text-gray-500 mt-1">📝 ${item.catatan}</p>` : ''}
+          ${(item.docData || item.docUrl || item.docFileName) ? `<p class="text-xs text-amber-600 mt-1">📎 ${item.docDesc || item.docFileName || item.docUrl} ${item.docUrl ? `<a href="${item.docUrl}" target="_blank" class="text-blue-600 underline">🔗 Buka</a>` : ''} ${item.docData ? `<button onclick="_openDocByIdx(${item._docIdx})" class="text-green-600 underline ml-1">📥 Download</button>` : ''}</p>` : ''}
+        </div>`;
+      }).join('')}
+      ${addItemButton(area.name, 'hasil', ai, -1)}
+    </div>`;
+  }).join('');
+}
+
+function buildQuestionsList() {
+  allQuestions = [];
+  appData.pengungkit.areas.forEach(area => {
+    area.subAreas.forEach(sub => {
+      sub.items.forEach(item => {
+        allQuestions.push({
+          area:area.name, areaId:area.id, subArea:sub.name, q:item.q, kriteria:item.kriteria,
+          jawaban:item.jawaban, tpi:item.tpi, nilai:item.nilai, catatan:item.catatan,
+          pct:item.nilai*100,
+          areaPct:area.pct, pemenuhan:area.pemenuhan, reform:area.reform, areaBobot:area.bobot,
+          docData:item.docData, docFileName:item.docFileName, docFileType:item.docFileType, docUrl:item.docUrl, docDesc:item.docDesc, folderUrl:area.folderUrl||'',
+          type:'pengungkit', areaIdx:appData.pengungkit.areas.indexOf(area), subIdx:area.subAreas.indexOf(sub), itemIdx:sub.items.indexOf(item)
+        });
+      });
+    });
+  });
+  appData.hasil.areas.forEach((area, ai) => {
+    area.items.forEach((item, ii) => {
+      allQuestions.push({
+        area:'Hasil: '+area.name, areaId:7, subArea:'', q:item.q, kriteria:item.kriteria||'-',
+        jawaban:item.jawaban, tpi:item.tpi, nilai:item.nilai, catatan:item.catatan||'',
+        pct:item.pct,
+        areaPct:area.pct, pemenuhan:area.nilai, reform:0, areaBobot:area.bobot,
+        min:item.min||(item.pct>=75?'OK':'Tidak Lulus'), bobot:item.bobot,
+        docData:item.docData, docFileName:item.docFileName, docFileType:item.docFileType, docUrl:item.docUrl, docDesc:item.docDesc, folderUrl:'',
+        type:'hasil', areaIdx:ai, subIdx:-1, itemIdx:ii
+      });
+    });
+  });
+
+  const sel = document.getElementById('filterArea');
+  sel.innerHTML = '<option value="">Semua Area</option>';
+  [...new Set(allQuestions.map(q=>q.area))].forEach(a => { sel.innerHTML += `<option value="${a}">${a}</option>`; });
+
+  // Assign _docIdx for download buttons
+  _docDownloadCache = [];
+  allQuestions.forEach(q => {
+    q._docIdx = -1;
+    if (q.docData) { q._docIdx = _docDownloadCache.length; _docDownloadCache.push({ data: q.docData, fileName: q.docFileName }); }
+  });
+
+  renderQuestions(allQuestions);
+}
+
+function renderQuestions(questions) {
+  const el = document.getElementById('questionsList');
+  if (questions.length === 0) { el.innerHTML = '<div class="text-center py-10 text-gray-400">Tidak ada pertanyaan yang sesuai</div>'; return; }
+  el.innerHTML = questions.map(q => {
+    const c = getColor(q.pct);
+    const icon = q.pct >= 90 ? '✅' : q.pct >= 50 ? '⚠️' : '❌';
+    const areaContext = q.type === 'pengungkit'
+      ? `<span class="text-xs text-gray-400">Area ${q.areaId}: P ${q.pemenuhan.toFixed(2)} + R ${q.reform.toFixed(2)} = ${q.areaPct.toFixed(1)}%</span>`
+      : q.type === 'hasil'
+        ? `<span class="text-xs text-gray-400">Hasil: Nilai ${q.pemenuhan.toFixed(2)}/${q.areaBobot} (${q.areaPct.toFixed(1)}%)</span>`
+        : '';
+    const itemMin = q.min || (q.pct >= 75 ? 'OK' : '');
+    const bobotInfo = q.bobot ? `<span>Bobot: <strong>${q.bobot}</strong></span>` : '';
+    return `<div class="glass rounded-xl shadow-sm p-4 mb-2 card-hover detail-row">
+      <div class="flex items-start gap-3">
+        <span class="text-lg flex-shrink-0 mt-0.5">${icon}</span>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2 flex-wrap mb-1">
+            <span class="badge" style="background:${c.bg};color:${c.text}">${q.area}</span>
+            ${q.subArea?`<span class="text-xs text-gray-400">› ${q.subArea}</span>`:''}
+            ${areaContext}
+            ${itemMin ? minBadge(itemMin) : ''}
+          </div>
+          <p class="text-sm text-gray-700">${q.q}</p>
+          <div class="mt-2 flex flex-wrap gap-3 text-xs">
+            <span>Kriteria: <strong>${q.kriteria}</strong></span>
+            <span>Unit: <strong class="text-blue-700">${q.jawaban}</strong></span>
+            <span>TPI: <strong class="text-purple-700">${q.tpi}</strong></span>
+            <span>Nilai: <strong style="color:${c.text}">${typeof q.nilai === 'number' ? q.nilai.toFixed(2) : q.nilai}</strong></span>
+            ${bobotInfo}
+          </div>
+          ${q.catatan?`<p class="text-xs text-gray-400 mt-1">📝 ${q.catatan}</p>`:''}
+          ${(q.docData||q.docUrl||q.docFileName)?`<p class="text-xs text-amber-600 mt-1">📎 ${q.docDesc||q.docFileName||q.docUrl} ${q.docUrl?`<a href="${q.docUrl}" target="_blank" class="text-blue-600 underline">🔗 Buka</a>`:''} ${q.docData?`<button onclick="_openDocByIdx(${q._docIdx})" class="text-green-600 underline ml-1">📥 Download</button>`:''}</p>`:''}
+          ${q.folderUrl?`<p class="text-xs mt-1"><a href="${q.folderUrl}" target="_blank" class="text-amber-600 font-semibold hover:text-amber-700 inline-flex items-center gap-1">📂 Bukti Dukung Drive</a></p>`:''}
+        </div>
+        <div class="flex flex-col gap-1 flex-shrink-0">
+          ${pctBadge(q.pct)}
+          ${crudButtons(q.type,q.areaIdx,q.subIdx,q.itemIdx)}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function filterQuestions() {
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const area = document.getElementById('filterArea').value;
+  const status = document.getElementById('filterStatus').value;
+  let filtered = allQuestions.filter(q => {
+    if (search && !q.q.toLowerCase().includes(search) && !q.subArea.toLowerCase().includes(search)) return false;
+    if (area && q.area !== area) return false;
+    if (status==='full' && q.pct < 90) return false;
+    if (status==='partial' && (q.pct < 50 || q.pct >= 90)) return false;
+    if (status==='zero' && q.pct >= 50) return false;
+    return true;
+  });
+  renderQuestions(filtered);
+}
+
+function renderDocsPage() {
+  let allDocs = [];
+  appData.pengungkit.areas.forEach(a => {
+    if (a.folderUrl) allDocs.push({ name:`Folder Bukti: ${a.name}`, url:a.folderUrl, desc:`Folder Google Drive untuk Area ${a.id} - ${a.name}`, link:a.name, isAreaFolder:true });
+    a.subAreas.forEach(s => {
+      s.items.forEach(item => {
+        if (item.docData || item.docUrl || item.docDesc || item.docFileName)
+          allDocs.push({ name:item.docDesc||item.docFileName||item.docUrl||'Unnamed', data:item.docData, fileName:item.docFileName, fileType:item.docFileType, url:item.docUrl, desc:item.docDesc, link:`${a.name} › ${s.name}` });
+      });
+    });
+  });
+  appData.hasil.areas.forEach(a => {
+    a.items.forEach(item => {
+      if (item.docData || item.docUrl || item.docDesc || item.docFileName)
+        allDocs.push({ name:item.docDesc||item.docFileName||item.docUrl||'Unnamed', data:item.docData, fileName:item.docFileName, fileType:item.docFileType, url:item.docUrl, desc:item.docDesc, link:`Hasil › ${a.name}` });
+    });
+  });
+  standaloneDocs.forEach(d => allDocs.push({ name:d.name||d.fileName||d.url||'Unnamed', data:d.data, fileName:d.fileName, fileType:d.fileType, url:d.url, desc:d.desc, link:d.linkItem||'Standalone' }));
+
+  const filter = document.getElementById('docSearchPage').value.toLowerCase();
+  if (filter) allDocs = allDocs.filter(d => (d.name||'').toLowerCase().includes(filter) || (d.fileName||'').toLowerCase().includes(filter) || (d.link||'').toLowerCase().includes(filter));
+
+  _docDownloadCache = allDocs.map(d => ({ data: d.data, fileName: d.fileName }));
+  allDocs = allDocs.map((d, i) => ({ ...d, _idx: i }));
+
+  const el = document.getElementById('docsPageList');
+  if (allDocs.length === 0) { el.innerHTML = '<div class="text-center py-10 text-gray-400">Belum ada dokumen. Klik "Tambah Dokumen" untuk menambahkan.</div>'; return; }
+
+  el.innerHTML = allDocs.map(d => `<div class="doc-card p-4 mb-3 bg-white ${d.isAreaFolder?'border-2 border-amber-300':''}">
+    <div class="flex items-center gap-3">
+      <span class="text-2xl">${d.isAreaFolder?'📂':d.data||d.fileName?'📄':d.url?'🔗':'📎'}</span>
+      <div class="flex-1">
+        <p class="font-bold text-gray-700 text-sm ${d.isAreaFolder?'text-amber-800':''}">${d.name||'Unnamed'}</p>
+        ${d.fileName?`<p class="text-xs text-gray-500">📄 <code class="bg-gray-100 px-1 rounded">${d.fileName}</code></p>`:''}
+        ${d.url?`<p class="text-xs"><a href="${d.url}" target="_blank" class="text-blue-600 underline">🌐 ${d.url}</a></p>`:''}
+        ${d.desc?`<p class="text-xs text-gray-400">📝 ${d.desc}</p>`:''}
+        <p class="text-xs text-gray-400">📌 ${d.link||'Standalone'}</p>
+      </div>
+      <div class="flex gap-1">
+        ${d.url?`<a href="${d.url}" target="_blank" class="btn-crud btn-doc">${d.isAreaFolder?'📂 Buka':'🔗 Buka'}</a>`:''}
+        ${d.data?`<button onclick="_openDocByIdx(${d._idx})" class="btn-crud btn-doc">📥 Download</button>`:''}
+      </div>
+    </div>
+  </div>`).join('');
+}
+
+function addNewDocFromPage() { addNewDoc(); }
+
+function filterDocsPage() { renderDocsPage(); }
+
+function renderAnalisis() {
+  // ===== Area-level overview (Pemenuhan + Reform) =====
+  const areaListEl = document.getElementById('areaAnalysisList');
+  areaListEl.innerHTML = appData.pengungkit.areas.map(a => {
+    const c = getColor(a.pct);
+    const pemPct = (a.pemenuhan / a.bobot) * 100;
+    const refPct = (a.reform / a.bobot) * 100;
+    return `<div class="flex items-center gap-3 p-3 mb-2 rounded-lg ${a.pct >= 75 ? 'bg-gray-50' : 'bg-red-50'}">
+      <div class="flex-1">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="text-sm font-bold text-gray-700">${a.id}. ${a.name}</span>
+          ${minBadge(a.min)}
+        </div>
+        <div class="flex gap-4 text-xs">
+          <span>Bobot: <strong>${a.bobot}</strong></span>
+          <span class="text-blue-600">Pemenuhan: <strong>${a.pemenuhan.toFixed(2)}</strong> (${pemPct.toFixed(1)}%)</span>
+          <span class="text-purple-600">Reform: <strong>${a.reform.toFixed(2)}</strong> (${refPct.toFixed(1)}%)</span>
+          <span style="color:${c.text}">Nilai: <strong>${a.nilai.toFixed(2)}</strong> (${a.pct.toFixed(1)}%)</span>
+        </div>
+      </div>
+      <div style="width:120px">
+        <div class="progress-bar"><div class="fill" style="width:${a.pct}%;background:${c.bar}"></div></div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // ===== Sub-area pemenuhan analysis =====
+  const weak = [], strong = [];
+  appData.pengungkit.areas.forEach(a => {
+    a.subAreas.forEach(s => {
+      const entry = { area:a.name, areaId:a.id, sub:s.name, pct:s.pct, bobot:s.bobot, nilai:s.nilai, reform:a.reform };
+      if (s.pct < 80) weak.push(entry);
+      if (s.pct >= 90) strong.push(entry);
+    });
+  });
+  weak.sort((a,b) => a.pct - b.pct);
+  strong.sort((a,b) => b.pct - a.pct);
+
+  document.getElementById('weakAreas').innerHTML = weak.length===0?'<p class="text-sm text-gray-400">Semua pemenuhan sudah baik 🎉</p>':
+    weak.map(w => { const c=getColor(w.pct); return `<div class="p-3 rounded-lg bg-red-50 mb-2">
+      <div class="flex justify-between items-center"><div><p class="text-sm font-semibold text-gray-700">${w.sub}</p><p class="text-xs text-gray-400">Area ${w.areaId}: ${w.area}</p></div><span class="badge" style="background:${c.bg};color:${c.text}">${w.pct.toFixed(1)}%</span></div>
+      <div class="progress-bar mt-2"><div class="fill" style="width:${w.pct}%;background:${c.bar}"></div></div>
+      <p class="text-xs text-gray-500 mt-1">💡 Catatan: Meskipun area ini lulus (${w.reform ? 'dengan Reform' : 'overall'}), pemenuhan berkas perlu ditingkatkan</p>
+    </div>`; }).join('');
+
+  document.getElementById('strongAreas').innerHTML = strong.length===0?'<p class="text-sm text-gray-400">Belum ada pemenuhan ≥90%</p>':
+    strong.map(s => `<div class="p-3 rounded-lg bg-green-50 mb-2">
+      <div class="flex justify-between items-center"><div><p class="text-sm font-semibold text-gray-700">${s.sub}</p><p class="text-xs text-gray-400">Area ${s.areaId}: ${s.area}</p></div><span class="badge badge-ok">${s.pct.toFixed(1)}%</span></div>
+      <div class="progress-bar mt-2"><div class="fill" style="width:${s.pct}%;background:#22c55e"></div></div>
+    </div>`).join('');
+
+  // ===== Fail items: areas/sub-areas below 75% =====
+  const failList = [];
+  // Check pengungkit areas
+  appData.pengungkit.areas.forEach(a => {
+    if (a.pct < 75) failList.push({ type:'area', name:`${a.id}. ${a.name}`, pem:a.pemenuhan, ref:a.reform, nilai:a.nilai, bobot:a.bobot, pct:a.pct });
+    a.subAreas.forEach(s => {
+      if (s.pct < 75) failList.push({ type:'sub-area', name:s.name, area:`Area ${a.id}: ${a.name}`, pem:s.nilai, ref:0, nilai:s.nilai, bobot:s.bobot, pct:s.pct });
+    });
+  });
+  // Check hasil areas
+  appData.hasil.areas.forEach(a => {
+    if (a.min === 'Tidak Lulus') failList.push({ type:'hasil', name:a.name, pem:a.nilai, ref:0, nilai:a.nilai, bobot:a.bobot, pct:a.pct });
+    a.items.forEach(i => { if (i.min === 'Tidak Lulus' || (i.pct||0) < 75) failList.push({ type:'item', name:i.q, area:`Hasil: ${a.name}`, pem:i.nilai, ref:0, nilai:i.nilai, bobot:i.bobot||0, pct:i.pct||0 }); });
+  });
+
+  document.getElementById('failItems').innerHTML = failList.length===0?'<p class="text-sm text-gray-400">Semua area/sub-area lulus minimum 75% 🎉</p>':
+    failList.map(f => `<div class="p-4 rounded-lg bg-amber-50 mb-2 border border-amber-200">
+      <div class="flex justify-between items-center flex-wrap gap-2">
+        <div>
+          <p class="text-sm font-semibold text-gray-700">${f.name}</p>
+          <p class="text-xs text-gray-400">${f.area||f.type}</p>
+        </div>
+        <span class="badge badge-fail">Tidak Lulus (${f.pct.toFixed(1)}%)</span>
+      </div>
+      <div class="flex items-center gap-3 mt-2 text-xs flex-wrap">
+        ${f.ref > 0 ? `<span class="text-blue-600">Pemenuhan: <strong>${f.pem.toFixed(2)}</strong></span><span class="text-purple-600">Reform: <strong>${f.ref.toFixed(2)}</strong></span>` : `<span>Pemenuhan: <strong>${f.pem.toFixed(2)}</strong></span>`}
+        <span>Bobot: <strong>${f.bobot}</strong></span>
+        <span>Nilai: <strong>${f.nilai.toFixed(2)}</strong></span>
+      </div>
+      <div class="progress-bar mt-2"><div class="fill" style="width:${Math.min(f.pct,100)}%;background:#f59e0b"></div></div>
+    </div>`).join('');
+
+  // ===== Recommendations =====
+  const recs = [];
+  weak.forEach(w => {
+    recs.push({ priority:'high', text:`Tingkatkan kelengkapan berkas "${w.sub}" (Area ${w.areaId}) — pemenuhan saat ini ${w.pct.toFixed(1)}%, target ≥80%`, action:'Periksa item dengan nilai rendah dan lengkapi bukti dukung' });
+  });
+  failList.filter(f => f.type === 'area').forEach(f => {
+    recs.push({ priority:'critical', text:`Area "${f.name}" TIDAK LULUS (${f.pct.toFixed(1)}%) — perlu peningkatan Reform dan Pemenuhan`, action:'Prioritaskan reformasi birokrasi dan lengkapi berkas' });
+  });
+  failList.filter(f => f.type === 'hasil').forEach(f => {
+    recs.push({ priority:'critical', text:`Hasil "${f.name}" TIDAK LULUS (${f.pct.toFixed(1)}%) — nilai survei eksternal di bawah threshold`, action:'Tingkatkan kualitas layanan untuk memperbaiki persepsi masyarakat' });
+  });
+  // Check sub-areas with 0-value items
+  appData.pengungkit.areas.forEach(a => {
+    a.subAreas.forEach(s => {
+      s.items.forEach(item => {
+        if (item.nilai === 0) recs.push({ priority:'medium', text:`Item "${item.q.substring(0,50)}..." di ${s.name} bernilai 0`, action:'Lengkapi bukti dukung atau ubah jawaban sesuai kriteria' });
+      });
+    });
+  });
+
+  document.getElementById('recommendations').innerHTML = recs.length === 0 ? '<p class="text-sm text-gray-400">Tidak ada rekomendasi khusus 🎉</p>' :
+    recs.sort((a,b) => { const p = {critical:0,high:1,medium:2}; return (p[a.priority]||3)-(p[b.priority]||3); }).map(r => {
+      const icon = r.priority==='critical'?'🔴':r.priority==='high'?'🟡':'🔵';
+      const bg = r.priority==='critical'?'bg-red-50':r.priority==='high'?'bg-yellow-50':'bg-blue-50';
+      return `<div class="p-3 rounded-lg ${bg} mb-2">
+        <p class="text-sm font-semibold text-gray-700">${icon} ${r.text}</p>
+        <p class="text-xs text-gray-500 mt-1">📌 ${r.action}</p>
+      </div>`;
+    }).join('');
+
+  // ===== Chart: Area pct (P+R) vs Sub-area pemenuhan pct =====
+  if (chartInstances.detail) chartInstances.detail.destroy();
+  const labels=[], areaVals=[], subVals=[], areaColors=[], subColors=[];
+  // Area-level bars
+  appData.pengungkit.areas.forEach(a => {
+    labels.push(`AREA ${a.id}: ${a.name.length>20?a.name.substring(0,20)+'...':a.name}`);
+    areaVals.push(a.pct);
+    areaColors.push(getColor(a.pct).bar);
+    subVals.push(null); // no sub-area value at this level
+    subColors.push(null);
+  });
+  // Separator
+  labels.push('── Sub-Area (Pemenuhan) ──');
+  areaVals.push(null); subVals.push(null); areaColors.push('#e5e7eb'); subColors.push('#e5e7eb');
+  // Sub-area bars
+  appData.pengungkit.areas.forEach(a => {
+    a.subAreas.forEach(s => {
+      const shortName = s.name.length>25?s.name.substring(0,25)+'...':s.name;
+      labels.push(`${a.id}.${shortName}`);
+      areaVals.push(null);
+      subVals.push(s.pct);
+      subColors.push(getColor(s.pct).bar);
+    });
+  });
+
+  chartInstances.detail = new Chart(document.getElementById('detailBarChart').getContext('2d'), {
+    type:'bar',
+    data: {
+      labels,
+      datasets: [
+        { label:'Area (P+R) %', data:areaVals, backgroundColor:areaColors, borderRadius:4 },
+        { label:'Sub-Area (Pemenuhan) %', data:subVals, backgroundColor:subColors, borderRadius:4 }
+      ]
+    },
+    options: {
+      indexAxis:'y',
+      responsive:true,
+      maintainAspectRatio:false,
+      plugins:{ legend:{ position:'bottom', labels:{ font:{size:11} } } },
+      scales:{ x:{ min:0, max:100, ticks:{ callback:v=>v+'%' } } }
+    }
+  });
+}
+
+// ==================== INIT ====================
+loadUsers();
+// Clear stale session from pre-RBAC version to force fresh login
+if (!localStorage.getItem('lkezi2025_rbac_v2')) {
+  localStorage.removeItem('lkezi2025_session');
+  localStorage.removeItem('lkezi2025_users');
+  localStorage.setItem('lkezi2025_rbac_v2', '1');
+  loadUsers();
+}
+if (checkSession()) {
+  loadSavedData();
+  renderAll();
+} else {
+  // No session — show login overlay (already visible by default)
+  document.getElementById('loginPass').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+  document.getElementById('loginUser').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('loginPass').focus(); });
+}
+</script>
+</body>
+</html>
