@@ -540,11 +540,14 @@ body{background:#f0f4f8}
 (function(){
   try {
     // One-time migration: clear old data that lacked P+R formula and docData fields
-    if (!localStorage.getItem('lkezi2025_v3')) {
+    if (!localStorage.getItem('lkezi2025_v4')) {
       localStorage.removeItem('lkezi2025_users');
       localStorage.removeItem('lkezi2025_data');
       localStorage.removeItem('lkezi2025_docs');
-      localStorage.setItem('lkezi2025_v3', '1');
+      localStorage.removeItem('lkezi2025_gh_config');
+      localStorage.removeItem('lkezi2025_gh_sha');
+      localStorage.removeItem('lkezi2025_gh_autosync');
+      localStorage.setItem('lkezi2025_v4', '1');
     }
   } catch(e){}
 })();
