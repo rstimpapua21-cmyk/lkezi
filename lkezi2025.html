@@ -844,169 +844,1980 @@ function addNewItemButton() {
 const ORIGINAL_DATA = {
   pengungkit: {
     areas: [
-      { id:1, name:"Manajemen Perubahan", bobot:8, pemenuhan:3.48, reform:4, folderUrl:"https://drive.google.com/drive/folders/1GPqB0AnJnwZd9zPlM-NAPwLWJQQQkY7N?usp=drive_link", subAreas:[
-        { name:"Penyusunan Tim Kerja", bobot:0.5, items:[
-          { q:"Unit kerja telah membentuk tim untuk melakukan pembangunan Zona Integritas", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/18HrAhyCPC6ZT4jaosNZnqPtL1vZuhXOH", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Penentuan anggota Tim dipilih melalui prosedur/mekanisme yang jelas", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1LfH-VOCJISm3SqaLnCGIbswJvbAZm0_H", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
-        ]},
-        { name:"Rencana Pembangunan Zona Integritas", bobot:1, items:[
-          { q:"Terdapat dokumen rencana kerja pembangunan Zona Integritas menuju WBK/WBBM", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1xim8eh_VntnNfS_uSibmzAM1ooiw6Pdw", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Dalam dokumen pembangunan terdapat target-target prioritas yang relevan dengan tujuan pembangunan WBK/WBBM", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1eo2cBTPvKt2-UBPgcin3Ah10JMQpsgNg", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Terdapat mekanisme atau media untuk mensosialisasikan pembangunan WBK/WBBM", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1mFSCEp1NPHXYuMIT6CFSIVtd60NGQPew", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
-        ]},
-        { name:"Pemantauan dan Evaluasi Pembangunan WBK/WBBM", bobot:1, items:[
-          { q:"Seluruh kegiatan pembangunan sudah dilaksanakan sesuai dengan rencana", kriteria:"A/B/C/D", jawaban:"A", tpi:"B", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1mjruWSOUOILPw3y5iQdFFLxpaJq355RX", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Terdapat monitoring dan evaluasi terhadap pembangunan Zona Integritas", kriteria:"A/B/C/D", jawaban:"A", tpi:"B", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1ry0DPT7gdab4cxIc0QUltTJ4iCt_8xmN", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Hasil Monitoring dan Evaluasi telah ditindaklanjuti", kriteria:"A/B/C/D", jawaban:"A", tpi:"B", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1XNgQebEV2bLD_7mF1g8gD84ExyHGO_pi", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
-        ]},
-        { name:"Perubahan Pola Pikir dan Budaya Kerja", bobot:1.5, items:[
-          { q:"Pimpinan berperan sebagai role model dalam pelaksanaan Pembangunan WBK/WBBM", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/18ArP1C5L9mtG6NTFeaMDp0AVsAd-p_dc", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Sudah ditetapkan agen perubahan", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1a5Ic-2DTvKU6fMh6jI6d-AqqjznbRMoG", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Telah dibangun budaya kerja dan pola pikir di lingkungan organisasi", kriteria:"A/B/C", jawaban:"B", tpi:"B", nilai:0.5, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1C2paz7v1ynaywvWEQjaJeAnzB4LKScFj", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Anggota organisasi terlibat dalam pembangunan Zona Integritas menuju WBK/WBBM", kriteria:"A/B/C/D", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1ER6IIrmc5Rf8mcVnYCR25vq1f9X_pCaX", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
-        ]}
-      ]},
-      { id:2, name:"Penataan Tatalaksana", bobot:7, pemenuhan:3.5, reform:3.17, folderUrl:"https://drive.google.com/drive/folders/1_0fexM9LmzEvXYYq8PQaaeVFxJxdPe4M?usp=drive_link", subAreas:[
-        { name:"Prosedur Operasional Tetap (SOP) Kegiatan Utama", bobot:1, items:[
-          { q:"SOP mengacu pada peta proses bisnis instansi", kriteria:"A/B/C/D", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1K3f05xdJcGM65vnH-RkjOEMVCIxEe5FZ", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Prosedur operasional tetap (SOP) telah diterapkan", kriteria:"A/B/C/D/E", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1NlZBrZQelS8gBWnmBvQ1FRH3-O_qYB_f", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Prosedur operasional tetap (SOP) telah dievaluasi", kriteria:"A/B/C/D/E", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1Y7aj-3bJGbHEuMYBF7rhZR8NRQDoe6HO", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
-        ]},
-        { name:"Sistem Pemerintahan Berbasis Elektronik (SPBE)", bobot:2, items:[
-          { q:"Sistem pengukuran kinerja unit sudah menggunakan teknologi informasi", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1LX5rNq9yLhpYJlVuLU5Bs9C6k1YIdKNl", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Operasionalisasi manajemen SDM sudah menggunakan teknologi informasi", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1-R1tNjtOgsQXw6cNBuueEf8Kzchiu9Wk", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Pemberian pelayanan kepada publik sudah menggunakan teknologi informasi", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1cNCTE18JNc65WFXZLG2fAwJ4-UtcFXwR", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Telah dilakukan monitoring dan evaluasi terhadap pemanfaatan TI", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1MrltjmbtE5W2fmPUrifVZC6CvSD1eTip", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
-        ]},
-        { name:"Keterbukaan Informasi Publik", bobot:0.5, items:[
-          { q:"Kebijakan tentang keterbukaan informasi publik telah diterapkan", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1ed1hU9DibSno5dCjfrfDkVYtbVaLvZLa", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Telah dilakukan monitoring dan evaluasi pelaksanaan kebijakan keterbukaan informasi publik", kriteria:"A/B/C", jawaban:"B", tpi:"A", nilai:0.5, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1OvggfKmcjdBETg2JOf1Y5z1cA4YSR6lf", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
-        ]}
-      ]},
-      { id:3, name:"Penataan Sistem Manajemen SDM Aparatur", bobot:10, pemenuhan:4.77, reform:4.6, folderUrl:"https://drive.google.com/drive/folders/1esVS6FGL2zNQRyh8Tr3H7hlqH6zcA8iD?usp=drive_link", subAreas:[
-        { name:"Perencanaan Kebutuhan Pegawai", bobot:0.25, items:[
-          { q:"Kebutuhan pegawai yang disusun oleh unit kerja mengacu kepada peta jabatan dan hasil analisis beban kerja", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/19ic--dzr-CQNJkIOvwK9cpuVAKd_lOCF", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Penempatan pegawai hasil rekrutmen murni mengacu kepada kebutuhan pegawai yang telah disusun per jabatan", kriteria:"A/B/C/D", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1tUDD-jwyFjwN2qBO1xyge-nAGBsdJcq3", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Telah dilakukan monitoring dan evaluasi terhadap penempatan pegawai rekrutmen", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1DNOV63EzV-T69mAVa1JZSO0fBdTvVorY", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
-        ]},
-        { name:"Pola Mutasi Internal", bobot:0.5, items:[
-          { q:"Dalam melakukan pengembangan karier pegawai, telah dilakukan mutasi pegawai antar jabatan", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1iW65kj4fw3ZN7VrXVnAlAsYNIireOThi", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Dalam melakukan mutasi pegawai antar jabatan telah memperhatikan kompetensi jabatan dan mengikuti pola mutasi", kriteria:"A/B/C/D/E", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/17C2ehzFQljih6lsdQtT2GNxUn4inBe_i", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Telah dilakukan monitoring dan evaluasi terhadap kegiatan mutasi dalam kaitannya dengan perbaikan kinerja", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1vSGDFKzHiykdt8FFMBb9wAdd2PZTBmZy", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
-        ]},
-        { name:"Pengembangan Pegawai Berbasis Kompetensi", bobot:1.25, items:[
-          { q:"Unit Kerja melakukan Training Need Analysis Untuk pengembangan kompetensi", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1lwC4zKiehuD5UCufv-IlvJwdAx3-SNyT", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Dalam menyusun rencana pengembangan kompetensi pegawai, telah mempertimbangkan hasil pengelolaan kinerja pegawai", kriteria:"A/B/C/D", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1DdjUVI8HhDrPNLucleNAxNHlL3VeDjXu", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Tingkat kesenjangan kompetensi pegawai yang ada dengan standar kompetensi yang ditetapkan", kriteria:"A/B/C/D", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1ROdg52Cja9v370GoRqSohc1wSI8UnhI4", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Pegawai di Unit Kerja telah memperoleh kesempatan/hak untuk mengikuti diklat maupun pengembangan kompetensi lainnya", kriteria:"A/B/C/D", jawaban:"B", tpi:"A", nilai:0.5, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1j6H_GWn8Of-5HoKsa72i-2RC6doGM7nl", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Dalam pelaksanaan pengembangan kompetensi, unit kerja melakukan upaya pengembangan kompetensi kepada pegawai", kriteria:"A/B/C/D", jawaban:"B", tpi:"A", nilai:0.5, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1xEjMqXKY3OZtI5ky0yTp5NOI68MDuWhu", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Telah dilakukan monitoring dan evaluasi terhadap hasil pengembangan kompetensi dalam kaitannya dengan perbaikan kinerja", kriteria:"A/B/C", jawaban:"A", tpi:"B", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1--8MbXHYZf-XwkXg0m7C4OnUdz9hLLvF", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
-        ]},
-        { name:"Penetapan Kinerja Individu", bobot:2, items:[
-          { q:"Terdapat penetapan kinerja individu yang terkait dengan perjanjian kinerja organisasi", kriteria:"A/B/C/D", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1ByVUHOhiMj52cWTsxKiYAR0JuhoYhe7i", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Ukuran kinerja individu telah memiliki kesesuaian dengan indikator kinerja individu level diatasnya", kriteria:"A/B/C/D", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1ICqYr93VlUL6Jx3tiwAuBARulrN2qTP0", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Pengukuran kinerja individu dilakukan secara periodik", kriteria:"A/B/C/D/E", jawaban:"B", tpi:"B", nilai:0.5, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1wNMX8gfKhMmTkXcbJb-ZKX9hv_knxzKG", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Hasil penilaian kinerja individu telah dijadikan dasar untuk pemberian reward", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1snTlyOh5CAQspVcVtsXUXQfkCRLV2CAx", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
-        ]},
-        { name:"Penegakan Aturan Disiplin/Kode Etik/Kode Perilaku Pegawai", bobot:0.75, items:[
-          { q:"Aturan disiplin/kode etik/kode perilaku telah dilaksanakan/diimplementasikan", kriteria:"A/B/C/D", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/196kbdDEzo7-ybgNl3_iVYCboSjr0SahI", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
-        ]},
-        { name:"Sistem Informasi Kepegawaian", bobot:0.25, items:[
-          { q:"Data informasi kepegawaian unit kerja telah dimutakhirkan secara berkala", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1Lu4la9-4cj0fFYAY_aRts1t8wn1scXRE", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
-        ]}
-      ]},
-      { id:4, name:"Penguatan Akuntabilitas", bobot:10, pemenuhan:5, reform:4.01, folderUrl:"https://drive.google.com/drive/folders/1teonVXCQZjxg9W1JvxubOCca6k4awCSW?usp=drive_link", subAreas:[
-        { name:"Keterlibatan Pimpinan", bobot:2.5, items:[
-          { q:"Unit kerja telah melibatkan pimpinan secara langsung pada saat penyusunan perencanaan", kriteria:"A/B/C", jawaban:"B", tpi:"A", nilai:0.5, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1Qm3sha9uHJGBc0UQ3weQ1C-DlHzRwBYO", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Unit kerja telah melibatkan secara langsung pimpinan saat penyusunan penetapan kinerja", kriteria:"A/B/C", jawaban:"B", tpi:"A", nilai:0.5, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1e8HFGGmh-oRth_Z9ke-tWnWWPscuygCr", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Pimpinan memantau pencapaian kinerja secara berkala", kriteria:"A/B/C/D", jawaban:"B", tpi:"A", nilai:0.5, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1U5wV75K9SrCxc596U52kHC8-OP7ZQrEb", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
-        ]},
-        { name:"Pengelolaan Akuntabilitas Kinerja", bobot:2.5, items:[
-          { q:"Dokumen perencanaan kinerja sudah ada", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1nLseR2KOK_MFYPxygeP5_lRNDhyJL0-J", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Perencanaan kinerja telah berorientasi hasil", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1GoRUry_6HJGBshhBVy2zfEm11NsVEOA_", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Terdapat penetapan Indikator Kinerja Utama (IKU)", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1o45wC7jXnqCMy5dpahgjnqQfpcufVQkk", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Indikator kinerja telah memenuhi kriteria SMART", kriteria:"A/B/C/D", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1ZR6-dZu7cJTAxunOVbXiettzvjoxHw20", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Laporan kinerja telah disusun tepat waktu", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/11TKj2gk68NgDhEjPLQFuNV451AMVkEFB", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Laporan kinerja telah memberikan informasi tentang kinerja", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1hzmPnOlfd9-0wJ6yTAEmd5pZv5RQuz9h", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Terdapat sistem informasi/mekanisme informasi kinerja", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1Yu_VAUEuhaGapzp9ilTinbWrNveta7zl", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Unit kerja telah berupaya meningkatkan kapasitas SDM yang menangangi akuntabilitas kinerja", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1sdRrkeQ5hQJl47rX78Sp9JwOYz_nQJyS", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
-        ]}
-      ]},
-      { id:5, name:"Penguatan Pengawasan", bobot:15, pemenuhan:4.92, reform:6.89, folderUrl:"https://drive.google.com/drive/folders/1bXhKgPJo5162u96vThd9C8l1TCBa_y7V?usp=drive_link", subAreas:[
-        { name:"Pengendalian Gratifikasi", bobot:1.5, items:[
-          { q:"Telah dilakukan public campaign tentang pengendalian gratifikasi", kriteria:"A/B/C", jawaban:"A", tpi:"B", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1YfzYfw2e5UAm0ziJZyp1umhGm_zRF_8a", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Pengendalian gratifikasi telah diimplementasikan", kriteria:"A/B/C/D", jawaban:"A", tpi:"C", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1XA3bfvRoNgWEIH4Kjme6v9Ho2FK8tBBy", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
-        ]},
-        { name:"Penerapan Sistem Pengendalian Intern Pemerintah (SPIP)", bobot:1.5, items:[
-          { q:"Telah dibangun lingkungan pengendalian", kriteria:"A/B/C/D/E", jawaban:"B", tpi:"B", nilai:0.5, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/16LVyXClR9apEvCdnM32i_Upzf75xyMkW", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Telah dilakukan penilaian risiko atas pelaksanaan kebijakan", kriteria:"A/B/C/D/E", jawaban:"B", tpi:"B", nilai:0.5, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1rY7DwgDafkKLmc6hCndw9RVbPMoeNZ1O", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Telah dilakukan kegiatan pengendalian untuk meminimalisir risiko yang telah diidentifikasi", kriteria:"A/B/C", jawaban:"B", tpi:"B", nilai:0.5, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/16r_lb7aWrDoKtUd5YLOWaUUEAHJru2r0", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"SPI telah diinformasikan dan dikomunikasikan kepada seluruh pihak terkait", kriteria:"A/B/C", jawaban:"B", tpi:"B", nilai:0.5, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1GuO4kI809QoJZjjSmicEFVzl55gwut7M", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
-        ]},
-        { name:"Pengaduan Masyarakat", bobot:1.5, items:[
-          { q:"Kebijakan Pengaduan masyarakat telah diimplementasikan", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1Q_otiTkYONRlfbD4GSEadsL3q52wS9Xe", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"pengaduan masyarakat dtindaklanjuti", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1ULL8byV28xzkEJaPEg4cAe7HVhNJjEcn", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Telah dilakukan monitoring dan evaluasi atas penanganan pengaduan masyarakat", kriteria:"A/B/C", jawaban:"A", tpi:"B", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1dVvN3Hb5YeGtboqamq6LGzHXyM7rs63_", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Hasil evaluasi atas penanganan pengaduan masyarakat telah ditindaklanjuti", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1pKaES1AUrHm17Ok9OeurSBaPgpBEMCHh", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
-        ]},
-        { name:"Whistle-Blowing System", bobot:1.5, items:[
-          { q:"Whistle-Blowing System telah diterapkan", kriteria:"A/B/C", jawaban:"B", tpi:"B", nilai:0.5, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1o6W41e-pSThxoBemh5fxvMK-craem_h7", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Telah dilakukan evaluasi atas penerapan Whistle Blowing System", kriteria:"A/B/C", jawaban:"B", tpi:"A", nilai:0.5, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1sSXc3uOhOg_iLRKON1C1FoYmOkOgFJfm", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Hasil evaluasi atas penerapan Whistle Blowing System telah ditindaklanjuti", kriteria:"A/B/C", jawaban:"B", tpi:"A", nilai:0.5, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1VIUqYabAbo_U9OGtmGF2EMBwI9r_ppsi", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
-        ]},
-        { name:"Penanganan Benturan Kepentingan", bobot:1.5, items:[
-          { q:"Telah terdapat identifikasi/pemetaan benturan kepentingan dalam tugas fungsi utama", kriteria:"A/B/C/D", jawaban:"B", tpi:"B", nilai:0.5, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1oPtN86rTVVTGX6VJZCZG4pKHzoEto25u", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Penanganan Benturan Kepentingan telah disosialisasikan/internalisasi", kriteria:"A/B/C/D", jawaban:"B", tpi:"B", nilai:0.5, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/16V-dzXYdCKZF_AbQKaisXm7U5s4MnMAT", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Penanganan Benturan Kepentingan telah diimplementasikan", kriteria:"A/B/C/D", jawaban:"C", tpi:"C", nilai:0.25, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/17bpGNYjxxLbzktKiWND2ssiCmMLqs_cG", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Telah dilakukan evaluasi atas Penanganan Benturan Kepentingan", kriteria:"A/B/C", jawaban:"B", tpi:"B", nilai:0.5, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1IeEEiziOBU2hGpSYk62f4YZ7CmO_yc1w", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Hasil evaluasi atas Penanganan Benturan Kepentingan telah ditindaklanjuti", kriteria:"A/B/C", jawaban:"B", tpi:"B", nilai:0.5, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1yeUDI-zlpv371xRyMFHCyacs4mPO3v8a", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
-        ]}
-      ]},
-      { id:6, name:"Peningkatan Kualitas Pelayanan Publik", bobot:10, pemenuhan:3.95, reform:5, folderUrl:"https://drive.google.com/drive/folders/1vG3QizTWBG3yb5iYE-XikFx3emqAeWmX?usp=drive_link", subAreas:[
-        { name:"Standar Pelayanan", bobot:1, items:[
-          { q:"Terdapat kebijakan standar pelayanan", kriteria:"A/B/C/D/E", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/18sgxVkAEWa6xbRcPIdd5xdwF4bXjZznG", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Standar pelayanan telah dimaklumatkan", kriteria:"A/B/C/D", jawaban:"B", tpi:"B", nilai:0.5, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/10YP7TUvgQqlQKNxLRrs9P7PpwgAxulml", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Dilakukan reviu dan perbaikan atas standar pelayanan", kriteria:"A/B/C/D", jawaban:"A", tpi:"B", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1VZunDAdnK7JMD9P7MYR1wca0qGeIbjFl", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"telah melakukan publikasi atas standar pelayanan dan maklumat pelayanan", kriteria:"Ya/Tidak", jawaban:"Tidak", tpi:"Ya", nilai:0, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/16L1TMu6iVRhIFBxc-wPqqxZ0SjxnHS9W", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
-        ]},
-        { name:"Budaya Pelayanan Prima", bobot:1, items:[
-          { q:"Telah dilakukan berbagai upaya peningkatan kemampuan dan/atau kompetensi tentang penerapan budaya pelayanan prima", kriteria:"A/B/C/D/E", jawaban:"A", tpi:"B", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1OrfqxKuaPwvABH3W-JTJeaDacdmfzkJH", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Informasi tentang pelayanan mudah diakses melalui berbagai media", kriteria:"A/B/C/D", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1tm-7vTNmn1_LB8hE75dGWhfpgw9Ybr7q", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Telah terdapat sistem pemberian penghargaan dan sanksi bagi petugas pemberi pelayanan", kriteria:"A/B/C/D", jawaban:"B", tpi:"B", nilai:0.5, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/115yQz98t1X1bmw1cfgAD2m4O9vrfur8F", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Telah terdapat sistem pemberian kompensasi kepada penerima layanan bila layanan tidak sesuai standar", kriteria:"A/B/C/D", jawaban:"D", tpi:"D", nilai:0, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1lFl0OrXb5MJxtPJKMo6nEomZ1SPawD6j", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Terdapat sarana layanan terpadu/terintegrasi", kriteria:"A/B/C/D", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1XfCrAEgfGhjM59q5lwJHzxQnFUF-I1H3", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Terdapat inovasi pelayanan", kriteria:"A/B/C/D/E", jawaban:"A", tpi:"B", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1R9F31cI1n7wir9Gt4cjUVM9dEaOi6dSV", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
-        ]},
-        { name:"Pengelolaan Pengaduan", bobot:1, items:[
-          { q:"Terdapat media pengaduan dan konsultasi pelayanan yang terintegrasi dengan SP4N-Lapor!", kriteria:"A/B/C/D/E", jawaban:"C", tpi:"B", nilai:0.25, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1nABnheA2P0buT107hRQrlLDOqFf9Oos7", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Terdapat unit yang mengelola pengaduan dan konsultasi pelayanan", kriteria:"A/B/C", jawaban:"C", tpi:"B", nilai:0, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1jiD7OFz6qi4o08puFaLWLyb7Zh88UAPn", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Telah dilakukan evaluasi atas penanganan keluhan/masukan dan konsultasi", kriteria:"A/B/C", jawaban:"B", tpi:"B", nilai:0.5, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1i0NHVIZo1vMKb2RLKAMPouYkwmgNgTm6", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
-        ]},
-        { name:"Penilaian Kepuasan terhadap Pelayanan", bobot:1, items:[
-          { q:"Telah dilakukan survey kepuasan masyarakat terhadap pelayanan", kriteria:"A/B/C/D/E", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1Ls5S9jpzgfElZKZweOUJgEjSmmnrplMN", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Hasil survei kepuasan masyarakat dapat diakses secara terbuka", kriteria:"A/B/C", jawaban:"B", tpi:"B", nilai:0.5, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/12DeOivlX7wNeLqxSpEzKU4RMyPDpxHFG", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Dilakukan tindak lanjut atas hasil survei kepuasan masyarakat", kriteria:"A/B/C/D", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1_jfQP3PQjqiUIbNxfjtJdO2c0OpAToRh", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
-        ]},
-        { name:"Pemanfaatan Teknologi Informasi", bobot:1, items:[
-          { q:"Telah menerapkan teknologi informasi dalam memberikan pelayanan", kriteria:"A/B/C/D", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/13mKvhthvslXqEAdrTBPzhVL6MCULjxAD", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Telah membangun database pelayanan yang terintegrasi", kriteria:"Ya/Tidak", jawaban:"Ya", tpi:"Ya", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1qLuD6tvqNROspBf0eR-6XEivFys4y5lc", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-          { q:"Telah dilakukan perbaikan secara terus menerus", kriteria:"A/B/C", jawaban:"A", tpi:"A", nilai:1, catatan:"OK", bukti:"OK", buktiLink:"https://drive.google.com/drive/folders/1D9KpIwt01mTQx0hG7BC2woqibworJvik", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
-        ]}
-      ]}
+{
+        id: 1,
+        name: "Manajemen Perubahan",
+        bobot: 8,
+        pemenuhan: 3.4825,
+        reform: 4,
+        folderUrl: "https://drive.google.com/drive/folders/1GPqB0AnJnwZd9zPlM-NAPwLWJQQQkY7N?usp=drive_link",
+        subAreas: [
+{
+            name: "Penyusunan Tim Kerja",
+            bobot: 0.5,
+            items: [
+{
+                q: "Unit kerja telah membentuk tim untuk melakukan pembangunan Zona Integritas",
+                kriteria: "Ya, jika Tim telah dibentuk di dalam unit kerja.",
+                jawaban: "Ya",
+                tpi: "Ya",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/18HrAhyCPC6ZT4jaosNZnqPtL1vZuhXOH",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Penentuan anggota Tim dipilih melalui prosedur/mekanisme yang jelas",
+                kriteria: "a. Jika dengan prosedur/mekanisme yang jelas dan mewakili seluruh unsur dalam unit kerja\nb. Jika sebagian menggunakan prosedur yang mewakili sebagian besar unsur dalam unit kerja\nc. Jika tidak di seleksi.",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1LfH-VOCJISm3SqaLnCGIbswJvbAZm0_H",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              }
+            ]
+          },
+{
+            name: "Rencana Pembangunan Zona Integritas",
+            bobot: 1,
+            items: [
+{
+                q: "Terdapat dokumen rencana kerja pembangunan Zona Integritas menuju WBK/WBBM",
+                kriteria: "Ya, jika memiliki  rencana kerja pembangunan Zona Integritas.",
+                jawaban: "Ya",
+                tpi: "Ya",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1xim8eh_VntnNfS_uSibmzAM1ooiw6Pdw",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Dalam dokumen pembangunan terdapat target-target prioritas yang relevan dengan tujuan pembangunan WBK/WBBM",
+                kriteria: "a. Jika semua target-target prioritas relevan dengan tujuanpembangunan WBK/WBBM\nb. Jika sebagian target-target prioritas relevan dengan tujuan pembangunan WBK/WBBM\nc. Jika tidak ada target-target prioritas yang relevan dengan tujuan pembangunan WBK/WBBM",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1eo2cBTPvKt2-UBPgcin3Ah10JMQpsgNg",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Terdapat mekanisme atau media untuk mensosialisasikan pembangunan WBK/WBBM",
+                kriteria: "a. Jika telah dilakukan pengelolaan media/aktivitas interaktif yang efektif untuk menginformasikan pembangunan ZI kepada internal dan stakeholder secara berkala\nb. Jika pengelolaan media/aktivitas interaktif dilakukan secara terbatas dan tidak secara berkala\nc. Jika pengelolaan media/aktivitas interaktif belum dilakukan",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1mFSCEp1NPHXYuMIT6CFSIVtd60NGQPew",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              }
+            ]
+          },
+{
+            name: "Pemantauan dan Evaluasi Pembangunan WBK/WBBM",
+            bobot: 1,
+            items: [
+{
+                q: "Seluruh kegiatan pembangunan sudah dilaksanakan sesuai dengan rencana",
+                kriteria: "a. Jika semua kegiatan pembangunan telah dilaksanakan sesuai dengan rencana\nb. Jika sebagian besar kegiatan pembangunan telah dilaksanakan sesuai dengan rencana\nc. Jika sebagian kecil kegiatan pembangunan telah dilaksanakan sesuai dengan rencana\nd. Jika belum ada kegiatan pembangunan yang dilakukan sesuai dengan rencana",
+                jawaban: "A",
+                tpi: "B",
+                nilai: 0.67,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1mjruWSOUOILPw3y5iQdFFLxpaJq355RX",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Terdapat monitoring dan evaluasi terhadap pembangunan Zona Integritas",
+                kriteria: "a. Jika monitoring dan evaluasi melibatkan pimpinan dan dilakukan secara berkala\nb. Jika monitoring dan evaluasi melibatkan pimpinan tetapi tidak secara berkala\nc. Jika monitoring dan evaluasi tidak melibatkan pimpinan dan tidak secara berkala\nd. Jika tidak terdapat monitoring dan evaluasi terhadap pembangunan zona integritas",
+                jawaban: "A",
+                tpi: "B",
+                nilai: 0.67,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1ry0DPT7gdab4cxIc0QUltTJ4iCt_8xmN",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Hasil Monitoring dan Evaluasi telah ditindaklanjuti",
+                kriteria: "a. Jika semua catatan/rekomendasi hasil  monitoring dan evaluasi tim internal atas persiapan dan pelaksanaan kegiatan Unit WBK/WBBM telah ditindaklanjuti\nb. Jika sebagian besar catatan/rekomendasi hasil monitoring danevaluasi tim internal atas persiapan dan pelaksanaan kegiatanUnit WBK/WBBM telah ditindaklanjuti\nc. Jika sebagian kecil catatan/rekomendasi hasil monitoring dan evaluasi tim internal atas persiapan dan pelaksanaan kegiatan Unit WBK/WBBM telah ditindaklanjuti\nd. Jika catatan/rekomendasi hasil monitoring dan evaluasi tim internal atas persiapan dan pelaksanaan kegiatan Unit WBK/WBBM belum ditindaklanjuti",
+                jawaban: "A",
+                tpi: "B",
+                nilai: 0.67,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1XNgQebEV2bLD_7mF1g8gD84ExyHGO_pi",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              }
+            ]
+          },
+{
+            name: "Perubahan Pola Pikir dan Budaya Kerja",
+            bobot: 1.5,
+            items: [
+{
+                q: "Pimpinan berperan sebagai role model dalam pelaksanaan Pembangunan WBK/WBBM",
+                kriteria: "ya, jika pimpinan menjadi contoh pelaksanaan nilai-nilai organisasi.",
+                jawaban: "Ya",
+                tpi: "Ya",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/18ArP1C5L9mtG6NTFeaMDp0AVsAd-p_dc",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Sudah ditetapkan agen perubahan",
+                kriteria: "a. Jika agen perubahan telah ditetapkan dan  berkontribusi terhadap perubahan pada unit kerjanya\nb. Jika agen perubahan telah ditetapkan namun belum berkontribusi terhadap perubahan pada unit kerjanya\nc. Jika belum terdapat agen perubahan",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1a5Ic-2DTvKU6fMh6jI6d-AqqjznbRMoG",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Telah dibangun budaya kerja dan pola pikir di lingkungan organisasi",
+                kriteria: "a. Jika telah dilakukan upaya pembangunan budaya kerja dan pola pikir dan mampu mengurangi resistensi atas perubahan\nb. Jika telah dilakukan upaya pembangunan budaya kerja dan pola pikir tapi masih terdapat resistensi atas perubahan\nc. Jika belum terdapat upaya pembangunan budaya kerja dan pola pikir",
+                jawaban: "B",
+                tpi: "B",
+                nilai: 0.5,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1C2paz7v1ynaywvWEQjaJeAnzB4LKScFj",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Anggota organisasi terlibat dalam pembangunan Zona Integritas menuju WBK/WBBM",
+                kriteria: "a. Jika semua anggota terlibat dalam pembangunan Zona Integritas menuju WBK/WBBM dan usulan-usulan dari anggota diakomodasikan dalam keputusan\nb. Jika sebagian besar anggota terlibat dalam pembangunan Zona Integritas menuju WBK/WBBM\nc. Jika sebagian kecil anggota terlibat dalam pembangunan Zona Integritas menuju WBK/WBBM\nd. Jika belum ada anggota terlibat dalam pembangunan Zona Integritas menuju WBK/WBBM",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1ER6IIrmc5Rf8mcVnYCR25vq1f9X_pCaX",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              }
+            ]
+          }
+        ],
+        reformItems: [
+{
+            q: "Agen perubahan telah membuat perubahan yang konkret di Instansi (dalam 1 tahun)",
+            kriteria: "Misalkan dengan kebijakan 1 Agen 1 Perubahan Persentase diperoleh dari Jumlah Perubahan yang dibuat dibagi dengan Jumlah Agen Perubahan",
+            pilihan: "%",
+            jawaban: "1",
+            tpi: "1",
+            nilai: 1,
+            catatan: "",
+            buktiLink: "https://drive.google.com/file/d/14KlFzmq58wetgflx6w6YM2YVC1VJoJvg/view",
+            docData: "",
+            docFileName: "",
+            docFileType: "",
+            docUrl: "",
+            docDesc: ""
+          },
+{
+            q: "Perubahan yang dibuat Agen Perubahan telah terintegrasi dalam sistem manajemen",
+            kriteria: "",
+            pilihan: "%",
+            jawaban: "1",
+            tpi: "1",
+            nilai: 1,
+            catatan: "",
+            buktiLink: "https://drive.google.com/file/d/18TnTvwo7jMx-8kUnRzlibMHVYZ7AqeXo/view",
+            docData: "",
+            docFileName: "",
+            docFileType: "",
+            docUrl: "",
+            docDesc: ""
+          },
+{
+            q: "Komitmen Pimpinan",
+            kriteria: "",
+            pilihan: "",
+            jawaban: "",
+            tpi: "",
+            nilai: 1,
+            catatan: "",
+            buktiLink: "",
+            docData: "",
+            docFileName: "",
+            docFileType: "",
+            docUrl: "",
+            docDesc: ""
+          },
+{
+            q: "Pimpinan memiliki komitmen terhadap pelaksanaan reformasi birokrasi, dengan adanya target capaian reformasi yang jelas di dokumen perencanaan",
+            kriteria: "a. Target capaian zona integritas sudah ada di dokumen perencanaan unit kerja dan sebagian besar (diatas 80%) sudah tercapai\nb. Target capaian zona integritas sudah ada di dokumen perencanaan unit kerja dan sebagian (diatas 50%) sudah tercapai\nc. Target capaian zona integritas sudah ada di dokumen perencanaan unit kerja dan sebagian kecil (dibawah 50%) sudah tercapai\nd. Target capaian zona integritassudah ada di dokumen perencanaan unit kerja, namun belum ada yang tercapai (masih dalam tahap pembangunan)\ne. Tidak ada target capaian zona integritasdi dokumen perencanaan unit kerja",
+            pilihan: "A/B/C/D/E",
+            jawaban: "A",
+            tpi: "A",
+            nilai: 1,
+            catatan: "",
+            buktiLink: "https://drive.google.com/file/d/1ZMxXsV0MzS6VDAWHoVAnAlTmHaS5ietU/view",
+            docData: "",
+            docFileName: "",
+            docFileType: "",
+            docUrl: "",
+            docDesc: ""
+          },
+{
+            q: "Membangun Budaya Kerja",
+            kriteria: "",
+            pilihan: "",
+            jawaban: "",
+            tpi: "",
+            nilai: 1,
+            catatan: "",
+            buktiLink: "",
+            docData: "",
+            docFileName: "",
+            docFileType: "",
+            docUrl: "",
+            docDesc: ""
+          },
+{
+            q: "Instansi membangun budaya kerja positif dan menerapkan nilai-nilai organisasi dalam pelaksanaan tugas sehari-hari",
+            kriteria: "a. Budaya kerja dan nilai-nilai organisasi telah dinternalisasi ke seluruh anggota organisasi, dan penerapannya dituangkan dalam standar operasional pelaksanaan kegiatan/tugas \nb. Budaya kerja dan nilai-nilai organisasi telah dinternalisasi ke seluruh anggota organisasi, namun belum dituangkan dalam standar operasional pelaksanaan kegiatan/tugas\nc. Budaya kerja dan nilai-nilai organisasi telah disusun, namun belum dinternalisasi ke seluruh anggota organisasi\nd. Belum menyusun budaya kerja dan nilai-nilai organisasi",
+            pilihan: "A/B/C/D",
+            jawaban: "A",
+            tpi: "A",
+            nilai: 1,
+            catatan: "",
+            buktiLink: "https://drive.google.com/file/d/1zM_JVxfynVPe5Ca7ze_0iazqcU2bwge7/view",
+            docData: "",
+            docFileName: "",
+            docFileType: "",
+            docUrl: "",
+            docDesc: ""
+          }
+        ]
+      },
+{
+        id: 2,
+        name: "Penataan Tatalaksana",
+        bobot: 7,
+        pemenuhan: 3.5,
+        reform: 3.166666667,
+        folderUrl: "https://drive.google.com/drive/folders/1_0fexM9LmzEvXYYq8PQaaeVFxJxdPe4M?usp=drive_link",
+        subAreas: [
+{
+            name: "Prosedur Operasional Tetap (SOP) Kegiatan Utama",
+            bobot: 1,
+            items: [
+{
+                q: "SOP mengacu pada peta proses bisnis instansi",
+                kriteria: "a. Jika semua SOP unit telah mengacu peta proses bisnis dan juga melakukan inovasi yang selaras\nb. Jika semua SOP unit telah mengacu peta proses bisnis\nc. Jika sebagian SOP unit telah mengacu peta proses bisnis\nd. Jika belum terdapat SOP unit yang mengacu peta proses bisnis",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1K3f05xdJcGM65vnH-RkjOEMVCIxEe5FZ",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Prosedur operasional tetap (SOP) telah diterapkan",
+                kriteria: "a. Jika unit telah menerapkan seluruh SOP yang ditetapkan organisasi dan juga melakukan inovasi pada SOP yang diterapkan\nb. Jika unit telah menerapkan seluruh SOP yang ditetapkan organisasi\nc. Jika unit telah menerapkan sebagian besar SOP yang ditetapkan organisasi\nd. Jika unit telah menerapkan sebagian kecil SOP yang ditetapkan organisasi\ne. Jika unit belum menerapkan SOP yang telah ditetapkan organisasi",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1NlZBrZQelS8gBWnmBvQ1FRH3-O_qYB_f",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Prosedur operasional tetap (SOP) telah dievaluasi",
+                kriteria: "a. Jika seluruh SOP utama telah dievaluasi dan telah ditindaklanjuti berupa perbaikan SOP atau usulan perbaikan SOP\nb. Jika sebagian besar SOP utama telah dievaluasi dan telah ditindaklanjuti berupa perbaikan SOP atau usulan perbaikan SOP\nc. Jika sebagian besar SOP utama telah dievaluasi tetapi belum ditindaklanjuti\nd. Jika sebagian kecil SOP utama telah dievaluasi\ne. Jika SOP belum pernah dievaluasi",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1Y7aj-3bJGbHEuMYBF7rhZR8NRQDoe6HO",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              }
+            ]
+          },
+{
+            name: "Sistem Pemerintahan Berbasis Elektronik (SPBE)",
+            bobot: 2,
+            items: [
+{
+                q: "Sistem pengukuran kinerja unit sudah menggunakan teknologi informasi",
+                kriteria: "a. Jika unit memiliki sistem pengukuran kinerja (e-performance/e-sakip) yang menggunakan teknologi informasi dan juga melakukan inovasi\nb. Jika unit memiliki sistem pengukuran kinerja (e-performance/e-sakip) yang menggunakan teknologi informasi\nc. Jika belum memiliki sistem pengukuran kinerja (e-performance/e-sakip) yang menggunakan teknologi informasi",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1LX5rNq9yLhpYJlVuLU5Bs9C6k1YIdKNl",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Operasionalisasi manajemen SDM sudah menggunakan teknologi informasi",
+                kriteria: "a. Jika unit memiliki operasionalisasi manajemen SDM yang menggunakan teknologi informasi dan juga melakukan inovasi\nb. Jika unit memiliki operasionalisasi manajemen SDM yang menggunakan teknologi informasi secara terpusat\nc. Jika belum menggunakan teknologi informasi dalam operasionalisasi manajemen SDM",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1-R1tNjtOgsQXw6cNBuueEf8Kzchiu9Wk",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Pemberian pelayanan kepada publik sudah menggunakan teknologi informasi",
+                kriteria: "a. Jika unit memberikan pelayanan kepada publik dengan menggunakan teknologi informasi terpusat/unit sendiri dan terdapat inovasi\nb. Jika unit memberikan pelayanan kepada publik dengan menggunakan teknologi informasi secara terpusat\nc. Jika belum memberikan pelayanan kepada publik dengan menggunakan teknologi informasi",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1cNCTE18JNc65WFXZLG2fAwJ4-UtcFXwR",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Telah dilakukan monitoring dan evaluasi terhadap pemanfaatan TI",
+                kriteria: "a. Jika laporan monitoring dan evaluasi terhadap pemanfaatan teknologi informasi dalam pengukuran kinerja unit, operasionalisasi SDM, dan pemberian layanan kepada publik sudah dilakukan secara berkala\nb. Jika laporan monitoring dan evaluasi terhadap pemanfaatan teknologi informasi dalam pengukuran kinerja unit, operasionalisasi SDM, dan pemberian layanan kepada publik sudah dilakukan tetapi tidak secara berkala\nc. Jika tidak terdapat monitoring dan evaluasi terhadap pemanfaatan teknologi informasi dalam pengukuran kinerja unit, operasionalisasi SDM, dan pemberian layanan kepada publik",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1MrltjmbtE5W2fmPUrifVZC6CvSD1eTip",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              }
+            ]
+          },
+{
+            name: "Keterbukaan Informasi Publik",
+            bobot: 0.5,
+            items: [
+{
+                q: "Kebijakan tentang keterbukaan informasi publik telah diterapkan",
+                kriteria: "a. Jika sudah terdapat Pejabat Pengelola Informasi Publik (PPID) yang menyebarkan seluruh informasi yang dapat diakses secara mutakhir dan lengkap\nb. Jika sudah terdapat PPID yang menyebarkan sebagian informasi yang dapat diakses secara mutakhir dan lengkap\nc. Jika belum ada PPID dan belum melakukan penyebaran informasi publik",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1ed1hU9DibSno5dCjfrfDkVYtbVaLvZLa",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Telah dilakukan monitoring dan evaluasi pelaksanaan kebijakan keterbukaan informasi publik",
+                kriteria: "a. Jika dilakukan monitoring dan evaluasi pelaksanaan kebijakan keterbukaan informasi publik dan telah ditindaklanjuti\nb. Jika monitoring dan evaluasi pelaksanaan kebijakan keterbukaan informasi publik telah dilakukan tetapi belum ditindaklanjuti\nc. Jika monitoring dan evaluasi pelaksanaan kebijakan keterbukaan informasi publik belum dilakukan",
+                jawaban: "B",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1OvggfKmcjdBETg2JOf1Y5z1cA4YSR6lf",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              }
+            ]
+          }
+        ],
+        reformItems: [
+{
+            q: "Telah disusun peta proses bisnis dengan adanya penyederhanaan jabatan",
+            kriteria: "a. Peta proses bisnis telah disusun dan mempengaruhi penyederhanaan seluruh jabatan\nb. Peta proses bisnis telah disusun dan mempengaruhi penyederhanaan sebagian besar (lebih dari 50%) jabatan\nc. Peta proses bisnis telah disusun dan mempengaruhi penyederhanaan sebagian kecil (kurang dari 50%)  jabatan\nd. Peta proses bisnis telah disusun dan belum mempengaruhi penyederhanaan jabatan",
+            pilihan: "A/B/C/D",
+            jawaban: "A",
+            tpi: "A",
+            nilai: 1,
+            catatan: "",
+            buktiLink: "https://drive.google.com/file/d/1_5USQjiGjcLEubRT6Keig8OPOOdanXs9/view",
+            docData: "",
+            docFileName: "",
+            docFileType: "",
+            docUrl: "",
+            docDesc: ""
+          },
+{
+            q: "Implementasi SPBE telah terintegrasi dan mampu mendorong pelaksanaan pelayanan publik yang lebih cepat dan efisien",
+            kriteria: "a. Implementasi SPBE telah terintegrasi dan mampu mendorong pelaksanaan pelayanan publik yang lebih cepat dan efisien \nb. Implementasi SPBE telah mampu mendorong pelaksanaan pelayanan publik yang lebih cepat dan efisien, namun belum terintegrasi (parsial)\nc. Implementasi SPBE belum mendorong pelaksanaan pelayanan publik yang lebih cepat dan efisien",
+            pilihan: "A/B/C",
+            jawaban: "A",
+            tpi: "A",
+            nilai: 1,
+            catatan: "",
+            buktiLink: "https://drive.google.com/drive/folders/1uEvdaEV2E_-T5Gs7zhYjJf3wd4qI_llu",
+            docData: "",
+            docFileName: "",
+            docFileType: "",
+            docUrl: "",
+            docDesc: ""
+          },
+{
+            q: "Implementasi SPBE telah terintegrasi dan mampu mendorong pelaksanaan pelayanan internal organisasi yang lebih cepat dan efisien",
+            kriteria: "a. Implementasi SPBE telah terintegrasi dan mampu mendorong pelaksanaan pelayanan internal unit kerja yang lebih cepat dan efisien \nb. Implementasi SPBE telah mampu mendorong pelaksanaan pelayanan internal unit kerja yang lebih cepat dan efisien, namun belum terintegrasi (parsial)\nc. Implementasi SPBE belum mendorong pelaksanaan pelayanan internal unit kerja yang lebih cepat dan efisien",
+            pilihan: "A/B/C",
+            jawaban: "A",
+            tpi: "A",
+            nilai: 1,
+            catatan: "",
+            buktiLink: "https://drive.google.com/drive/folders/1uEvdaEV2E_-T5Gs7zhYjJf3wd4qI_llu",
+            docData: "",
+            docFileName: "",
+            docFileType: "",
+            docUrl: "",
+            docDesc: ""
+          },
+{
+            q: "Transformasi digital pada bidang proses bisnis utama telah mampu memberikan nilai manfaat bagi unit kerja secara optimal",
+            kriteria: "a. Kriteria huruf b telah terpenuhi dan penerapan atau penggunaan dari manfaat/dampak dari transformasi digital pada bidang proses bisnis utama bagi unit kerja telah dilakukan validasi dan evaluasi serta ditindaklanjuti secara berkelanjutan\nb. Kriteria huruf c telah terpenuhi dan manfaat/dampak dari transformasi digital pada bidang proses bisnis utama telah diterapkan/digunakan oleh unit kerja sesuai dengan sasaran dan target manfaat/dampak\nc. Kriteria huruf d telah terpenuhi dan manfaat/dampak dari transformasi digital pada bidang proses bisnis utama telah mampu direalisasikan pada unit kerja sesuai dengan sasaran dan target manfaat/dampak\nd. Kriteria huruf e telah terpenuhi dan kapabilitas prakiraan dan pelacakan terhadap sasaran dan target manfaat/dampak dari transformasi digital pada bidang proses bisnis utama\ne. Sasaran dan target manfaat/dampak dari transformasi digital pada bidang proses bisnis utama telah direncanakan, didefinisikan, dan ditetapkan",
+            pilihan: "A/B/C/D/E",
+            jawaban: "B",
+            tpi: "B",
+            nilai: 0.75,
+            catatan: "",
+            buktiLink: "https://drive.google.com/file/d/1kAiQql1sIijT80u5QwV-3BV1cNFLP3mS/view",
+            docData: "",
+            docFileName: "",
+            docFileType: "",
+            docUrl: "",
+            docDesc: ""
+          },
+{
+            q: "Transformasi digital pada bidang administrasi pemerintahan telah mampu memberikan nilai manfaat bagi unit kerja secara optimal",
+            kriteria: "a. Kriteria huruf b telah terpenuhi dan penerapan atau penggunaan dari manfaat/dampak dari transformasi digital pada bidang administrasi pemerintahan bagi unit kerja telah dilakukan validasi dan evaluasi serta ditindaklanjuti secara berkelanjutan\nb. Kriteria huruf c telah terpenuhi dan manfaat/dampak dari transformasi digital pada bidang administrasi pemerintahan telah diterapkan/digunakan oleh unit kerja sesuai dengan sasaran dan target manfaat/dampak\nc. Kriteria huruf d telah terpenuhi dan manfaat/dampak dari transformasi digital pada bidang administrasi pemerintahan telah mampu direalisasikan pada unit kerja sesuai dengan sasaran dan target manfaat/dampak\nd. Kriteria huruf e telah terpenuhi dan kapabilitas prakiraan dan pelacakan terhadap sasaran dan target manfaat/dampak dari transformasi digital pada bidang administrasi pemerintahan\ne. Sasaran dan target manfaat/dampak dari transformasi digital pada bidang administrasi pemerintahan telah direncanakan, didefinisikan, dan ditetapkan",
+            pilihan: "A/B/C/D/E",
+            jawaban: "A",
+            tpi: "A",
+            nilai: 1,
+            catatan: "",
+            buktiLink: "https://drive.google.com/drive/folders/16IHE_jiAma-l1EuQrPtuBBeDNpm54M5e",
+            docData: "",
+            docFileName: "",
+            docFileType: "",
+            docUrl: "",
+            docDesc: ""
+          },
+{
+            q: "Transformasi digital pada bidang pelayanan publik telah mampu memberikan nilai manfaat bagi unit kerja secara optimal",
+            kriteria: "a. Kriteria huruf b telah terpenuhi dan penerapan atau penggunaan dari manfaat/dampak dari transformasi digital pada bidang pelayanan publik bagi unit kerja telah dilakukan validasi dan evaluasi serta ditindaklanjuti secara berkelanjutan\nb. Kriteria huruf c telah terpenuhi dan manfaat/dampak dari transformasi digital pada bidang pelayanan publik telah diterapkan/digunakan oleh unit kerja sesuai dengan sasaran dan target manfaat/dampak\nc. Kriteria huruf d telah terpenuhi dan manfaat/dampak dari transformasi digital pada bidang pelayanan publik telah mampu direalisasikan pada unit kerja sesuai dengan sasaran dan target manfaat/dampak\nd. Kriteria huruf e telah terpenuhi dan kapabilitas prakiraan dan pelacakan terhadap sasaran dan target manfaat/dampak dari transformasi digital pada bidang pelayanan publik\ne. Sasaran dan target manfaat/dampak dari transformasi digital pada bidang pelayanan publik telah direncanakan, didefinisikan, dan ditetapkan",
+            pilihan: "A/B/C/D/E",
+            jawaban: "B",
+            tpi: "B",
+            nilai: 0.75,
+            catatan: "",
+            buktiLink: "https://drive.google.com/drive/folders/1JpDui7PKr5W183BMXo9P3iJAGWW1zS28",
+            docData: "",
+            docFileName: "",
+            docFileType: "",
+            docUrl: "",
+            docDesc: ""
+          }
+        ]
+      },
+{
+        id: 3,
+        name: "Penataan Sistem Manajemen SDM Aparatur",
+        bobot: 10,
+        pemenuhan: 4.770833333,
+        reform: 4.6,
+        folderUrl: "https://drive.google.com/drive/folders/1esVS6FGL2zNQRyh8Tr3H7hlqH6zcA8iD?usp=drive_link",
+        subAreas: [
+{
+            name: "Perencanaan Kebutuhan Pegawai",
+            bobot: 0.25,
+            items: [
+{
+                q: "Kebutuhan pegawai yang disusun oleh unit kerja mengacu kepada peta jabatan dan hasil analisis beban kerja",
+                kriteria: "Ya, jika kebutuhan pegawai yang disusun oleh unit kerja mengacu kepada peta jabatan dan hasil analisis beban kerja untuk masing-masing jabatan.",
+                jawaban: "Ya",
+                tpi: "Ya",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/19ic--dzr-CQNJkIOvwK9cpuVAKd_lOCF",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Penempatan pegawai hasil rekrutmen murni mengacu kepada kebutuhan pegawai yang telah disusun per jabatan",
+                kriteria: "a. Jika semua penempatan pegawai hasil rekrutmen murni mengacu kepada kebutuhan pegawai yang telah disusun per jabatan\nb. Jika sebagian besar penempatan pegawai hasil rekrutmen murni mengacu kepada kebutuhan pegawai yang telah disusun per jabatan\nc. Jika sebagian kecil penempatan pegawai hasil rekrutmen murni mengacu kepada kebutuhan pegawai yang telah disusun per jabatan\nd. Jika penempatan pegawai hasil rekrutmen murni tidak mengacu kepada kebutuhan pegawai yang telah disusun per jabatan",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1tUDD-jwyFjwN2qBO1xyge-nAGBsdJcq3",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Telah dilakukan monitoring dan evaluasi terhadap penempatan pegawai rekrutmen",
+                kriteria: "Ya, jika sudah dilakukan monitoring dan evaluasi terhadap penempatan pegawai hasil rekrutmen untuk memenuhi kebutuhan jabatan dalam organisasi telah memberikan perbaikan terhadap kinerja unit kerja.",
+                jawaban: "Ya",
+                tpi: "Ya",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1DNOV63EzV-T69mAVa1JZSO0fBdTvVorY",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              }
+            ]
+          },
+{
+            name: "Pola Mutasi Internal",
+            bobot: 0.5,
+            items: [
+{
+                q: "Dalam melakukan pengembangan karier pegawai, telah dilakukan mutasi pegawai antar jabatan",
+                kriteria: "Ya, jika dilakukan mutasi pegawai antar jabatan sebagai wujud dari pengembangan karier pegawai.",
+                jawaban: "Ya",
+                tpi: "Ya",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1iW65kj4fw3ZN7VrXVnAlAsYNIireOThi",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Dalam melakukan mutasi pegawai antar jabatan telah memperhatikan kompetensi jabatan dan mengikuti pola mutasi",
+                kriteria: "a. Jika semua mutasi pegawai antar jabatan telah memperhatikan kompetensi jabatan dan mengikuti pola mutasi yang telah ditetapkan organisasi dan juga unit kerja memberikan pertimbangan terkait hal ini\nb. Jika semua mutasi pegawai antar jabatan telah memperhatikan kompetensi jabatan dan mengikuti pola mutasi yang telah ditetapkan organisasi\nc. Jika sebagian besar mutasi pegawai antar jabatan telah memperhatikan kompetensi jabatan dan mengikuti pola mutasi yang telah ditetapkan organisasi\nd. Jika sebagian kecil semua mutasi pegawai antar jabatan telah memperhatikan kompetensi jabatan dan mengikuti pola mutasi yang telah ditetapkan organisasi\ne. Jika mutasi pegawai antar jabatan belum memperhatikan kompetensi jabatan dan mengikuti pola mutasi yang telah ditetapkan organisasi",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/17C2ehzFQljih6lsdQtT2GNxUn4inBe_i",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Telah dilakukan monitoring dan evaluasi terhadap kegiatan mutasi dalam kaitannya dengan perbaikan kinerja",
+                kriteria: "Ya, jika sudah dilakukan monitoring dan evaluasi terhadap kegiatan mutasi yang telah dilakukan dalam kaitannya dengan perbaikan kinerja.",
+                jawaban: "Ya",
+                tpi: "Ya",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1vSGDFKzHiykdt8FFMBb9wAdd2PZTBmZy",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              }
+            ]
+          },
+{
+            name: "Pengembangan Pegawai Berbasis Kompetensi",
+            bobot: 1.25,
+            items: [
+{
+                q: "Unit Kerja melakukan Training Need Analysis Untuk pengembangan kompetensi",
+                kriteria: "Ya, jika sudah dilakukan Training Need Analysis Untuk pengembangan kompetensi.",
+                jawaban: "Ya",
+                tpi: "Ya",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1lwC4zKiehuD5UCufv-IlvJwdAx3-SNyT",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Dalam menyusun rencana pengembangan kompetensi pegawai, telah mempertimbangkan hasil pengelolaan kinerja pegawai",
+                kriteria: "a. Jika semua rencana pengembangan kompetensi pegawai mempertimbangkan hasil pengelolaan kinerja pegawai\nb. Jika sebagian besar rencana pengembangan kompetensi pegawai mempertimbangkan hasil pengelolaan kinerja pegawai\nc. Jika sebagian kecil rencana pengembangan kompetensi pegawai mempertimbangkan hasil pengelolaan kinerja pegawai\nd. Jika belum ada rencana pengembangan kompetensi pegawai yang mempertimbangkan hasil pengelolaan kinerja pegawai",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1DdjUVI8HhDrPNLucleNAxNHlL3VeDjXu",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Tingkat kesenjangan kompetensi pegawai yang ada dengan standar kompetensi yang ditetapkan",
+                kriteria: "a. Jika persentase kesenjangan kompetensi pegawai dengan standar kompetensi yang ditetapkan sebesar <25%\nb. Jika persentase kesenjangan kompetensi pegawai dengan standar kompetensi yang ditetapkan sebesar >25%-50%\nc. Jika  sebagian besar kompetensi pegawai dengan standar kompetensi yang ditetapkan untuk masing-masing jabatan >50% -75%\nd. Jika persentase kesenjangan kompetensi pegawai dengan standar kompetensi yang ditetapkan sebesar >75%-100%",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1ROdg52Cja9v370GoRqSohc1wSI8UnhI4",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Pegawai di Unit Kerja telah memperoleh kesempatan/hak untuk mengikuti diklat maupun pengembangan kompetensi lainnya",
+                kriteria: "a. Jika seluruh pegawai di Unit Kerja telah memperoleh kesempatan/hak untuk mengikuti diklat maupun pengembangan kompetensi lainnya\nb. Jika sebagian besar pegawai di Unit Kerja telah memperoleh kesempatan/hak untuk mengikuti diklat maupun pengembangan kompetensi lainnya\nc. Jika sebagian kecil pegawai di Unit Kerja telah memperoleh kesempatan/hak untuk mengikuti diklat maupun pengembangan kompetensi lainnya\nd. Jika belum ada pegawai di Unit Kerja telah memperoleh kesempatan/hak untuk mengikuti diklat maupun pengembangan kompetensi lainnya",
+                jawaban: "B",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1j6H_GWn8Of-5HoKsa72i-2RC6doGM7nl",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Dalam pelaksanaan pengembangan kompetensi, unit kerja melakukan upaya pengembangan kompetensi kepada pegawai",
+                kriteria: "a. Jika unit kerja melakukan upaya pengembangan kompetensi kepada seluruh pegawai\nb. Jika unit kerja melakukan upaya pengembangan kompetensi kepada sebagian besar pegawai\nc. Jika unit kerja melakukan upaya pengembangan kompetensi kepada sebagian kecil pegawai\nd. Jika unit kerja belum melakukan upaya pengembangan kompetensi kepada pegawai",
+                jawaban: "B",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1xEjMqXKY3OZtI5ky0yTp5NOI68MDuWhu",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Telah dilakukan monitoring dan evaluasi terhadap hasil pengembangan kompetensi dalam kaitannya dengan perbaikan kinerja",
+                kriteria: "a. Jika monitoring dan evaluasi terhadap hasil pengembangan kompetensi dalam kaitannya dengan perbaikan kinerja telah dilakukan secara berkala\nb. Jika monitoring dan evaluasi terhadap hasil pengembangan kompetensi dalam kaitannya dengan perbaikan kinerja telah dilakukan namun tidak secara berkala\nc. Jika monitoring dan evaluasi terhadap hasil pengembangan kompetensi dalam kaitannya dengan perbaikan kinerja belum dilakukan",
+                jawaban: "A",
+                tpi: "B",
+                nilai: 0.5,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1--8MbXHYZf-XwkXg0m7C4OnUdz9hLLvF",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              }
+            ]
+          },
+{
+            name: "Penetapan Kinerja Individu",
+            bobot: 2,
+            items: [
+{
+                q: "Terdapat penetapan kinerja individu yang terkait dengan perjanjian kinerja organisasi",
+                kriteria: "a. Jika seluruh penetapan kinerja individu terkait dengan kinerja organisasi serta perjanjian kinerja selaras dengan sasaran kinerja pegawai (SKP)\nb. Jika sebagian besar penetapan kinerja individu terkait dengan kinerja organisasi\nc. Jika sebagian kecil penetapan kinerja individu terkait dengan kinerja organisasi\nd. Jika belum ada penetapan kinerja individu terkait dengan kinerja organisasi",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1ByVUHOhiMj52cWTsxKiYAR0JuhoYhe7i",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Ukuran kinerja individu telah memiliki kesesuaian dengan indikator kinerja individu level diatasnya",
+                kriteria: "a. Jika seluruh ukuran kinerja individu telah memiliki kesesuaian dengan indikator kinerja individu level diatasnya serta menggambarkan logic model\nb. Jika sebagian besar ukuran kinerja individu telah memiliki kesesuaian dengan indikator kinerja individu level diatasnya\nc. Jika sebagian kecil ukuran kinerja individu telah memiliki kesesuaian dengan indikator kinerja individu level diatasnya\nd. Jika ukuran kinerja individu belum memiliki kesesuaian dengan indikator kinerja individu level diatasnya",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1ICqYr93VlUL6Jx3tiwAuBARulrN2qTP0",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Pengukuran kinerja individu dilakukan secara periodik",
+                kriteria: "a. Jika pengukuran kinerja individu dilakukan secara bulanan\nb. Jika pengukuran kinerja individu dilakukan secara triwulanan\nc. Jika pengukuran kinerja individu dilakukan secara semesteran\nd. Jika pengukuran kinerja individu dilakukan secara tahunan\ne. Jika pengukuran kinerja individu belum dilakukan",
+                jawaban: "B",
+                tpi: "B",
+                nilai: 0.75,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1wNMX8gfKhMmTkXcbJb-ZKX9hv_knxzKG",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Hasil penilaian kinerja individu telah dijadikan dasar untuk pemberian reward",
+                kriteria: "Ya, jika hasil hasil penilaian kinerja individu telah dijadikan dasar untuk pemberian reward (Seperti: pengembangan karir individu, atau penghargaan)",
+                jawaban: "Ya",
+                tpi: "Ya",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1snTlyOh5CAQspVcVtsXUXQfkCRLV2CAx",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              }
+            ]
+          },
+{
+            name: "Penegakan Aturan Disiplin/Kode Etik/Kode Perilaku Pegawai",
+            bobot: 0.75,
+            items: [
+{
+                q: "Aturan disiplin/kode etik/kode perilaku telah dilaksanakan/diimplementasikan",
+                kriteria: "a. Jika unit kerja telah mengimplementasikan seluruh aturan disiplin/kode etik/kode perilaku yang ditetapkan organisasi dan juga membuat inovasi terkait aturan disiplin/kode etik/kode perilaku yang sesuai dengan karakteristik unit kerja\nb. Jika unit kerja telah mengimplementasikan seluruh aturan disiplin/kode etik/kode perilaku yang ditetapkan organisasi\nc. Jika unit kerja telah mengimplementasikan sebagian aturan disiplin/kode etik/kode perilaku yang ditetapkan organisasi\nd. Jika unit kerja belum mengimplementasikan aturan disiplin/kode etik/kode perilaku yang ditetapkan organisasi",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/196kbdDEzo7-ybgNl3_iVYCboSjr0SahI",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              }
+            ]
+          },
+{
+            name: "Sistem Informasi Kepegawaian",
+            bobot: 0.25,
+            items: [
+{
+                q: "Data informasi kepegawaian unit kerja telah dimutakhirkan secara berkala",
+                kriteria: "a. Jika data informasi kepegawaian unit kerja dapat diakses oleh pegawai dan dimutakhirkan setiap ada perubahan data pegawai\nb. Jika data informasi kepegawaian unit kerja dapat diakses oleh pegawai dan  dimutakhirkan namun secara berkala\nc. Jika data informasi kepegawaian unit kerja belum dimutakhirkan",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1Lu4la9-4cj0fFYAY_aRts1t8wn1scXRE",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              }
+            ]
+          }
+        ],
+        reformItems: [
+{
+            q: "Ukuran kinerja individu telah berorientasi hasil (outcome) sesuai pada levelnya",
+            kriteria: "a. Seluruh ukuran kinerja individu telah berorientasi hasil (outcome) sesuai pada levelnya\nb. Sebagian ukuran kinerja individu telah berorientasi hasil (outcome) sesuai pada levelnya\nc. Tidak ada ukuran kinerja individu yang berorientasi hasil (outcome)",
+            pilihan: "A/B/C",
+            jawaban: "A",
+            tpi: "A",
+            nilai: 1,
+            catatan: "",
+            buktiLink: "https://drive.google.com/drive/folders/1iCTfbXD-5a8IQJCUxjyc3vHq60nOC8hg",
+            docData: "",
+            docFileName: "",
+            docFileType: "",
+            docUrl: "",
+            docDesc: ""
+          },
+{
+            q: "Hasil assement telah dijadikan pertimbangan untuk mutasi dan pengembangan karir pegawai",
+            kriteria: "a. Seluruh hasil assessment dijadikan dasar mutasi internal dan pengembangan kompetensi pegawai\nb. Hasil assessment belum seluruhnya dijadikan mutasi internal dan pengembangan kompetensi pegawai\nc. Hasil assessment belum dijadikan dasar mutasi internal dan pengembangan kompetensi pegawai",
+            pilihan: "A/B/C",
+            jawaban: "A",
+            tpi: "A",
+            nilai: 1,
+            catatan: "",
+            buktiLink: "https://drive.google.com/drive/folders/18h-s-FUaFNslIkFn9P0Cm3Iq3HA3P151",
+            docData: "",
+            docFileName: "",
+            docFileType: "",
+            docUrl: "",
+            docDesc: ""
+          },
+{
+            q: "Penurunan pelanggaran disiplin pegawai",
+            kriteria: "Persentase pernurunan pelanggaran disiplin pegawai diperoleh dari Jumlah pelanggaran tahun sebelumnya dikurangi Jumlah pelanggaran tahun ini kemudian dibagi dengan Jumlah pelanggaran tahun sebelumnya",
+            pilihan: "%",
+            jawaban: "0.8",
+            tpi: "0.8",
+            nilai: 0.8,
+            catatan: "",
+            buktiLink: "https://drive.google.com/file/d/1eyiVtn7BfBi54maoeVnPSoeV5jIXf_VY/view",
+            docData: "",
+            docFileName: "",
+            docFileType: "",
+            docUrl: "",
+            docDesc: ""
+          }
+        ]
+      },
+{
+        id: 4,
+        name: "Penguatan Akuntabilitas",
+        bobot: 10,
+        pemenuhan: 5,
+        reform: 4.005,
+        folderUrl: "https://drive.google.com/drive/folders/1teonVXCQZjxg9W1JvxubOCca6k4awCSW?usp=drive_link",
+        subAreas: [
+{
+            name: "Keterlibatan Pimpinan",
+            bobot: 2.5,
+            items: [
+{
+                q: "Unit kerja telah melibatkan pimpinan secara langsung pada saat penyusunan perencanaan",
+                kriteria: "a. Jika pimpinan selalu terlibat dalam seluruh tahapan penyusunan perencanaan\nb. Jika pimpinan ikut terlibat dalam sebagian tahapan penyusunan perencanaan\nc. Jika tidak ada keterlibatan pimpinan dalam penyusunan perencanaan (hanya menandatangani)",
+                jawaban: "B",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1Qm3sha9uHJGBc0UQ3weQ1C-DlHzRwBYO",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Unit kerja telah melibatkan secara langsung pimpinan saat penyusunan penetapan kinerja",
+                kriteria: "a. Jika pimpinan selalu terlibat dalam seluruh tahapan penyusunan perjanjian kinerja\nb. Jika pimpinan terlibat dalam sebagian tahapan penyusunan perjanjian kinerja\nc. Jika tidak ada keterlibatan pimpinan dalam penyusunan perjanjian kinerja",
+                jawaban: "B",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1e8HFGGmh-oRth_Z9ke-tWnWWPscuygCr",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Pimpinan memantau pencapaian kinerja secara berkala",
+                kriteria: "a. Jika pimpinan selalu terlibat dalam seluruh pemantauan pencapaian kinerja dan menindaklanjuti hasil pemantauan\nb. Jika pimpinan unit kerja terlibat dalam seluruh pemantauan pencapaian kinerja tetapi tidak ada tindak lanjut hasil pemantauan\nc. Jika pimpinan unit kerja terlibat dalam sebagian pemantauan pencapaian kinerja\nd. Jika tidak ada keterlibatan pimpinan dalam pemantauan pencapaian kinerja",
+                jawaban: "B",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1U5wV75K9SrCxc596U52kHC8-OP7ZQrEb",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              }
+            ]
+          },
+{
+            name: "Pengelolaan Akuntabilitas Kinerja",
+            bobot: 2.5,
+            items: [
+{
+                q: "Dokumen perencanaan kinerja sudah ada",
+                kriteria: "ya, jika unit kerja memiliki dokumen perencanaan kinerja lengkap",
+                jawaban: "Ya",
+                tpi: "Ya",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1nLseR2KOK_MFYPxygeP5_lRNDhyJL0-J",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Perencanaan kinerja telah berorientasi hasil",
+                kriteria: "ya, jika perencanaan kinerja telah berorientasi hasil",
+                jawaban: "Ya",
+                tpi: "Ya",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1GoRUry_6HJGBshhBVy2zfEm11NsVEOA_",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Terdapat penetapan Indikator Kinerja Utama (IKU)",
+                kriteria: "ya, jika unit kerja memiliki IKU",
+                jawaban: "Ya",
+                tpi: "Ya",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1o45wC7jXnqCMy5dpahgjnqQfpcufVQkk",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Indikator kinerja telah memenuhi kriteria SMART",
+                kriteria: "a. Jika seluruh indikator kinerja telah SMART\nb. Jika sebagian besar indikator kinerja telah SMART\nc. Jika sebagian kecil indikator kinerja telah SMART\nd. Jika belum ada indikator kinerja yang SMART",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1ZR6-dZu7cJTAxunOVbXiettzvjoxHw20",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Laporan kinerja telah disusun tepat waktu",
+                kriteria: "Ya, jika unit kerja telah menyusun laporan kinerja tepat waktu",
+                jawaban: "Ya",
+                tpi: "Ya",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/11TKj2gk68NgDhEjPLQFuNV451AMVkEFB",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Laporan kinerja telah memberikan informasi tentang kinerja",
+                kriteria: "a. Jika seluruh pelaporan kinerja telah memberikan informasi tentang kinerja\nb. Jika sebagian pelaporan kinerja belum memberikan informasi tentang kinerja\nc. Jika seluruh pelaporan kinerja belum memberikan informasi tentang kinerja",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1hzmPnOlfd9-0wJ6yTAEmd5pZv5RQuz9h",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Terdapat sistem informasi/mekanisme informasi kinerja",
+                kriteria: "ya, jika terdapat sistem informasi/mekanisme informasi kinerja",
+                jawaban: "Ya",
+                tpi: "Ya",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1Yu_VAUEuhaGapzp9ilTinbWrNveta7zl",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Unit kerja telah berupaya meningkatkan kapasitas SDM yang menangangi akuntabilitas kinerja",
+                kriteria: "a. Jika seluruh SDM pengelola akuntabilitas kinerja kompeten\nb. Jika sebagian SDM pengelola akuntabilitas kinerja kompeten\nc. Jika seluruh SDM pengelola akuntabilitas kinerja belum ada yang kompeten",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1sdRrkeQ5hQJl47rX78Sp9JwOYz_nQJyS",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              }
+            ]
+          }
+        ],
+        reformItems: [
+{
+            q: "Persentase Sasaran dengan capaian 100% atau lebih",
+            kriteria: "Persentase diperoleh dari Jumlah Sasaran Kinerja yang tercapai 100% atau lebih dibagi dengan Jumlah Sasaran Kinerja",
+            pilihan: "%",
+            jawaban: "0.75",
+            tpi: "0.75",
+            nilai: 0.75,
+            catatan: "",
+            buktiLink: "https://drive.google.com/file/d/12fyvbsrpvxV1TTqRH9o4VYdeXL6R0z2D/view",
+            docData: "",
+            docFileName: "",
+            docFileType: "",
+            docUrl: "",
+            docDesc: ""
+          },
+{
+            q: "Hasil Capaian/Monitoring Perjanjian Kinerja telah dijadikan dasar sebagai pemberian reward and punishment bagi organisasi",
+            kriteria: "a. Seluruh capaian kinerja (Perjanjian Kinerja) merupakan unsur dalam pemberian reward and punishment\nb. Sebagian besar Capaian Kinerja (lebih dari 50% Perjanjian kinerja) merupakan unsur dalam pemberian reward and punishment\nc. Sebagian kecil Capaian Kinerja (kurang dari 50% Perjanjian kinerja) merupakan unsur dalam pemberian reward and punishment\nd. Capaian Kinerja (Perjanjian kinerja) belum menjadi unsur dalam pemberian reward and punishment",
+            pilihan: "A/B/C/D",
+            jawaban: "B",
+            tpi: "B",
+            nilai: 0.67,
+            catatan: "",
+            buktiLink: "https://drive.google.com/drive/folders/1KTx7UXMMKl0mY7mtJsf6E6pBcgqh7iLQ",
+            docData: "",
+            docFileName: "",
+            docFileType: "",
+            docUrl: "",
+            docDesc: ""
+          },
+{
+            q: "Apakah terdapat penjenjangan kinerja ((Kerangka Logis Kinerja) yang mengacu pada kinerja utama  organisasi dan dijadikan dalam penentuan kinerja seluruh pegawai?",
+            kriteria: "a. terdapat Kerangka Logis kinerja yang mengacu pada kinerja utama organisasi  dan digunakan dalam penjabaran kinerja seluruh pegawai\nb. terdapat  Kerangka Logis kinerja yang mengacu pada kinerja utama organisasi namun belum digunakan dalam penjabaran kinerja seluruh pegawai\nc. Kerangka Logis kinerja ada namun belum mengacu pada kinerja utama organisasi dan belum digunakan dalam penjabaran kinerja seluruh pegawai\nd. Kerangka Logis kinerja belum ada",
+            pilihan: "A/B/C/D",
+            jawaban: "A",
+            tpi: "A",
+            nilai: 1,
+            catatan: "",
+            buktiLink: "https://drive.google.com/drive/folders/1HzCHUMFmVUFX8vJsg_V_mLQroppR4PeO",
+            docData: "",
+            docFileName: "",
+            docFileType: "",
+            docUrl: "",
+            docDesc: ""
+          }
+        ]
+      },
+{
+        id: 5,
+        name: "Penguatan Pengawasan",
+        bobot: 15,
+        pemenuhan: 4.9235,
+        reform: 6.888888889,
+        folderUrl: "https://drive.google.com/drive/folders/1bXhKgPJo5162u96vThd9C8l1TCBa_y7V?usp=drive_link",
+        subAreas: [
+{
+            name: "Pengendalian Gratifikasi",
+            bobot: 1.5,
+            items: [
+{
+                q: "Telah dilakukan public campaign tentang pengendalian gratifikasi",
+                kriteria: "a. Jika public campaign telah dilakukan secara berkala\nb. Jika public campaign dilakukan tidak secara berkala\nc. Jika belum dilakukan public campaign",
+                jawaban: "A",
+                tpi: "B",
+                nilai: 0.5,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1YfzYfw2e5UAm0ziJZyp1umhGm_zRF_8a",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Pengendalian gratifikasi telah diimplementasikan",
+                kriteria: "a. Jika Unit Pengendalian Gratifikasi, pengendalian gratifikasi telah menjadi bagian dari prosedur\nb. Jika Unit Pengendalian Gratifikasi, upaya pengendalian gratifikasi telah mulai dilakukan\nc. Jika telah membentuk Unit Pengendalian Gratifikasi tetapi belum terdapat prosedur pengendalian\nd. Jika belum memiliki Unit Pengendalian Gratifikasi",
+                jawaban: "A",
+                tpi: "C",
+                nilai: 0.33,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1XA3bfvRoNgWEIH4Kjme6v9Ho2FK8tBBy",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              }
+            ]
+          },
+{
+            name: "Penerapan Sistem Pengendalian Intern Pemerintah (SPIP)",
+            bobot: 1.5,
+            items: [
+{
+                q: "Telah dibangun lingkungan pengendalian",
+                kriteria: "a. Jika unit kerja membangun seluruh lingkungan pengendalian sesuai dengan yang ditetapkan organisasi dan juga membuat inovasi terkait lingkungan pengendalian yang sesuai dengan karakteristik unit kerja\nb. Jika unit kerja melakukan penilaian risiko atas seluruh pelaksanaan kebijakan sesuai dengan yang ditetapkan organisasi\nc. Jika unit kerja membangun sebagian besar lingkungan pengendalian sesuai dengan yang ditetapkan organisasi\nd. Jika unit kerja membangun sebagian kecil lingkungan pengendalian sesuai dengan yang ditetapkan organisasi\ne. Jika unit kerja belum membangun lingkungan pengendalian",
+                jawaban: "B",
+                tpi: "B",
+                nilai: 0.75,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/16LVyXClR9apEvCdnM32i_Upzf75xyMkW",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Telah dilakukan penilaian risiko atas pelaksanaan kebijakan",
+                kriteria: "a. Jika unit kerja melakukan penilaian risiko atas seluruh pelaksanaan kebijakan sesuai dengan yang ditetapkan organisasi dan juga membuat inovasi terkait lingkungan pengendalian yang sesuai dengan karakteristik unit kerja; \nb. Jika unit kerja melakukan penilaian risiko atas seluruh pelaksanaan kebijakan sesuai dengan yang ditetapkan organisasi\nc. Jika melakukan penilaian risiko atas sebagian besar pelaksanaan kebijakan sesuai dengan yang ditetapkan organisasi\nd. Jika melakukan penilaian risiko atas sebagian kecil pelaksanaan kebijakan sesuai dengan yang ditetapkan organisasi\ne. Jika unit kerja belum melakukan penilaian resiko",
+                jawaban: "B",
+                tpi: "B",
+                nilai: 0.75,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1rY7DwgDafkKLmc6hCndw9RVbPMoeNZ1O",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Telah dilakukan kegiatan pengendalian untuk meminimalisir risiko yang telah diidentifikasi",
+                kriteria: "a. Jika unit kerja melakukan kegiatan pengendalian untuk meminimalisir resiko sesuai dengan yang ditetapkan organisasi dan juga membuat inovasi terkait kegiatan pengendalian untuk meminimalisir resiko yang sesuai dengan karakteristik unit kerja\nb. Jika unit kerja melakukan kegiatan pengendalian untuk meminimalisir resiko sesuai dengan yang ditetapkan organisasi\nc. Jika unit kerja belum melakukan kegiatan pengendalian untuk meminimalisir resiko",
+                jawaban: "B",
+                tpi: "B",
+                nilai: 0.5,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/16r_lb7aWrDoKtUd5YLOWaUUEAHJru2r0",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "SPI telah diinformasikan dan dikomunikasikan kepada seluruh pihak terkait",
+                kriteria: "a. Jika SPI telah diinformasikan dan dikomunikasikan kepada seluruh pihak terkait\nb. Jika SPI telah diinformasikan dan dikomunikasikan kepada sebagian pihak terkait\nc. Jika SPI belum diinformasikan dan dikomunikasikan kepada pihak terkait",
+                jawaban: "B",
+                tpi: "B",
+                nilai: 0.5,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1GuO4kI809QoJZjjSmicEFVzl55gwut7M",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              }
+            ]
+          },
+{
+            name: "Pengaduan Masyarakat",
+            bobot: 1.5,
+            items: [
+{
+                q: "Kebijakan Pengaduan masyarakat telah diimplementasikan",
+                kriteria: "a. Jika unit kerja mengimplementasikan seluruh kebijakan pengaduan masyarakat sesuai dengan yang ditetapkan organisasi dan juga membuat inovasi terkait pengaduan masyarakat yang sesuai dengan karakteristik unit kerja\nb. Jika unit kerja telah mengimplementasikan seluruh kebijakan pengaduan masyarakat sesuai dengan yang ditetapkan organisasi \nc. Jika unit kerja belum mengimplementasikan kebijakan pengaduan masyarakat",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1Q_otiTkYONRlfbD4GSEadsL3q52wS9Xe",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "pengaduan masyarakat dtindaklanjuti",
+                kriteria: "ya,pengaduan masyaakat ditindaklanjuti",
+                jawaban: "Ya",
+                tpi: "Ya",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1ULL8byV28xzkEJaPEg4cAe7HVhNJjEcn",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Telah dilakukan monitoring dan evaluasi atas penanganan pengaduan masyarakat",
+                kriteria: "a. Jika penanganan pengaduan masyarakat dimonitoring dan evaluasi secara berkala\nb. Jika penanganan pengaduan masyarakat dimonitoring dan evaluasi tetapi tidak secara berkala\nc. Jika penanganan pengaduan masyarakat belum di monitoring dan evaluasi",
+                jawaban: "A",
+                tpi: "B",
+                nilai: 0.5,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1dVvN3Hb5YeGtboqamq6LGzHXyM7rs63_",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Hasil evaluasi atas penanganan pengaduan masyarakat telah ditindaklanjuti",
+                kriteria: "a. Jika seluruh hasil evaluasi atas penanganan pengaduan telah ditindaklanjuti oleh unit kerja\nb. Jika sebagian hasil evaluasi atas penanganan pengaduan telah ditindaklanjuti oleh unit kerja\nc. Jika hasil evaluasi atas penanganan pengaduan belum ditindaklanjuti",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1pKaES1AUrHm17Ok9OeurSBaPgpBEMCHh",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              }
+            ]
+          },
+{
+            name: "Whistle-Blowing System",
+            bobot: 1.5,
+            items: [
+{
+                q: "Whistle-Blowing System telah diterapkan",
+                kriteria: "a. Jika unit kerja menerapkan seluruh kebijakan Whistle Blowing System sesuai dengan yang ditetapkan organisasi dan juga membuat inovasi terkait pelaksanaan Whistle Blowing System yang sesuai dengan karakteristik unit kerja\nb. Jika unit kerja menerapkan kebijakan Whistle Blowing System sesuai dengan yang ditetapkan organisasi\nc. Jika unit kerja belum menerapkan kebijakan Whistle Blowing System",
+                jawaban: "B",
+                tpi: "B",
+                nilai: 0.5,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1o6W41e-pSThxoBemh5fxvMK-craem_h7",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Telah dilakukan evaluasi atas penerapan Whistle Blowing System",
+                kriteria: "a. Jika penerapan Whistle Blowing System dimonitoring dan evaluasi secara berkala\nb. Jika penerapan Whistle Blowing System dimonitoring dan evaluasi tidak secara berkala\nc. Jika penerapan Whistle Blowing System belum di monitoring dan evaluasi",
+                jawaban: "B",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1sSXc3uOhOg_iLRKON1C1FoYmOkOgFJfm",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Hasil evaluasi atas penerapan Whistle Blowing System telah ditindaklanjuti",
+                kriteria: "a. Jika seluruh hasil evaluasi atas penerapan Whistle Blowing System telah ditindaklanjuti oleh unit kerja\nb. Jika sebagian hasil evaluasi atas penerapan Whistle Blowing System telah ditindaklanjuti oleh unit kerja\nc. Jika hasil evaluasi atas penerapan Whistle Blowing System belum ditindaklanjuti",
+                jawaban: "B",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1VIUqYabAbo_U9OGtmGF2EMBwI9r_ppsi",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              }
+            ]
+          },
+{
+            name: "Penanganan Benturan Kepentingan",
+            bobot: 1.5,
+            items: [
+{
+                q: "Telah terdapat identifikasi/pemetaan benturan kepentingan dalam tugas fungsi utama",
+                kriteria: "a. Jika terdapat  identifikasi/pemetaan benturan kepentingan pada seluruh tugas fungsi utama\nb. Jika terdapat  identifikasi/pemetaan benturan kepentingan tetapi pada sebagian besar tugas fungsi utama\nc. Jika terdapat  identifikasi/pemetaan benturan kepentingan tetapi pada sebagian kecil tugas fungsi utama\nd. Jika belum terdapat  identifikasi/pemetaan benturan kepentingan dalam tugas fungsi utama",
+                jawaban: "B",
+                tpi: "B",
+                nilai: 0.67,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1oPtN86rTVVTGX6VJZCZG4pKHzoEto25u",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Penanganan Benturan Kepentingan telah disosialisasikan/internalisasi",
+                kriteria: "a. Jika penanganan Benturan Kepentingan disosialiasikan/diinternalisasikan ke seluruh layanan\nb. Jika penanganan Benturan Kepentingan disosialiasikan/diinternalisasikan ke sebagian besar layanan\nc.  Jika penanganan Benturan Kepentingan disosialiasikan/diinternalisasikan ke sebagian kecil layanan\nd.  Jika penanganan Benturan Kepentingan belum disosialiasikan/diinternalisasikan ke seluruh layanan",
+                jawaban: "B",
+                tpi: "B",
+                nilai: 0.67,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/16V-dzXYdCKZF_AbQKaisXm7U5s4MnMAT",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Penanganan Benturan Kepentingan telah diimplementasikan",
+                kriteria: "a. Jika penanganan Benturan Kepentingan diimplementasikan ke seluruh layanan\nb. Jika penanganan Benturan Kepentingan diimplementasikan ke sebagian besar layanan\nc. Jika penanganan Benturan Kepentingan diimplementasikan ke sebagian kecil layanan\nd. Jika penanganan Benturan Kepentingan belum diimplementasikan ke seluruh layanan",
+                jawaban: "C",
+                tpi: "C",
+                nilai: 0.33,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/17bpGNYjxxLbzktKiWND2ssiCmMLqs_cG",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Telah dilakukan evaluasi atas Penanganan Benturan Kepentingan",
+                kriteria: "a. Jika penanganan Benturan Kepentingan dievaluasi secara berkala oleh unit kerja\nb. Jika penanganan Benturan Kepentingan dievaluasi tetapi tidak secara berkala oleh unit kerja\nc. Jika penanganan Benturan Kepentingan belum dievaluasi oleh unit kerja",
+                jawaban: "B",
+                tpi: "B",
+                nilai: 0.5,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1IeEEiziOBU2hGpSYk62f4YZ7CmO_yc1w",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Hasil evaluasi atas Penanganan Benturan Kepentingan telah ditindaklanjuti",
+                kriteria: "a. Jika seluruh hasil evaluasi atas Penanganan Benturan Kepentingan telah ditindaklanjuti oleh unit kerja\nb. Jika sebagian hasil evaluasi atas Penanganan Benturan Kepentingan telah ditindaklanjuti oleh unit kerja\nc. Jika belum ada hasil evaluasi atas Penanganan Benturan Kepentingan yang ditindaklanjuti unit kerja",
+                jawaban: "B",
+                tpi: "B",
+                nilai: 0.5,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1yeUDI-zlpv371xRyMFHCyacs4mPO3v8a",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              }
+            ]
+          }
+        ],
+        reformItems: [
+{
+            q: "Telah dilakukan mekanisme pengendalian aktivitas secara berjenjang",
+            kriteria: "a. Terdapat pengendalian aktivitas utama organisasi yang tersistem mulai dari perencanaan, penilaian risiko, pelaksanaan, monitoring, dan pelaporan oleh penanggung jawab aktivitas serta pimpinan unit kerja dan telah menghasilkan peningkatan kinerja, mekanise kerja baru yang lebih efektif, efisien, dan terkendali\nb. Terdapat pengendalian aktivitas utama organisasi yang tersistem mulai dari perencanaan, penilaian risiko, pelaksanaan, monitoring, dan pelaporan oleh penanggung jawab aktivitas serta pimpinan unit kerja namun belum berdampak pada peningkatan kinerja unit kerja\nc.Terdapat pengendalian aktivitas utama organisasi yang tersistem mulai dari perencanaan, penilaian risiko, pelaksanaan, monitoring, dan pelaporan oleh penanggung jawab aktivitas\nd. Terdapat pengendalian aktivitas utama organisasi tetapi tidak tersistem\ne. Tidak terdapat pengendalian atas aktivitas utama organisasi",
+            pilihan: "A/B/C/D/E",
+            jawaban: "A",
+            tpi: "A",
+            nilai: 1,
+            catatan: "",
+            buktiLink: "https://drive.google.com/drive/folders/1mCJ1DRPzeHHLR9VBhllrKxxwFVN47Lq6",
+            docData: "",
+            docFileName: "",
+            docFileType: "",
+            docUrl: "",
+            docDesc: ""
+          },
+{
+            q: "Persentase penanganan pengaduan masyarakat",
+            kriteria: "Penilaian ini menghitung realisasi penanganan pengaduan masyarakat yang harus diselesaikan",
+            pilihan: "%",
+            jawaban: "1",
+            tpi: "1",
+            nilai: 1,
+            catatan: "",
+            buktiLink: "https://drive.google.com/file/d/1R1bC2lDucNcM9RVP5dIe3ffHyRfpvznx/view",
+            docData: "",
+            docFileName: "",
+            docFileType: "",
+            docUrl: "",
+            docDesc: ""
+          },
+{
+            q: "Persentase penyampaian LHKPN",
+            kriteria: "",
+            pilihan: "%",
+            jawaban: "1",
+            tpi: "1",
+            nilai: 1,
+            catatan: "",
+            buktiLink: "https://drive.google.com/file/d/1VkgTIhIMI-7Z-C2ioRTN6Vs8G62ACh-m/view",
+            docData: "",
+            docFileName: "",
+            docFileType: "",
+            docUrl: "",
+            docDesc: ""
+          },
+{
+            q: "Persentase penyampaian Non LHKPN",
+            kriteria: "",
+            pilihan: "%",
+            jawaban: "1",
+            tpi: "0.3888888889",
+            nilai: 0.3888888889,
+            catatan: "",
+            buktiLink: "https://drive.google.com/file/d/1VkgTIhIMI-7Z-C2ioRTN6Vs8G62ACh-m/view",
+            docData: "",
+            docFileName: "",
+            docFileType: "",
+            docUrl: "",
+            docDesc: ""
+          }
+        ]
+      },
+{
+        id: 6,
+        name: "Peningkatan Kualitas Pelayanan Publik",
+        bobot: 10,
+        pemenuhan: 3.946666667,
+        reform: 5,
+        folderUrl: "https://drive.google.com/drive/folders/1vG3QizTWBG3yb5iYE-XikFx3emqAeWmX?usp=drive_link",
+        subAreas: [
+{
+            name: "Standar Pelayanan",
+            bobot: 1,
+            items: [
+{
+                q: "Terdapat kebijakan standar pelayanan",
+                kriteria: "a. Terdapat penetapan Standar Pelayanan terhadap seluruh jenis pelayanan, dan sesuai asas serta komponen standar pelayanan publik yang berlaku\nb. Terdapat penetapan Standar Pelayanan terhadap sebagian jenis pelayanan, dan sesuai asas serta komponen standar pelayanan publik yang berlaku\nc. Terdapat penetapan Standar Pelayanan terhadap seluruh jenis pelayanan, namun tidak sesuai asas serta komponen standar pelayanan publik yang berlaku\nd. Terdapat penetapan Standar Pelayanan terhadap sebagian jenis pelayanan, namun tidak sesuai asas serta komponen standar pelayanan publik yang berlaku\ne. Standar Pelayanan belum ditetapkan",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/18sgxVkAEWa6xbRcPIdd5xdwF4bXjZznG",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Standar pelayanan telah dimaklumatkan",
+                kriteria: "a. Standar pelayanan telah dimaklumatkan pada seluruh jenis pelayanan dan dipublikasikan di website dan media lainnya\nb. Standar pelayanan telah dimaklumatkan pada sebagian besar jenis pelayanan dan dipublikasikan minimal di website\nc. Standar pelayanan telah dimaklumatkan pada sebagian kecil  jenis pelayanan dan belum dipublikasikan\nd. Standar pelayanan belum dimaklumatkan pada seluruh jenis pelayanan dan belum dipublikasikan",
+                jawaban: "B",
+                tpi: "B",
+                nilai: 0.67,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/10YP7TUvgQqlQKNxLRrs9P7PpwgAxulml",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Dilakukan reviu dan perbaikan atas standar pelayanan",
+                kriteria: "a. Dilakukan reviu dan perbaikan atas standar pelayanan dan dilakukan dengan melibatkan stakeholders (antara lain : tokoh masyarakat,  akademisi, dunia usaha, dan lembaga swadaya masyarakat), serta memanfaatkan masukan hasil SKM dan pengaduan masyarakat\nb. Dilakukan reviu dan perbaikan atas standar pelayanan dan dilakukan dengan memanfaatkan masukan hasil SKM dan pengaduan masyarakat, namun tanpa melibatkan stakeholders\nc. Dilakukan reviu dan perbaikan atas standar pelayanan, namun  dilakukan tanpa memanfaatkan masukan hasil SKM dan pengaduan masyarakat, serta tanpa melibatkan stakeholders\nd. Belum dilakukan reviu dan perbaikan atas standar pelayanan",
+                jawaban: "A",
+                tpi: "B",
+                nilai: 0.67,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1VZunDAdnK7JMD9P7MYR1wca0qGeIbjFl",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "telah melakukan publikasi atas standar pelayanan dan maklumat pelayanan",
+                kriteria: "ya,telah melakukan publikasi atas standar pelayanan dan maklumat pelayanan",
+                jawaban: "Tidak",
+                tpi: "Ya",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/16L1TMu6iVRhIFBxc-wPqqxZ0SjxnHS9W",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              }
+            ]
+          },
+{
+            name: "Budaya Pelayanan Prima",
+            bobot: 1,
+            items: [
+{
+                q: "Telah dilakukan berbagai upaya peningkatan kemampuan dan/atau kompetensi tentang penerapan budaya pelayanan prima",
+                kriteria: "a. Telah dilakukan pelatihan/sosialisasi pelayanan prima secara berkelanjutan dan terjadwal, sehingga seluruh petugas/pelaksana layanan memiliki kompetensi sesuai kebutuhan jenis layanan serta telah dan terdapat monev yang melihat kemampuan/kecakapan petugas/pelaksana layanan\nb. Telah dilakukan pelatihan/sosialisasi pelayanan prima, dan  seluruh petugas/pelaksana layanan memiliki kompetensi sesuai kebutuhan jenis layanan\nc. Telah dilakukan pelatihan/sosialisasi pelayanan prima, akan tetapi baru sebagian besar petugas/pelaksana layanan memiliki kompetensi sesuai kebutuhan jenis layanan \nd. Telah dilakukan pelatihan/sosialisasi pelayanan prima namun secara terbatas, sehingga hanya sebagian kecil petugas/pelaksana layanan yang memiliki kompetensi sesuai kebutuhan jenis layanan \ne. Belum dilakukan pelatihan/sosialisasi pelayanan prima, dan seluruh petugas/pelaksana layanan belum memiliki kompetensi sesuai kebutuhan jenis layanan",
+                jawaban: "A",
+                tpi: "B",
+                nilai: 0.75,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1OrfqxKuaPwvABH3W-JTJeaDacdmfzkJH",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Informasi tentang pelayanan mudah diakses melalui berbagai media",
+                kriteria: "a. Seluruh Informasi tentang pelayanan dapat diakses secara online (website/media sosial) dan terhubung dengan sistem informasi pelayanan publik nasional\nb. Seluruh Informasi tentang pelayanan dapat diakses secara online (website/media sosial), namun belum terhubung dengan sistem informasi pelayanan publik nasional\nc. Seluruh Informasi tentang pelayanan belum online, hanya dapat diakses di tempat layanan (intranet dan non elektronik)\nd. Informasi tentang pelayanan sulit diakses",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1tm-7vTNmn1_LB8hE75dGWhfpgw9Ybr7q",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Telah terdapat sistem pemberian penghargaan dan sanksi bagi petugas pemberi pelayanan",
+                kriteria: "a. Telah terdapat kebijakan pemberian penghargaan dan sanksi yang minimal memenuhi unsur penilaian: disiplin, kinerja, dan hasil penilaian pengguna layanan, dan telah diterapkan secara rutin/berkelanjutan\nb. Telah terdapat kebijakan pemberian penghargaan dan sanksi yang minimal memenuhi unsur penilaian: disiplin, kinerja, dan hasil penilaian pengguna layanan, namun belum diterapkan secara rutin/berkelanjutan\nc. Telah terdapat kebijakan pemberian penghargaan dan sanksi, namun belum memenuhi unsur penilaian minimal : disiplin, kinerja, dan hasil penilaian pengguna layanan\nd. Belum terdapat kebijakan pemberian penghargaan dan sanksi",
+                jawaban: "B",
+                tpi: "B",
+                nilai: 0.67,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/115yQz98t1X1bmw1cfgAD2m4O9vrfur8F",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Telah terdapat sistem pemberian kompensasi kepada penerima layanan bila layanan tidak sesuai standar",
+                kriteria: "a. Telah terdapat sistem pemberian kompensasi bila layanan tidak sesuai standar bagi penerima layanan di seluruh jenis layanan\nb. Telah terdapat sistem pemberian kompensasi bila layanan tidak sesuai standar bagi penerima layanan di sebagian besar jenis layanan \nc. Telah terdapat sistem pemberian kompensasi bila layanan tidak sesuai standar bagi penerima layanan di sebagian kecil jenis layanan \nd. Belum terdapat sistem pemberian kompensasi bila layanan tidak sesuai standar",
+                jawaban: "D",
+                tpi: "D",
+                nilai: 0,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1lFl0OrXb5MJxtPJKMo6nEomZ1SPawD6j",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Terdapat sarana layanan terpadu/terintegrasi",
+                kriteria: "a. Jika seluruh pelayanan sudah dilakukan secara terpadu/terintegrasi\nb. Jika sebagian besar pelayanan sudah dilakukan secara terpadu/terintegrasi\nc. Jika sebagian kecil pelayanan sudah dilakukan secara terpadu/terintegrasi\nd. Jika tidak ada pelayanan yang dilakukan secara terpadu/terintegrasi",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1XfCrAEgfGhjM59q5lwJHzxQnFUF-I1H3",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Terdapat inovasi pelayanan",
+                kriteria: "a. Jika unit kerja telah memiliki inovasi pelayanan yang  berbeda dengan unit kerja lain dan mendekatkan pelayanan dengan masyarakat serta telah direplikasi\nb. Jika unit kerja telah memiliki inovasi pelayanan yang  berbeda dengan unit kerja lain dan mendekatkan pelayanan dengan masyarakat\nc. Jika unit kerja memiliki inovasi yang merupakan replikasi dan pengembangan dari inovasi yang sudah ada \nd. Jika unit kerja telah memiliki inovasi akan tetapi merupakan pelaksanaan inovasi dari instansi pemerintah \ne. Jika  unit kerja belum memiliki inovasi pelayanan",
+                jawaban: "A",
+                tpi: "B",
+                nilai: 0.75,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1R9F31cI1n7wir9Gt4cjUVM9dEaOi6dSV",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              }
+            ]
+          },
+{
+            name: "Pengelolaan Pengaduan",
+            bobot: 1,
+            items: [
+{
+                q: "Terdapat media pengaduan dan konsultasi pelayanan yang terintegrasi dengan SP4N-Lapor!",
+                kriteria: "a. Terdapat media konsultasi dan pengaduan secara offline dan online, tersedia petugas khusus yang menangani, dan terintegrasi dengan SP4N-LAPOR!\nb. Terdapat media konsultasi dan pengaduan secara offline dan online, tersedia petugas khusus yang menangani namun belum terintegrasi dengan SP4N-LAPOR!\nc. Terdapat media konsultasi dan pengaduan secara offline dan online, namun belum tersedia petugas khusus yang menangani\nd. Hanya terdapat media konsultasi dan pengaduan secara offline\ne. Tidak terdapat media konsultasi dan pengaduan",
+                jawaban: "C",
+                tpi: "B",
+                nilai: 0.75,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1nABnheA2P0buT107hRQrlLDOqFf9Oos7",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Terdapat unit yang mengelola pengaduan dan konsultasi pelayanan",
+                kriteria: "a. Terdapat unit pengelola khusus untuk konsultasi dan pengaduan, serta surat penugasan pengelola SP4N-LAPOR! di level unit kerja\nb. Terdapat SK pengelola SP4N-LAPOR! di level instansi dan/atau surat penugasan pengelola SP4N-LAPOR! di level unit kerja, namun unit pengelola khusus untuk konsultasi dan pengaduan belum ada\nc. Belum terdapat unit pengelola khusus untuk konsultasi dan pengaduan, serta belum terdapat SK pengelola SP4N-LAPOR! di level instansi dan/atau surat penugasan pengelola SP4N-LAPOR! di level unit kerja",
+                jawaban: "C",
+                tpi: "B",
+                nilai: 0.5,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1jiD7OFz6qi4o08puFaLWLyb7Zh88UAPn",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Telah dilakukan evaluasi atas penanganan keluhan/masukan dan konsultasi",
+                kriteria: "a. Evaluasi atas penanganan keluhan/masukan dan konsultasi dilakukan secara berkala\nb. Evaluasi  atas penanganan keluhan/masukan dan konsultasi dilakukan  tidak berkala\nc. Belum dilakukan evaluasi penanganan keluhan/masukan dan konsultasi",
+                jawaban: "B",
+                tpi: "B",
+                nilai: 0.5,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1i0NHVIZo1vMKb2RLKAMPouYkwmgNgTm6",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              }
+            ]
+          },
+{
+            name: "Penilaian Kepuasan terhadap Pelayanan",
+            bobot: 1,
+            items: [
+{
+                q: "Telah dilakukan survey kepuasan masyarakat terhadap pelayanan",
+                kriteria: "a. Survei kepuasan masyarakat terhadap pelayanan dilakukan minimal 4 kali dalam setahun\nb. Survei kepuasan masyarakat terhadap pelayanan dilakukan minimal 3 kali dalam setahun\nc. Survei kepuasan masyarakat terhadap pelayanan dilakukan minimal 2 kali dalam setahun\nd. Survei kepuasan masyarakat terhadap pelayanan dilakukan minimal 1 kali dalam setahun\ne. Belum dilakukan survei kepuasan masyarakat terhadap pelayanan",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1Ls5S9jpzgfElZKZweOUJgEjSmmnrplMN",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Hasil survei kepuasan masyarakat dapat diakses secara terbuka",
+                kriteria: "a. Hasil survei kepuasan masyarakat dapat diakses secara  online (website, media sosial, dll) dan offline\nb. Hasil survei kepuasan masyarakat hanya dapat diakses secara offline di tempat layanan\nc. Hasil survei kepuasan masyarakat tidak dipublikasi",
+                jawaban: "B",
+                tpi: "B",
+                nilai: 0.5,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/12DeOivlX7wNeLqxSpEzKU4RMyPDpxHFG",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Dilakukan tindak lanjut atas hasil survei kepuasan masyarakat",
+                kriteria: "a. Jika dilakukan tindak lanjut atas seluruh hasil survei kepuasan masyarakat\nb. Jika dilakukan tindak lanjut atas sebagian besar hasil survei kepuasan masyarakat\nc. Jika dilakukan tindak lanjut atas sebagian kecil hasil survei kepuasan masyarakat\nd. Jika belum dilakukan tindak lanjut atas hasil survei kepuasan masyarakat",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1_jfQP3PQjqiUIbNxfjtJdO2c0OpAToRh",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              }
+            ]
+          },
+{
+            name: "Pemanfaatan Teknologi Informasi",
+            bobot: 1,
+            items: [
+{
+                q: "Telah menerapkan teknologi informasi dalam memberikan pelayanan",
+                kriteria: "a. Terdapat pelayanan yang menggunakan teknologi informasi pada seluruh proses pemberian layanan\nb. Terdapat pelayanan yang menggunakan teknologi informasi pada sebagian besar proses pemberian layanan\nc. Terdapat pelayanan yang menggunakan teknologi informasi pada sebagian kecil proses pemberian layanan\nd. Terdapat pelayanan yang belum menggunakan teknologi informasi pada proses pemberian pelayanan",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/13mKvhthvslXqEAdrTBPzhVL6MCULjxAD",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Telah membangun database pelayanan yang terintegrasi",
+                kriteria: "Ya,jika tela membangun database pelayanan yang terintegrasi",
+                jawaban: "Ya",
+                tpi: "Ya",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1qLuD6tvqNROspBf0eR-6XEivFys4y5lc",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              },
+{
+                q: "Telah dilakukan perbaikan secara terus menerus",
+                kriteria: "a. Perbaikan dilakukan secara terus-menerus\nb. Perbaikan dilakukan tidak secara terus menerus\nc. Belum dilakukan perbaikan",
+                jawaban: "A",
+                tpi: "A",
+                nilai: 1,
+                catatan: "OK",
+                bukti: "OK",
+                buktiLink: "https://drive.google.com/drive/folders/1D9KpIwt01mTQx0hG7BC2woqibworJvik",
+                docData: "",
+                docFileName: "",
+                docFileType: "",
+                docUrl: "",
+                docDesc: ""
+              }
+            ]
+          }
+        ],
+        reformItems: [
+{
+            q: "Upaya dan/atau inovasi telah mendorong perbaikan pelayanan publik pada:\n1. Kesesuaian Persyaratan\n2. Kemudahan Sistem, Mekanisme, dan Prosedur\n3. Kecepatan Waktu Penyelesaian\n4. Kejelasan Biaya/Tarif, Gratis\n5. Kualitas Produk Spesifikasi Jenis Pelayanan\n6. Kompetensi Pelaksana/Web\n7. Perilaku Pelaksana/Web\n8. Kualitas Sarana dan prasarana\n9. Penanganan Pengaduan, Saran dan Masukan",
+            kriteria: "a. Upaya dan/atau inovasi yang dilakukan telah mendorong perbaikan seluruh pelayanan publik yang prima (lebih Cepat dan mudah) \nb. Upaya dan/atau inovasi yang dilakukan belum seluruhnya memberikan dampak pada perbaikan pelayanan public yang prima (Cepat dan mudah) \nc. Upaya dan/atau inovasi yang dilakukan belum sesuai kebutuhan \nd. Belum ada inovasi",
+            pilihan: "A/B/C/D",
+            jawaban: "A",
+            tpi: "A",
+            nilai: 1,
+            catatan: "",
+            buktiLink: "https://drive.google.com/drive/folders/19rU-wOQkrQAl4B2o15zHS-Ht0XjsJ08D",
+            docData: "",
+            docFileName: "",
+            docFileType: "",
+            docUrl: "",
+            docDesc: ""
+          },
+{
+            q: "Upaya dan/atau inovasi pada perijinan/pelayanan telah dipermudah:\n1. Waktu lebih cepat\n2. Pelayanan Publik yang terpadu\n3. Alur lebih pendek/singkat\n4 Terintegrasi dengan aplikasi",
+            kriteria: "Persentase diperoleh dari Jumlah perijinan/pelayanan yang telah dipermudah dibagi dengan Jumlah perijinan/pelayanan yang terdata/terdaftar",
+            pilihan: "%",
+            jawaban: "1",
+            tpi: "1",
+            nilai: 1,
+            catatan: "",
+            buktiLink: "https://drive.google.com/drive/folders/16DWec2x_y6XdAohhBss-CFmeIXoQ4_XN",
+            docData: "",
+            docFileName: "",
+            docFileType: "",
+            docUrl: "",
+            docDesc: ""
+          },
+{
+            q: "Penanganan pengaduan pelayanan dilakukan melalui berbagai kanal/media secara responsive dan bertanggung jawab",
+            kriteria: "a. Pengaduan pelayanan  dan konsultasi telah direspon dengan cepat melalui berbagai kanal/media\nb. Pengaduan pelayanan dan konsultasi telah direspon dengan cepat melalui kanal/media yang terbatas\nc. Pengaduan pelayanan dan konsultasi direspon lambat melalui berbagai kanal/media\nd. Pengaduan pelayanan dan konsultasi direspon lambat dan kanal/media terbatas",
+            pilihan: "A/B/C/D",
+            jawaban: "A",
+            tpi: "A",
+            nilai: 1,
+            catatan: "",
+            buktiLink: "https://drive.google.com/drive/folders/1J2XjOk2htWQ3fgzNJSZbZPD1n94FFcx1",
+            docData: "",
+            docFileName: "",
+            docFileType: "",
+            docUrl: "",
+            docDesc: ""
+          }
+        ]
+      }
     ]
   },
   hasil: {
     areas: [
-      { name:"Birokrasi yang Bersih dan Akuntabel", bobot:22.5, nilai:22.5, pct:100, min:"OK", items:[
-        { q:"Nilai Survey Persepsi Korupsi (IPAK)", bobot:17.5, nilai:17.5, pct:100, jawaban:"4 (skala 0-4)", tpi:"4", min:"OK", catatan:"FORM SURVEY SPAK", buktiLink:"https://drive.google.com/file/d/1yDfNLwYlf_hcjB0tI4qLtC2lUKUNwBxE/view", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" },
-        { q:"Capaian Kinerja Lebih Baik dari Capaian Kinerja Sebelumnya", bobot:5, nilai:5, pct:100, jawaban:"A", tpi:"A", min:"OK", catatan:"Hasil Survei Mundur 2024", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
-      ]},
-      { name:"Pelayanan Publik yang Prima", bobot:17.5, nilai:17.5, pct:100, items:[
-        { q:"Nilai Persepsi Kualitas Pelayanan (IPKP)", bobot:17.5, nilai:17.5, pct:100, jawaban:"4 (skala 0-4)", tpi:"4", min:"OK", catatan:"FORM SPKP", buktiLink:"", docData:"",docFileName:"",docFileType:"",docUrl:"",docDesc:"" }
-      ]}
+{
+        name: "Birokrasi yang Bersih dan Akuntabel",
+        bobot: 22.5,
+        nilai: 22.5,
+        pct: 100,
+        min: "OK",
+        items: [
+{
+            q: "Nilai Survey Persepsi Korupsi (Survei Eksternal :\nIndeks Persepsi Anti Korupsi/ IPAK)",
+            bobot: 17.5,
+            nilai: 17.5,
+            pct: 100,
+            jawaban: "",
+            tpi: "",
+            min: "OK",
+            catatan: "",
+            buktiLink: "",
+            docData: "",
+            docFileName: "",
+            docFileType: "",
+            docUrl: "",
+            docDesc: ""
+          },
+{
+            q: "Capaian Kinerja Lebih Baik dari pada Capaian Kinerja Sebelumnya",
+            bobot: 5,
+            nilai: 5,
+            pct: 100,
+            jawaban: "",
+            tpi: "",
+            min: "OK",
+            catatan: "",
+            buktiLink: "",
+            docData: "",
+            docFileName: "",
+            docFileType: "",
+            docUrl: "",
+            docDesc: ""
+          }
+        ]
+      },
+{
+        name: "Pelayanan Publik yang Prima",
+        bobot: 17.5,
+        nilai: 17.5,
+        pct: 100,
+        items: [
+{
+            q: "Nilai Persepsi Kualitas Pelayanan (Survei Eksternal :\nIndeks Persepsi Kualitas Pelayanan Publik / IPKP)",
+            bobot: 17.5,
+            nilai: 17.5,
+            pct: 100,
+            jawaban: "",
+            tpi: "",
+            min: "OK",
+            catatan: "",
+            buktiLink: "",
+            docData: "",
+            docFileName: "",
+            docFileType: "",
+            docUrl: "",
+            docDesc: ""
+          }
+        ]
+      }
     ]
   }
-};
+};;;;;
 
 // ==================== STATE ====================
 let appData = null;
