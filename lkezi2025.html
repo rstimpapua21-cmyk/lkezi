@@ -90,10 +90,7 @@ body{background:#f0f4f8}
 <div class="mt-4 p-3 bg-gray-50 rounded-xl">
 <p class="text-xs text-gray-400 font-semibold mb-2">Akun Default:</p>
 <div class="space-y-1 text-xs">
-<div class="flex justify-between"><span class="text-gray-600"><strong>admin</strong> / admin123</span><span class="role-badge role-admin">Administrator</span></div>
-<div class="flex justify-between"><span class="text-gray-600"><strong>operator</strong> / operator123</span><span class="role-badge role-operator">Operator</span></div>
-<div class="flex justify-between"><span class="text-gray-600"><strong>viewer</strong> / viewer123</span><span class="role-badge role-viewer">View Only</span></div>
-<div class="flex justify-between"><span class="text-gray-600"><strong>dashboard</strong> / dash123</span><span class="role-badge role-dashboard">Dashboard Only</span></div>
+<div class="flex justify-between"><span class="text-gray-600"><strong>dashboard</strong> / dashboard</span><span class="role-badge role-dashboard">Dashboard Only</span></div>
 </div>
 </div>
 </div>
@@ -560,10 +557,10 @@ function simpleHash(str) {
 
 // Default users with pre-computed hashes
 const DEFAULT_USERS = [
-  { username:'admin', fullname:'Administrator', passwordHash: simpleHash('admin123'), role:'admin', active:true },
-  { username:'operator', fullname:'Operator RSUD', passwordHash: simpleHash('operator123'), role:'operator', active:true },
-  { username:'viewer', fullname:'Viewer', passwordHash: simpleHash('viewer123'), role:'viewer', active:true },
-  { username:'dashboard', fullname:'Dashboard Only', passwordHash: simpleHash('dash123'), role:'dashboard', active:true }
+  { username:'admin', fullname:'Administrator', passwordHash: simpleHash('@dm1n_123'), role:'admin', active:true },
+  { username:'operator', fullname:'Operator RSUD', passwordHash: simpleHash('@operator123'), role:'operator', active:true },
+  { username:'viewer', fullname:'Viewer', passwordHash: simpleHash('@viewer123'), role:'viewer', active:true },
+  { username:'dashboard', fullname:'Dashboard Only', passwordHash: simpleHash('dashboard'), role:'dashboard', active:true }
 ];
 
 // RBAC Permissions Matrix
